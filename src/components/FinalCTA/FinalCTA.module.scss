@@ -1,0 +1,46 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.cta {
+  background: v.$color-black;
+  padding: v.$space-7 v.$space-4;
+  color: v.$color-white;
+  text-align: center;
+}
+
+.cta__container {
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.cta__title {
+  font-family: v.$font-display;
+  font-size: v.$fs-2xl;
+  font-weight: v.$fw-bold;
+  text-transform: uppercase;
+  margin-bottom: v.$space-4;
+}
+
+.cta__text {
+  font-size: v.$fs-md;
+  color: v.$color-gray-light;
+  margin-bottom: v.$space-6;
+  line-height: 1.6;
+}
+
+.cta__button {
+  display: inline-block;
+  background: v.$color-red;
+  color: v.$color-white;
+  padding: v.$space-3 v.$space-6;
+  font-size: v.$fs-sm;
+  font-weight: v.$fw-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: v.$radius-sm;
+  transition: v.$transition-base;
+
+  &:hover {
+    background: v.$color-red-dark;
+  }
+}

@@ -1,19 +1,6 @@
 @use "../../styles/base/variables" as v;
 @use "../../styles/base/mixins" as m;
 
-/* ----------------------------- */
-/* HOME WRAPPER */
-/* ----------------------------- */
-
-.home {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-/* ----------------------------- */
-/* HERO */
-/* ----------------------------- */
-
 .hero {
   position: relative;
   width: 100%;
@@ -89,10 +76,6 @@
   max-width: 520px;
 }
 
-/* ----------------------------- */
-/* HERO BUTTONS */
-/* ----------------------------- */
-
 .hero__actions {
   display: flex;
   flex-direction: column;
@@ -135,34 +118,4 @@
     background: v.$color-white;
     color: v.$color-black;
   }
-}
-
-/* ----------------------------- */
-/* INTRO SECTION */
-/* ----------------------------- */
-
-.intro {
-  background: v.$color-white-soft;
-  padding: v.$space-7 v.$space-4;
-}
-
-.intro__container {
-  max-width: 800px;
-  margin-inline: auto;
-}
-
-.intro__title {
-  font-family: v.$font-display;
-  font-size: v.$fs-2xl;
-  font-weight: v.$fw-bold;
-  margin-bottom: v.$space-5;
-  text-transform: uppercase;
-  color: v.$color-black;
-}
-
-.intro__text {
-  font-size: v.$fs-md;
-  color: v.$color-black;
-  margin-bottom: v.$space-4;
-  line-height: 1.6;
 }

@@ -4,12 +4,14 @@
 .sm-button {
   @include m.button-reset;
   @include m.flex-center;
+
   gap: v.$space-2;
   padding: v.$space-3 v.$space-5;
   border-radius: v.$radius-md;
   font-size: v.$fs-sm;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  transition: v.$transition-base;
 
   &:disabled {
     opacity: 0.6;

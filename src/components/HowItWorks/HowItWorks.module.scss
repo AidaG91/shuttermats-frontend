@@ -1,0 +1,59 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.how {
+  background: v.$color-white;
+  padding: v.$space-7 v.$space-4;
+}
+
+.how__container {
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+.how__title {
+  font-family: v.$font-display;
+  font-size: v.$fs-2xl;
+  font-weight: v.$fw-bold;
+  text-transform: uppercase;
+  margin-bottom: v.$space-6;
+  color: v.$color-black;
+}
+
+.how__steps {
+  display: grid;
+  gap: v.$space-6;
+
+  @include m.md {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.how__step {
+  background: v.$color-white-soft;
+  padding: v.$space-5;
+  border-radius: v.$radius-md;
+  border: 1px solid v.$color-gray-lighter;
+  box-shadow: v.$shadow-sm;
+}
+
+.how__number {
+  display: inline-block;
+  font-size: v.$fs-lg;
+  font-weight: v.$fw-bold;
+  color: v.$color-red;
+  margin-bottom: v.$space-3;
+}
+
+.how__stepTitle {
+  font-size: v.$fs-md;
+  font-weight: v.$fw-semibold;
+  margin-bottom: v.$space-2;
+  color: v.$color-black;
+}
+
+.how__text {
+  font-size: v.$fs-sm;
+  color: v.$color-gray;
+  line-height: 1.55;
+}
