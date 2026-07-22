@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+import Button from "../../components/Button/Button";
 import styles from "./FinalCTA.module.scss";
 
 const FinalCTA = () => {
@@ -5,19 +7,20 @@ const FinalCTA = () => {
     <section className={styles.cta}>
       <div className={styles.cta__container}>
         <h2 className={styles.cta__title}>
-          ¿Quieres cobertura profesional para tus combates?
+          Creemos juntos algo que te represente de la manera más auténtica.
         </h2>
 
         <p className={styles.cta__text}>
-          Ofrecemos cobertura fotográfica y audiovisual especializada en
-          Brazilian Jiu‑Jitsu y Grappling. Si compites o organizas un evento,
-          capturamos cada momento con una estética cinematográfica y enfocada en
-          la intensidad del tatami.
+          Contacta con nosotros y cuéntanos en qué podemos ayudarte. Si compites
+          o organizas un evento, podemos ofrecer cobertura profesional enfocada
+          en la intensidad y la esencia del tatami.
         </p>
 
-        <a href="/reserva" className={styles.cta__button}>
-          Reservar Cobertura
-        </a>
+        <Link to="/reserva">
+          <Button variant="primary" size="md">
+            Hablemos
+          </Button>
+        </Link>
       </div>
     </section>
   );

@@ -1,0 +1,58 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.footer {
+  background: v.$color-black;
+  color: v.$color-white;
+  padding: v.$space-6 v.$space-4;
+}
+
+.footer__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.footer__brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: v.$space-2;
+  margin-bottom: v.$space-4;
+}
+
+.footer__logo {
+  width: 40px;
+  height: 40px;
+}
+
+.footer__title {
+  font-family: v.$font-display;
+  font-size: v.$fs-md;
+  font-weight: v.$fw-bold;
+  text-transform: uppercase;
+}
+
+.footer__nav {
+  display: flex;
+  justify-content: center;
+  gap: v.$space-6;
+  margin-bottom: v.$space-4;
+}
+
+.footer__link {
+  color: v.$color-white;
+  text-transform: uppercase;
+  font-size: v.$fs-sm;
+  letter-spacing: 0.05em;
+  transition: v.$transition-base;
+
+  &:hover {
+    color: v.$color-red;
+  }
+}
+
+.footer__copy {
+  font-size: v.$fs-xs;
+  color: v.$color-gray;
+}
