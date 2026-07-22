@@ -1,0 +1,89 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.smButton {
+  @include m.button-reset;
+  @include m.flex-center;
+  gap: $space-2;
+  padding: $space-3 $space-5;
+  border-radius: $radius-md;
+  font-size: $fs-sm;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &--full {
+    width: 100%;
+  }
+
+  // Variants
+  &--primary {
+    background: $color-red;
+    color: $color-white;
+
+    &:hover:not(:disabled) {
+      background: $color-red-dark;
+    }
+  }
+
+  &--secondary {
+    background: $color-black;
+    color: $color-white;
+
+    &:hover:not(:disabled) {
+      background: $color-black-soft;
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $color-black;
+    border: 2px solid $color-black;
+
+    &:hover:not(:disabled) {
+      background: $color-black;
+      color: $color-white;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-red;
+
+    &:hover:not(:disabled) {
+      background: rgba($color-red, 0.08);
+    }
+  }
+
+  // Sizes
+  &--sm {
+    padding: $space-2 $space-3;
+    font-size: $fs-xs;
+  }
+  &--md {
+    padding: $space-3 $space-5;
+  }
+  &--lg {
+    padding: $space-4 $space-6;
+    font-size: $fs-md;
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: $color-white;
+    border-radius: 50%;
+    animation: sm-spin 0.6s linear infinite;
+  }
+}
+
+@keyframes sm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

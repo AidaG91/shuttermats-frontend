@@ -1,0 +1,78 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.smNavbar {
+  position: sticky;
+  top: 0;
+  z-index: $z-navbar;
+  height: $navbar-height;
+  background: $color-black;
+  color: $color-white;
+  box-shadow: $shadow-sm;
+
+  &__inner {
+    @include container;
+    @include flex-between;
+    height: 100%;
+  }
+
+  &__brand {
+    font-family: $font-display;
+    font-size: $fs-lg;
+    font-weight: $fw-bold;
+    color: $color-white;
+    letter-spacing: 0.04em;
+
+    span {
+      color: $color-red;
+    }
+
+    &:hover {
+      color: $color-white;
+    }
+  }
+
+  &__links {
+    @include flex-center;
+    gap: $space-4;
+  }
+
+  &__link {
+    color: $color-white;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+
+    &:hover {
+      color: $color-red-light;
+    }
+  }
+
+  &__cta {
+    background: $color-red;
+    color: $color-white;
+    padding: $space-2 $space-4;
+    border-radius: $radius-md;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+
+    &:hover {
+      background: $color-red-dark;
+      color: $color-white;
+    }
+  }
+
+  &__logout {
+    background: transparent;
+    border: 1px solid $color-gray;
+    color: $color-white;
+    padding: $space-2 $space-4;
+    border-radius: $radius-md;
+    font-size: $fs-sm;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $color-red;
+      color: $color-red-light;
+    }
+  }
+}

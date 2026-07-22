@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
-import Header from "./layouts/Header";
-import Footer from "./layouts/Footer";
+import { Outlet } from "react-router";
+import Header from "./layouts/Header/Header";
+import Footer from "./layouts/Footer/Footer";
 
 function App() {
   return (
