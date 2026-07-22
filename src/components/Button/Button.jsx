@@ -12,10 +12,10 @@ const Button = ({
   ...rest
 }) => {
   const classes = [
-    "sm-button",
-    `sm-button--${variant}`,
-    `sm-button--${size}`,
-    fullWidth ? "sm-button--full" : "",
+    styles["sm-button"],
+    styles[`sm-button--${variant}`],
+    styles[`sm-button--${size}`],
+    fullWidth ? styles["sm-button--full"] : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -28,9 +28,7 @@ const Button = ({
       onClick={onClick}
       {...rest}
     >
-      {loading ? (
-        <span className={styles.smButtonSpinner}aria-hidden="true" />
-      ) : null}
+      {loading ? <span className={styles["sm-button__spinner"]} /> : null}
       <span className={styles.smButtonLabel}>{children}</span>
     </button>
   );

@@ -1,3 +1,5 @@
+@use "./variables" as v;
+
 // ---- Breakpoints (mobile-first) ----
 $breakpoint-sm: 640px;
 $breakpoint-md: 768px;
@@ -31,12 +33,12 @@ $breakpoint-xl: 1280px;
 // ---- Centered container ----
 @mixin container {
   width: 100%;
-  max-width: $container-max;
+  max-width: v.$container-max;
   margin-inline: auto;
-  padding-inline: $space-4;
+  padding-inline: v.$space-4;
 
   @include md {
-    padding-inline: $space-6;
+    padding-inline: v.$space-6;
   }
 }
 
@@ -55,19 +57,19 @@ $breakpoint-xl: 1280px;
 
 // ---- Card surface ----
 @mixin card-surface {
-  background: $color-white;
-  border: 1px solid $color-gray-lighter;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  background: v.$color-white;
+  border: 1px solid v.$color-gray-lighter;
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-sm;
 }
 
 // ---- Red accent button base (overridden by component) ----
 @mixin button-reset {
   border: none;
   cursor: pointer;
-  font-family: $font-primary;
-  font-weight: $fw-semibold;
-  transition: $transition-base;
+  font-family: v.$font-primary;
+  font-weight: v.$fw-semibold;
+  transition: v.$transition-base;
 }
 
 // ---- Visually hidden (a11y) ----

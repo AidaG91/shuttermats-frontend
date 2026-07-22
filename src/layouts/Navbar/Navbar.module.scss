@@ -1,5 +1,5 @@
-@use '../../styles/variables' as *;
-@use '../../styles/mixins' as *;
+@use '../../styles/base/variables' as *;
+@use '../../styles/base/mixins' as *;
 
 .smNavbar {
   position: sticky;

@@ -1,13 +1,13 @@
 @use "../../styles/base/variables" as v;
 @use "../../styles/base/mixins" as m;
 
-.smButton {
+.sm-button {
   @include m.button-reset;
   @include m.flex-center;
-  gap: $space-2;
-  padding: $space-3 $space-5;
-  border-radius: $radius-md;
-  font-size: $fs-sm;
+  gap: v.$space-2;
+  padding: v.$space-3 v.$space-5;
+  border-radius: v.$radius-md;
+  font-size: v.$fs-sm;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 
@@ -15,71 +15,71 @@
     opacity: 0.6;
     cursor: not-allowed;
   }
+}
 
-  &--full {
-    width: 100%;
+.sm-button--full {
+  width: 100%;
+}
+
+.sm-button--primary {
+  background: v.$color-red;
+  color: v.$color-white;
+
+  &:hover:not(:disabled) {
+    background: v.$color-red-dark;
   }
+}
 
-  // Variants
-  &--primary {
-    background: $color-red;
-    color: $color-white;
+.sm-button--secondary {
+  background: v.$color-black;
+  color: v.$color-white;
 
-    &:hover:not(:disabled) {
-      background: $color-red-dark;
-    }
+  &:hover:not(:disabled) {
+    background: v.$color-black-soft;
   }
+}
 
-  &--secondary {
-    background: $color-black;
-    color: $color-white;
+.sm-button--outline {
+  background: transparent;
+  color: v.$color-black;
+  border: 2px solid v.$color-black;
 
-    &:hover:not(:disabled) {
-      background: $color-black-soft;
-    }
+  &:hover:not(:disabled) {
+    background: v.$color-black;
+    color: v.$color-white;
   }
+}
 
-  &--outline {
-    background: transparent;
-    color: $color-black;
-    border: 2px solid $color-black;
+.sm-button--ghost {
+  background: transparent;
+  color: v.$color-red;
 
-    &:hover:not(:disabled) {
-      background: $color-black;
-      color: $color-white;
-    }
+  &:hover:not(:disabled) {
+    background: rgba(v.$color-red, 0.08);
   }
+}
 
-  &--ghost {
-    background: transparent;
-    color: $color-red;
+.sm-button--sm {
+  padding: v.$space-2 v.$space-3;
+  font-size: v.$fs-xs;
+}
 
-    &:hover:not(:disabled) {
-      background: rgba($color-red, 0.08);
-    }
-  }
+.sm-button--md {
+  padding: v.$space-3 v.$space-5;
+}
 
-  // Sizes
-  &--sm {
-    padding: $space-2 $space-3;
-    font-size: $fs-xs;
-  }
-  &--md {
-    padding: $space-3 $space-5;
-  }
-  &--lg {
-    padding: $space-4 $space-6;
-    font-size: $fs-md;
-  }
+.sm-button--lg {
+  padding: v.$space-4 v.$space-6;
+  font-size: v.$fs-md;
+}
 
-  &__spinner {
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-top-color: $color-white;
-    border-radius: 50%;
-    animation: sm-spin 0.6s linear infinite;
-  }
+.sm-button__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: v.$color-white;
+  border-radius: 50%;
+  animation: sm-spin 0.6s linear infinite;
 }
 
 @keyframes sm-spin {
