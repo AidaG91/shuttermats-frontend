@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
+import Logo from "../../assets/logos/logo-white.svg";
 
 const Header = ({ user, onLogout }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -46,11 +47,10 @@ const Header = ({ user, onLogout }) => {
         {/* Brand */}
         <Link to="/" className={styles.header__brand}>
           <img
-            src="/images/logo-icon.png"
+            src={Logo}
             alt="ShutterMats Logo"
             className={styles.header__logo}
           />
-          <span className={styles.header__title}>SHUTTERMATS</span>
         </Link>
 
         {/* Desktop Navigation */}
