@@ -1,16 +1,21 @@
 import { createBrowserRouter } from "react-router";
 import App from "../App";
-import Home from "../pages/Home/Home"
+import Home from "../pages/Home/Home";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        index: true,
-        element: <Home />
-      }
-    ]
+    basename: import.meta.env.BASE_URL,
   },
-]);
+);
