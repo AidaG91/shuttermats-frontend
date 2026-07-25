@@ -10,7 +10,7 @@
 .hero {
   background: v.$color-surface;
   color: v.$color-on-surface;
-  padding: v.$space-8 0;
+  padding: calc(#{v.$navbar-height} + #{v.$space-8}) 0 v.$space-8;
   text-align: center;
   border-bottom: 1px solid v.$color-outline-variant;
 

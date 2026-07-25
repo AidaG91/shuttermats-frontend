@@ -2,49 +2,54 @@
 @use "../../styles/base/mixins" as m;
 
 .footer {
-  background: v.$color-black;
+  background: v.$color-surface;
   color: v.$color-white;
-  padding: v.$space-6 v.$space-4;
+  border-top: 1px solid v.$color-outline-variant;
+  padding: v.$space-5 v.$space-4;
 }
 
 .footer__inner {
-  max-width: 1200px;
+  max-width: v.$container-max;
   margin-inline: auto;
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-4;
 }
 
 .footer__brand {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: v.$space-2;
-  margin-bottom: v.$space-4;
+  text-decoration: none;
 }
 
 .footer__logo {
-  width: 100px;
-  height: 100px;
+  width: 28px;
+  height: 28px;
 }
 
-.footer__title {
+.footer__wordmark {
   font-family: v.$font-display;
-  font-size: v.$fs-md;
+  font-size: v.$fs-sm;
   font-weight: v.$fw-bold;
+  letter-spacing: v.$ls-wide;
   text-transform: uppercase;
+  color: v.$color-white;
 }
 
 .footer__nav {
   display: flex;
-  justify-content: center;
-  gap: v.$space-6;
-  margin-bottom: v.$space-4;
+  flex-wrap: wrap;
+  gap: v.$space-5;
 }
 
 .footer__link {
-  color: v.$color-white;
+  color: v.$color-on-surface-muted;
   text-transform: uppercase;
-  font-size: v.$fs-sm;
-  letter-spacing: 0.05em;
+  font-size: v.$fs-xs;
+  letter-spacing: v.$ls-wide;
   transition: v.$transition-base;
 
   &:hover {
@@ -52,7 +57,12 @@
   }
 }
 
+.footer__link--active {
+  color: v.$color-white;
+}
+
 .footer__copy {
   font-size: v.$fs-xs;
-  color: v.$color-gray;
+  color: v.$color-on-surface-muted;
+  white-space: nowrap;
 }

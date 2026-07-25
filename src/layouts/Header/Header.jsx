@@ -9,9 +9,22 @@ const NAV_LINKS = [
   { to: "/galerias", label: "Galerías" },
 ];
 
+const SCROLL_THRESHOLD = 40;
+
 const Header = ({ user, onLogout }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef(null);
+
+  useEffect(() => {
+    const updateScrolledState = () => {
+      setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    };
+
+    updateScrolledState();
+    window.addEventListener("scroll", updateScrolledState);
+    return () => window.removeEventListener("scroll", updateScrolledState);
+  }, []);
 
   useEffect(() => {
     const closeMenuOnEscape = (event) => {
@@ -46,7 +59,9 @@ const Header = ({ user, onLogout }) => {
   }, [menuOpen]);
 
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${scrolled ? styles["header--solid"] : ""}`}
+    >
       <div className={styles.header__inner}>
         <Link to="/" className={styles.header__brand}>
           <img
@@ -58,7 +73,14 @@ const Header = ({ user, onLogout }) => {
 
         <nav className={styles.header__nav} aria-label="Menú principal">
           {NAV_LINKS.map((link) => (
-            <NavLink key={link.to} to={link.to} className={styles.header__link}>
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.to === "/"}
+              className={({ isActive }) =>
+                `${styles.header__link} ${isActive ? styles["header__link--active"] : ""}`
+              }
+            >
               {link.label}
             </NavLink>
           ))}
@@ -110,7 +132,10 @@ const Header = ({ user, onLogout }) => {
               <NavLink
                 key={link.to}
                 to={link.to}
-                className={styles.mobileMenu__link}
+                end={link.to === "/"}
+                className={({ isActive }) =>
+                  `${styles.mobileMenu__link} ${isActive ? styles["mobileMenu__link--active"] : ""}`
+                }
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}

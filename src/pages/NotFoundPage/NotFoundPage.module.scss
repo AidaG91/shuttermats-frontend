@@ -7,7 +7,7 @@
   color: v.$color-on-surface;
   @include m.flex-center;
   text-align: center;
-  padding: v.$space-8 v.$space-4;
+  padding: calc(#{v.$navbar-height} + #{v.$space-8}) v.$space-4 v.$space-8;
 }
 
 .content {

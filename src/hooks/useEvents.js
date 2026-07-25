@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { getEvents } from "../services/eventsService";
 
+const INITIAL_STATE = {
+  content: [],
+  totalPages: 0,
+  totalElements: 0,
+  loading: true,
+  error: null,
+};
+
 export function useEvents({
   status = "upcoming",
   location = "",
@@ -8,28 +16,22 @@ export function useEvents({
   size = 6,
   sort = "date,asc",
 } = {}) {
-  const [data, setData] = useState({
-    content: [],
-    totalPages: 0,
-    totalElements: 0,
-  });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [state, setState] = useState(INITIAL_STATE);
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(null);
+    setState((previous) => ({ ...previous, loading: true, error: null }));
 
     getEvents({ status, location, page, size, sort })
       .then((result) => {
-        if (!cancelled) setData(result);
+        if (!cancelled) {
+          setState({ ...result, loading: false, error: null });
+        }
       })
       .catch((err) => {
-        if (!cancelled) setError(err.message);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          setState((previous) => ({ ...previous, loading: false, error: err.message }));
+        }
       });
 
     return () => {
@@ -37,5 +39,5 @@ export function useEvents({
     };
   }, [status, location, page, size, sort]);
 
-  return { ...data, loading, error };
+  return state;
 }

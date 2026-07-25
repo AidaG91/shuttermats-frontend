@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { ApiError, get } from "../../services/httpClient";
 
 function mockFetchOnce(response) {
-  global.fetch = vi.fn().mockResolvedValue(response);
+  globalThis.fetch = vi.fn().mockResolvedValue(response);
 }
 
 describe("httpClient.get", () => {
@@ -26,7 +26,7 @@ describe("httpClient.get", () => {
 
     await get("/events", { status: "upcoming", location: "", page: 0 });
 
-    const calledUrl = global.fetch.mock.calls[0][0];
+    const calledUrl = globalThis.fetch.mock.calls[0][0];
     expect(calledUrl).toContain("status=upcoming");
     expect(calledUrl).toContain("page=0");
     expect(calledUrl).not.toContain("location=");
@@ -48,7 +48,7 @@ describe("httpClient.get", () => {
   });
 
   it("throws an ApiError when the network request fails", async () => {
-    global.fetch = vi.fn().mockRejectedValue(new TypeError("Failed to fetch"));
+    globalThis.fetch = vi.fn().mockRejectedValue(new TypeError("Failed to fetch"));
 
     await expect(get("/events")).rejects.toBeInstanceOf(ApiError);
   });
