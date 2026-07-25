@@ -1,3 +1,6 @@
+import { Link } from "react-router";
+import { ChevronDown } from "lucide-react";
+import { resolveAssetUrl } from "../../utils/url";
 import styles from "./Hero.module.scss";
 
 const Hero = () => {
@@ -5,7 +8,7 @@ const Hero = () => {
     <section className={styles.hero}>
       <div className={styles.hero__background}>
         <img
-          src="/images/hero-bjj.jpg"
+          src={resolveAssetUrl("/images/hero-bjj.jpg")}
           alt="Dos atletas de Brazilian Jiu-Jitsu compitiendo sobre el tatami"
           className={styles.hero__image}
         />
@@ -28,15 +31,19 @@ const Hero = () => {
         </p>
 
         <div className={styles.hero__actions}>
-          <a href="/events" className={styles["hero__btn--primary"]}>
+          <Link to="/events" className={styles["hero__btn--primary"]}>
             Ver Eventos
-          </a>
+          </Link>
 
-          <a href="/reserva" className={styles["hero__btn--outline"]}>
+          <Link to="/reserva" className={styles["hero__btn--outline"]}>
             Reservar Cobertura
-          </a>
+          </Link>
         </div>
       </div>
+
+      <span className={styles.hero__scrollCue} aria-hidden="true">
+        <ChevronDown size={28} />
+      </span>
     </section>
   );
 };

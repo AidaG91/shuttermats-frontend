@@ -5,6 +5,7 @@
   @include m.button-reset;
   @include m.flex-center;
 
+  display: inline-flex;
   gap: v.$space-2;
   padding: v.$space-3 v.$space-5;
   border-radius: v.$radius-md;

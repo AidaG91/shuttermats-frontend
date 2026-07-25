@@ -142,27 +142,41 @@
 /* ----------------------------- */
 
 .intro {
-  background: v.$color-white-soft;
-  padding: v.$space-7 v.$space-4;
+  background: v.$color-surface;
+  color: v.$color-on-surface;
+  padding: v.$space-8 v.$space-4;
+  text-align: center;
 }
 
 .intro__container {
-  max-width: 800px;
+  max-width: 760px;
   margin-inline: auto;
 }
 
-.intro__title {
-  font-family: v.$font-display;
-  font-size: v.$fs-2xl;
-  font-weight: v.$fw-bold;
+.intro__eyebrow {
+  display: inline-block;
   margin-bottom: v.$space-5;
+  font-size: v.$fs-sm;
+  font-weight: v.$fw-medium;
   text-transform: uppercase;
-  color: v.$color-black;
+  letter-spacing: v.$ls-wide;
+  color: v.$color-red;
 }
 
-.intro__text {
-  font-size: v.$fs-md;
-  color: v.$color-black;
-  margin-bottom: v.$space-4;
-  line-height: 1.6;
+.intro__quote {
+  margin: 0 0 v.$space-5;
+  font-family: v.$font-display;
+  font-size: v.$fs-xl;
+  font-weight: v.$fw-medium;
+  line-height: 1.4;
+  color: v.$color-on-surface;
+
+  @include m.md {
+    font-size: v.$fs-2xl;
+  }
+}
+
+.intro__attribution {
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
 }

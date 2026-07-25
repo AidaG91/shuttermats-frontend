@@ -29,10 +29,10 @@ const HowItWorks = () => {
       <div className={styles.how__container}>
         <h2 className={styles.how__title}>Cómo Funciona</h2>
 
-        <div className={styles.how__steps}>
+        <div className={styles.how__timeline}>
           {steps.map((step) => (
             <div key={step.number} className={styles.how__step}>
-              <span className={styles.how__number}>{step.number}</span>
+              <span className={styles.how__node}>{step.number}</span>
               <h3 className={styles.how__stepTitle}>{step.title}</h3>
               <p className={styles.how__text}>{step.text}</p>
             </div>
