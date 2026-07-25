@@ -1,0 +1,41 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.eventsPage {
+  background: v.$color-white-soft;
+  color: v.$color-black;
+}
+
+.hero {
+  background: v.$color-black-soft;
+  color: v.$color-white;
+  padding: v.$space-7 0;
+  text-align: center;
+
+  h1 {
+    font-size: v.$fs-3xl;
+    margin-bottom: v.$space-3;
+  }
+
+  p {
+    font-size: v.$fs-md;
+    color: v.$color-gray-light;
+  }
+}
+
+.eventsList {
+  padding: v.$space-7 0;
+}
+
+.grid {
+  display: grid;
+  gap: v.$space-6;
+
+  @include m.sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include m.lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,0 +1,57 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.card {
+  @include m.card-surface;
+  border-radius: v.$radius-lg;
+  overflow: hidden;
+  transition: v.$transition-base;
+
+  &:hover {
+    box-shadow: v.$shadow-md;
+    transform: translateY(-4px);
+  }
+}
+
+.image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+
+  @include m.md {
+    height: 220px;
+  }
+}
+
+.content {
+  padding: v.$space-4;
+}
+
+h3 {
+  font-size: v.$fs-lg;
+  margin-bottom: v.$space-2;
+}
+
+.meta {
+  font-size: v.$fs-sm;
+  color: v.$color-gray;
+  margin-bottom: v.$space-3;
+}
+
+.description {
+  font-size: v.$fs-sm;
+  color: v.$color-black-soft;
+  margin-bottom: v.$space-4;
+}
+
+.button {
+  @include m.button-reset;
+  background: v.$color-red;
+  color: v.$color-white;
+  padding: v.$space-2 v.$space-4;
+  border-radius: v.$radius-md;
+
+  &:hover {
+    background: v.$color-red-dark;
+  }
+}

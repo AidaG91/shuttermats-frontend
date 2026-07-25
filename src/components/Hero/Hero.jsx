@@ -28,7 +28,7 @@ const Hero = () => {
         </p>
 
         <div className={styles.hero__actions}>
-          <a href="/eventos" className={styles["hero__btn--primary"]}>
+          <a href="/events" className={styles["hero__btn--primary"]}>
             Ver Eventos
           </a>
 

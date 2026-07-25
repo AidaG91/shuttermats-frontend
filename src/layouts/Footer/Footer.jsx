@@ -18,7 +18,7 @@ const Footer = () => {
           <Link to="/" className={styles.footer__link}>
             Inicio
           </Link>
-          <Link to="/eventos" className={styles.footer__link}>
+          <Link to="/events" className={styles.footer__link}>
             Eventos
           </Link>
           <Link to="/galerias" className={styles.footer__link}>

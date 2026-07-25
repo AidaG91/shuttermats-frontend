@@ -58,7 +58,7 @@ const Header = ({ user, onLogout }) => {
           <Link to="/" className={styles.header__link}>
             Inicio
           </Link>
-          <Link to="/eventos" className={styles.header__link}>
+          <Link to="/events" className={styles.header__link}>
             Eventos
           </Link>
           <Link to="/galerias" className={styles.header__link}>
@@ -114,7 +114,7 @@ const Header = ({ user, onLogout }) => {
             <Link to="/" className={styles.mobileMenu__link}>
               Inicio
             </Link>
-            <Link to="/eventos" className={styles.mobileMenu__link}>
+            <Link to="/events" className={styles.mobileMenu__link}>
               Eventos
             </Link>
             <Link to="/galerias" className={styles.mobileMenu__link}>
