@@ -1,6 +1,6 @@
-# Imagenes de eventos
+# Imágenes de eventos
 
-Coloca aqui las fotos de cada competicion con estos nombres exactos
+Coloca aquí las fotos de cada competición con estos nombres exactos
 (el backend ya las referencia por esta ruta en `data.sql`):
 
 - torredembarra-challenge-summer-2025.jpg
@@ -11,9 +11,9 @@ Coloca aqui las fotos de cada competicion con estos nombres exactos
 - penedes-challenge-2026.jpg
 - torredembarra-challenge-fall-2026.jpg
 
-Formato recomendado: jpg u png, orientacion horizontal (la tarjeta de
-evento recorta a 200-240px de alto con `object-fit: cover`, asi que
-no hace falta recortar a mano, pero cuanto mas panoramica mejor encaja).
+Formato recomendado: jpg o png, orientación horizontal (la tarjeta de
+evento recorta a 200-240px de alto con `object-fit: cover`, así que
+no hace falta recortar a mano, pero cuanto más panorámica mejor encaja).
 
-Si cambias un nombre de archivo, actualiza tambien el campo `image_url`
+Si cambias un nombre de archivo, actualiza también el campo `image_url`
 correspondiente en `shuttermats-backend/src/main/resources/data.sql`.

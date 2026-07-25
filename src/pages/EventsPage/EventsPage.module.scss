@@ -51,3 +51,70 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-3;
+  margin-bottom: v.$space-6;
+}
+
+.select {
+  appearance: none;
+  background: v.$color-surface-container;
+  border: 1px solid v.$color-outline-variant;
+  border-radius: v.$radius-sm;
+  color: v.$color-on-surface;
+  font-family: v.$font-primary;
+  font-size: v.$fs-sm;
+  font-weight: v.$fw-medium;
+  padding: v.$space-3 v.$space-8 v.$space-3 v.$space-4;
+  cursor: pointer;
+  transition: v.$transition-base;
+
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23b4b5b5'><path d='M4 6l4 4 4-4H4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right v.$space-3 center;
+  background-size: 16px;
+
+  &:hover,
+  &:focus-visible {
+    border-color: v.$color-red;
+    outline: none;
+  }
+}
+
+.pagination {
+  @include m.flex-center;
+  gap: v.$space-4;
+  margin-top: v.$space-7;
+}
+
+.pageInfo {
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
+  white-space: nowrap;
+}
+
+.pageButton {
+  @include m.button-reset;
+  background: transparent;
+  color: v.$color-on-surface;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: v.$space-2 v.$space-5;
+  border-radius: v.$radius-sm;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  font-size: v.$fs-sm;
+  font-weight: v.$fw-bold;
+
+  &:hover:not(:disabled) {
+    background: v.$color-red;
+    border-color: v.$color-red;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
