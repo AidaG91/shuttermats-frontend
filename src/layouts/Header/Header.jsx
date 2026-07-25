@@ -1,50 +1,53 @@
-import { Link } from "react-router";
+import { NavLink, Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
 import Logo from "../../assets/logos/logo-white.svg";
+
+const NAV_LINKS = [
+  { to: "/", label: "Inicio" },
+  { to: "/events", label: "Eventos" },
+  { to: "/galerias", label: "Galerías" },
+];
 
 const Header = ({ user, onLogout }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Cerrar con ESC
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const closeMenuOnEscape = (event) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
       }
     };
 
     if (menuOpen) {
-      window.addEventListener("keydown", handleKeyDown);
+      window.addEventListener("keydown", closeMenuOnEscape);
     }
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", closeMenuOnEscape);
     };
   }, [menuOpen]);
 
-  // Cerrar al hacer click fuera del menú
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const closeMenuOnOutsideClick = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuOpen(false);
       }
     };
 
     if (menuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("mousedown", closeMenuOnOutsideClick);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", closeMenuOnOutsideClick);
     };
   }, [menuOpen]);
 
   return (
     <header className={styles.header}>
       <div className={styles.header__inner}>
-        {/* Brand */}
         <Link to="/" className={styles.header__brand}>
           <img
             src={Logo}
@@ -53,20 +56,14 @@ const Header = ({ user, onLogout }) => {
           />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className={styles.header__nav}>
-          <Link to="/" className={styles.header__link}>
-            Inicio
-          </Link>
-          <Link to="/events" className={styles.header__link}>
-            Eventos
-          </Link>
-          <Link to="/galerias" className={styles.header__link}>
-            Galerías
-          </Link>
+        <nav className={styles.header__nav} aria-label="Menú principal">
+          {NAV_LINKS.map((link) => (
+            <NavLink key={link.to} to={link.to} className={styles.header__link}>
+              {link.label}
+            </NavLink>
+          ))}
         </nav>
 
-        {/* Desktop Actions */}
         <div className={styles.header__actions}>
           {user ? (
             <button className={styles.header__logout} onClick={onLogout}>
@@ -86,7 +83,6 @@ const Header = ({ user, onLogout }) => {
           )}
         </div>
 
-        {/* Mobile Hamburger */}
         <button
           className={`${styles.header__hamburger} ${
             menuOpen ? styles["header__hamburger--open"] : ""
@@ -102,7 +98,6 @@ const Header = ({ user, onLogout }) => {
         </button>
       </div>
 
-      {/* Backdrop + Mobile Menu */}
       {menuOpen && (
         <div className={styles.mobileOverlay}>
           <nav
@@ -111,15 +106,16 @@ const Header = ({ user, onLogout }) => {
             ref={menuRef}
             aria-label="Menú principal móvil"
           >
-            <Link to="/" className={styles.mobileMenu__link}>
-              Inicio
-            </Link>
-            <Link to="/events" className={styles.mobileMenu__link}>
-              Eventos
-            </Link>
-            <Link to="/galerias" className={styles.mobileMenu__link}>
-              Galerías
-            </Link>
+            {NAV_LINKS.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={styles.mobileMenu__link}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </NavLink>
+            ))}
 
             {user ? (
               <button className={styles.mobileMenu__logout} onClick={onLogout}>
@@ -127,10 +123,18 @@ const Header = ({ user, onLogout }) => {
               </button>
             ) : (
               <>
-                <Link to="/login" className={styles.mobileMenu__link}>
+                <Link
+                  to="/login"
+                  className={styles.mobileMenu__link}
+                  onClick={() => setMenuOpen(false)}
+                >
                   Login
                 </Link>
-                <Link to="/reserva" className={styles.mobileMenu__cta}>
+                <Link
+                  to="/reserva"
+                  className={styles.mobileMenu__cta}
+                  onClick={() => setMenuOpen(false)}
+                >
                   Reservar Cobertura
                 </Link>
               </>

@@ -1,0 +1,36 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.notFound {
+  min-height: 60vh;
+  background: v.$color-surface;
+  color: v.$color-on-surface;
+  @include m.flex-center;
+  text-align: center;
+  padding: v.$space-8 v.$space-4;
+}
+
+.content {
+  max-width: 32rem;
+}
+
+.code {
+  display: block;
+  font-family: v.$font-display;
+  font-size: v.$fs-3xl;
+  font-weight: v.$fw-black;
+  color: v.$color-red;
+  margin-bottom: v.$space-3;
+}
+
+.homeLink {
+  display: inline-block;
+  margin-top: v.$space-5;
+  color: v.$color-on-surface;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &:hover {
+    color: v.$color-red;
+  }
+}

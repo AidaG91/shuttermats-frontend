@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getEvents } from "../services/eventsService";
 
 export function useEvents({
   status = "upcoming",
@@ -13,21 +14,28 @@ export function useEvents({
     totalElements: 0,
   });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    let cancelled = false;
     setLoading(true);
+    setError(null);
 
-    const params = new URLSearchParams({ page, size, sort });
-    if (status && status !== "all") params.set("status", status);
-    if (location) params.set("location", location);
-
-    fetch(`http://localhost:8080/api/events?${params.toString()}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
+    getEvents({ status, location, page, size, sort })
+      .then((result) => {
+        if (!cancelled) setData(result);
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err.message);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
       });
+
+    return () => {
+      cancelled = true;
+    };
   }, [status, location, page, size, sort]);
 
-  return { ...data, loading };
+  return { ...data, loading, error };
 }

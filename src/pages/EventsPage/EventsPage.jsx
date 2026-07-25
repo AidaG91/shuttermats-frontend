@@ -14,8 +14,9 @@ export default function EventsPage() {
     content: events,
     totalPages,
     loading,
+    error,
   } = useEvents({ status, location, page, sort });
-  const locations = useEventLocations();
+  const { locations } = useEventLocations();
 
   const changeStatus = (value) => {
     setStatus(value);
@@ -40,43 +41,70 @@ export default function EventsPage() {
       <section className={styles.eventsList}>
         <div className="container">
           <div className={styles.filters}>
-            <select
-              className={styles.select}
-              value={status}
-              onChange={(e) => changeStatus(e.target.value)}
-            >
-              <option value="upcoming">Próximos</option>
-              <option value="past">Pasados</option>
-              <option value="all">Todos</option>
-            </select>
+            <div className={styles.field}>
+              <label htmlFor="status-filter" className={styles.fieldLabel}>
+                Estado
+              </label>
+              <select
+                id="status-filter"
+                className={styles.select}
+                value={status}
+                onChange={(e) => changeStatus(e.target.value)}
+              >
+                <option value="upcoming">Próximos</option>
+                <option value="past">Pasados</option>
+                <option value="all">Todos</option>
+              </select>
+            </div>
 
-            <select
-              className={styles.select}
-              value={location}
-              onChange={(e) => changeLocation(e.target.value)}
-            >
-              <option value="">Todas las ubicaciones</option>
-              {locations.map((loc) => (
-                <option key={loc} value={loc}>
-                  {loc}
-                </option>
-              ))}
-            </select>
+            <div className={styles.field}>
+              <label htmlFor="location-filter" className={styles.fieldLabel}>
+                Ubicación
+              </label>
+              <select
+                id="location-filter"
+                className={styles.select}
+                value={location}
+                onChange={(e) => changeLocation(e.target.value)}
+              >
+                <option value="">Todas las ubicaciones</option>
+                {locations.map((loc) => (
+                  <option key={loc} value={loc}>
+                    {loc}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          {loading && <p>Cargando eventos...</p>}
-          {!loading && events.length === 0 && (
-            <p>No hay eventos disponibles en este momento.</p>
+          <div aria-live="polite">
+            {loading && <p>Cargando eventos...</p>}
+
+            {!loading && error && (
+              <p className={styles.errorMessage} role="alert">
+                No se han podido cargar los eventos: {error}. Inténtalo de
+                nuevo más tarde.
+              </p>
+            )}
+
+            {!loading && !error && events.length === 0 && (
+              <p>No hay eventos disponibles en este momento.</p>
+            )}
+          </div>
+
+          {!loading && !error && events.length > 0 && (
+            <div className={styles.grid}>
+              {events.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
           )}
 
-          <div className={styles.grid}>
-            {events.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
-
-          {totalPages > 1 && (
-            <div className={styles.pagination}>
+          {!loading && !error && totalPages > 1 && (
+            <nav
+              className={styles.pagination}
+              aria-label="Paginación de eventos"
+            >
               <button
                 className={styles.pageButton}
                 disabled={page === 0}
@@ -94,7 +122,7 @@ export default function EventsPage() {
               >
                 Siguiente
               </button>
-            </div>
+            </nav>
           )}
         </div>
       </section>

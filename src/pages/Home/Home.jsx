@@ -9,7 +9,6 @@ const Home = () => {
     <main className={styles.home}>
       <Hero />
 
-      {/* INTRO */}
       <section className={styles.intro}>
         <div className={styles.intro__container}>
           <h2 className={styles.intro__title}>Bienvenidos a ShutterMats</h2>

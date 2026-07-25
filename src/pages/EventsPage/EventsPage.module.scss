@@ -55,8 +55,27 @@
 .filters {
   display: flex;
   flex-wrap: wrap;
-  gap: v.$space-3;
+  gap: v.$space-4;
   margin-bottom: v.$space-6;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+}
+
+.fieldLabel {
+  font-size: v.$fs-xs;
+  font-weight: v.$fw-medium;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  color: v.$color-on-surface-muted;
+}
+
+.errorMessage {
+  color: v.$color-red;
+  font-size: v.$fs-sm;
 }
 
 .select {

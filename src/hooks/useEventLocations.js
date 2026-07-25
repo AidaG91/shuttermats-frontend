@@ -1,13 +1,25 @@
 import { useEffect, useState } from "react";
+import { getEventLocations } from "../services/eventsService";
 
 export function useEventLocations() {
   const [locations, setLocations] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/events/locations")
-      .then((res) => res.json())
-      .then(setLocations);
+    let cancelled = false;
+
+    getEventLocations()
+      .then((result) => {
+        if (!cancelled) setLocations(result);
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err.message);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  return locations;
+  return { locations, error };
 }
