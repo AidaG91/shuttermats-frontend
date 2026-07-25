@@ -2,29 +2,41 @@
 @use "../../styles/base/mixins" as m;
 
 .eventsPage {
-  background: v.$color-white-soft;
-  color: v.$color-black;
+  background: v.$color-surface;
+  color: v.$color-on-surface;
+  min-height: 100vh;
 }
 
 .hero {
-  background: v.$color-black-soft;
-  color: v.$color-white;
-  padding: v.$space-7 0;
+  background: v.$color-surface;
+  color: v.$color-on-surface;
+  padding: v.$space-8 0;
   text-align: center;
+  border-bottom: 1px solid v.$color-outline-variant;
 
   h1 {
-    font-size: v.$fs-3xl;
+    font-family: v.$font-display;
+    font-size: v.$fs-2xl;
+    font-weight: v.$fw-black;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
     margin-bottom: v.$space-3;
+
+    @include m.md {
+      font-size: v.$fs-3xl;
+    }
   }
 
   p {
     font-size: v.$fs-md;
-    color: v.$color-gray-light;
+    color: v.$color-on-surface-muted;
+    max-width: 40rem;
+    margin-inline: auto;
   }
 }
 
 .eventsList {
-  padding: v.$space-7 0;
+  padding: v.$space-8 0;
 }
 
 .grid {

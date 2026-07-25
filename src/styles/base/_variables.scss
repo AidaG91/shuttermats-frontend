@@ -1,11 +1,22 @@
-// ---- Colors ----
+// ---- Colors (dark theme, Stitch-inspired) ----
 $color-black: #0a0a0a;
-$color-black-soft: #1a1a1a;
+$color-surface: #131313; // fondo principal
+$color-surface-container: #201f1f; // fondo de cards
+$color-surface-container-low: #1c1b1b;
+$color-surface-container-high: #2a2a2a;
+$color-surface-bright: #393939;
+
 $color-white: #ffffff;
-$color-white-soft: #f5f5f5;
-$color-red: #BA0911;
-$color-red-dark: #b30022;
-$color-red-light: #ff4d6d;
+$color-on-surface: #e5e2e1; // texto principal sobre fondo oscuro
+$color-on-surface-muted: #b4b5b5; // texto secundario
+
+$color-red: #e53935; // acento primario (antes $color-red)
+$color-red-dark: #c62828;
+$color-red-light: #ff544c;
+$color-red-glow: rgba(229, 57, 53, 0.3);
+
+$color-outline-variant: #3a3130; // bordes sutiles sobre fondo oscuro
+
 $color-gray: #6b6b6b;
 $color-gray-light: #d9d9d9;
 $color-gray-lighter: #ededed;
@@ -14,9 +25,12 @@ $color-warning: #e0a800;
 $color-danger: #d32f2f;
 $color-info: #1e88e5;
 
+$color-black-soft: #1a1a1a;
+$color-white-soft: #f5f5f5;
+
 // ---- Typography ----
-$font-primary: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-$font-display: 'Oswald', 'Inter', sans-serif;
+$font-primary: "Montserrat", "Inter", "Segoe UI", Arial, sans-serif;
+$font-display: "Montserrat", "Oswald", sans-serif;
 
 $fs-xs: 0.75rem;
 $fs-sm: 0.875rem;
@@ -31,6 +45,9 @@ $fw-regular: 400;
 $fw-medium: 500;
 $fw-semibold: 600;
 $fw-bold: 700;
+$fw-black: 800;
+
+$ls-wide: 0.05em; // letter-spacing para labels/botones en mayúsculas
 
 // ---- Spacing scale ----
 $space-1: 0.25rem;
@@ -49,18 +66,19 @@ $radius-lg: 16px;
 $radius-pill: 999px;
 
 // ---- Shadows ----
-$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
-$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
-$shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.22);
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+$shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55);
+$shadow-glow: 0 0 25px $color-red-glow;
 
 // ---- Layout ----
-$container-max: 1200px;
+$container-max: 1280px;
 $sidebar-width: 240px;
 $navbar-height: 64px;
 
 // ---- Transitions ----
 $transition-fast: 120ms ease;
-$transition-base: 200ms ease;
+$transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
 
 // ---- z-index ----
 $z-navbar: 100;

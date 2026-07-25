@@ -57,8 +57,8 @@ $breakpoint-xl: 1280px;
 
 // ---- Card surface ----
 @mixin card-surface {
-  background: v.$color-white;
-  border: 1px solid v.$color-gray-lighter;
+  background: v.$color-surface-container;
+  border: 1px solid v.$color-outline-variant;
   border-radius: v.$radius-lg;
   box-shadow: v.$shadow-sm;
 }
