@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useAdminRequests } from "../../hooks/useAdminRequests";
+import { useEvents } from "../../hooks/useEvents";
 import Select from "../../components/Select/Select";
 import StatusBadge from "../../components/StatusBadge/StatusBadge";
 import { clearAdminSession } from "../../services/authService";
@@ -19,6 +20,7 @@ const STATUS_OPTIONS = [
 export default function AdminDashboardPage() {
   const navigate = useNavigate();
   const [status, setStatus] = useState("");
+  const [eventId, setEventId] = useState("");
   const [page, setPage] = useState(0);
 
   const {
@@ -27,7 +29,17 @@ export default function AdminDashboardPage() {
     totalElements,
     loading,
     error,
-  } = useAdminRequests({ status, page });
+  } = useAdminRequests({ status, eventId, page });
+
+  const { content: events } = useEvents({ status: "all", size: 100, sort: "date,desc" });
+
+  const eventOptions = [
+    { value: "", label: "Todos" },
+    ...events.map((event) => ({
+      value: String(event.id),
+      label: `${event.name} · ${new Date(event.date).toLocaleDateString("es-ES")}`,
+    })),
+  ];
 
   const sessionExpired = error?.status === 401 || error?.status === 403;
 
@@ -40,6 +52,11 @@ export default function AdminDashboardPage() {
 
   const changeStatus = (value) => {
     setStatus(value);
+    setPage(0);
+  };
+
+  const changeEvent = (value) => {
+    setEventId(value);
     setPage(0);
   };
 
@@ -59,6 +76,13 @@ export default function AdminDashboardPage() {
           options={STATUS_OPTIONS}
           value={status}
           onChange={(e) => changeStatus(e.target.value)}
+        />
+        <Select
+          label="Evento"
+          id="event-filter"
+          options={eventOptions}
+          value={eventId}
+          onChange={(e) => changeEvent(e.target.value)}
         />
       </div>
 

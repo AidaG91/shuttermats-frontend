@@ -9,14 +9,14 @@ const INITIAL_STATE = {
   error: null,
 };
 
-export function useAdminRequests({ status = "", page = 0, size = 10 } = {}) {
+export function useAdminRequests({ status = "", eventId = "", page = 0, size = 10 } = {}) {
   const [state, setState] = useState(INITIAL_STATE);
 
   useEffect(() => {
     let cancelled = false;
     setState((previous) => ({ ...previous, loading: true, error: null }));
 
-    getAdminRequests({ status, page, size })
+    getAdminRequests({ status, eventId, page, size })
       .then((result) => {
         if (!cancelled) {
           setState({ ...result, loading: false, error: null });
@@ -31,7 +31,7 @@ export function useAdminRequests({ status = "", page = 0, size = 10 } = {}) {
     return () => {
       cancelled = true;
     };
-  }, [status, page, size]);
+  }, [status, eventId, page, size]);
 
   return state;
 }

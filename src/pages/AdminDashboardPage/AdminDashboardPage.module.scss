@@ -25,8 +25,15 @@
 }
 
 .filters {
-  max-width: 16rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-4;
   margin-bottom: v.$space-6;
+
+  > * {
+    flex: 1 1 16rem;
+    max-width: 20rem;
+  }
 }
 
 .errorMessage {
