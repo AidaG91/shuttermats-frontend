@@ -94,6 +94,17 @@
   }
 }
 
+.header__linkDisabled {
+  position: relative;
+  color: v.$color-gray;
+  text-transform: uppercase;
+  font-size: v.$fs-sm;
+  letter-spacing: 0.05em;
+  padding-bottom: v.$space-2;
+  cursor: not-allowed;
+  user-select: none;
+}
+
 .header__actions {
   display: none;
 
@@ -210,6 +221,16 @@
 .mobileMenu__link--active {
   color: v.$color-red;
   border-left-color: v.$color-red;
+}
+
+.mobileMenu__linkDisabled {
+  color: v.$color-gray;
+  text-transform: uppercase;
+  font-size: v.$fs-sm;
+  border-left: 2px solid transparent;
+  padding-left: v.$space-3;
+  cursor: not-allowed;
+  user-select: none;
 }
 
 .mobileMenu__cta {

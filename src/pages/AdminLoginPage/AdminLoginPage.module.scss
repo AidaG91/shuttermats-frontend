@@ -1,0 +1,64 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.loginPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: calc(#{v.$navbar-height} + #{v.$space-6}) v.$space-4 v.$space-8;
+  background: v.$color-surface;
+  color: v.$color-on-surface;
+}
+
+.card {
+  @include m.card-surface;
+  width: 100%;
+  max-width: 24rem;
+  padding: v.$space-7;
+  border-radius: v.$radius-lg;
+  text-align: center;
+
+  h1 {
+    font-family: v.$font-display;
+    font-size: v.$fs-xl;
+    font-weight: v.$fw-black;
+    text-transform: uppercase;
+    margin-bottom: v.$space-2;
+  }
+
+  p {
+    color: v.$color-on-surface-muted;
+    font-size: v.$fs-sm;
+    margin-bottom: v.$space-6;
+  }
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto v.$space-4;
+  border-radius: 50%;
+  color: v.$color-red;
+  background: v.$color-red-glow;
+  border: 1px solid rgba(229, 57, 53, 0.35);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+  text-align: left;
+}
+
+.errorBanner {
+  background: rgba(229, 57, 53, 0.1);
+  border: 1px solid v.$color-red;
+  color: v.$color-on-surface;
+  padding: v.$space-3 v.$space-4;
+  border-radius: v.$radius-md;
+  font-size: v.$fs-sm;
+}

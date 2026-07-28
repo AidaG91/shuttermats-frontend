@@ -66,3 +66,12 @@
   color: v.$color-on-surface-muted;
   white-space: nowrap;
 }
+
+.footer__adminLink {
+  color: v.$color-on-surface-muted;
+  text-decoration: none;
+
+  &:hover {
+    color: v.$color-red;
+  }
+}

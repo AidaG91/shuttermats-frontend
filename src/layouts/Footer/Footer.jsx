@@ -38,7 +38,10 @@ const Footer = () => {
         </nav>
 
         <p className={styles.footer__copy}>
-          © {new Date().getFullYear()} ShutterMats
+          © {new Date().getFullYear()} ShutterMats ·{" "}
+          <Link to="/admin/login" className={styles.footer__adminLink}>
+            Acceso administrador
+          </Link>
         </p>
       </div>
     </footer>

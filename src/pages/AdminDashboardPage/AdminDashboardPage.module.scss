@@ -1,0 +1,39 @@
+@use "../../styles/base/variables" as v;
+@use "../../styles/base/mixins" as m;
+
+.dashboardPage {
+  background: v.$color-surface;
+  color: v.$color-on-surface;
+  min-height: 100vh;
+  padding: calc(#{v.$navbar-height} + #{v.$space-6}) 0 v.$space-8;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: v.$space-4;
+  padding-bottom: v.$space-5;
+  border-bottom: 1px solid v.$color-outline-variant;
+  margin-bottom: v.$space-6;
+
+  h1 {
+    font-family: v.$font-display;
+    font-size: v.$fs-xl;
+    font-weight: v.$fw-black;
+    text-transform: uppercase;
+    margin-bottom: v.$space-1;
+  }
+
+  p {
+    color: v.$color-on-surface-muted;
+    font-size: v.$fs-sm;
+  }
+}
+
+.placeholder {
+  @include m.card-surface;
+  border-radius: v.$radius-lg;
+  padding: v.$space-6;
+  color: v.$color-on-surface-muted;
+}
