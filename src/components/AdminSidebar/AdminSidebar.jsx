@@ -6,12 +6,10 @@ import styles from "./AdminSidebar.module.scss";
 
 const NAV_ITEMS = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/admin/events", label: "Eventos", icon: CalendarDays, end: false },
 ];
 
-const DISABLED_ITEMS = [
-  { label: "Eventos", icon: CalendarDays },
-  { label: "Ajustes", icon: Settings },
-];
+const DISABLED_ITEMS = [{ label: "Ajustes", icon: Settings }];
 
 export default function AdminSidebar() {
   const navigate = useNavigate();

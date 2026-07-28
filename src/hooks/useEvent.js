@@ -7,6 +7,11 @@ export function useEvent(eventId) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!eventId) {
+      setLoading(false);
+      return;
+    }
+
     let cancelled = false;
     setLoading(true);
     setError(null);

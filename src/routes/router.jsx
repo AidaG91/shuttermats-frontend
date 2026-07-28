@@ -9,6 +9,8 @@ import LegalDocPage from "../pages/LegalDocPage/LegalDocPage";
 import AdminLoginPage from "../pages/AdminLoginPage/AdminLoginPage";
 import AdminDashboardPage from "../pages/AdminDashboardPage/AdminDashboardPage";
 import AdminRequestDetailPage from "../pages/AdminRequestDetailPage/AdminRequestDetailPage";
+import AdminEventsPage from "../pages/AdminEventsPage/AdminEventsPage";
+import AdminEventFormPage from "../pages/AdminEventFormPage/AdminEventFormPage";
 import AdminProtectedRoute from "./protectedRouter";
 import AdminLayout from "../layouts/AdminLayout/AdminLayout";
 
@@ -62,6 +64,18 @@ export const router = createBrowserRouter(
             {
               path: "requests/:id",
               element: <AdminRequestDetailPage />,
+            },
+            {
+              path: "events",
+              element: <AdminEventsPage />,
+            },
+            {
+              path: "events/new",
+              element: <AdminEventFormPage />,
+            },
+            {
+              path: "events/:id/edit",
+              element: <AdminEventFormPage />,
             },
           ],
         },

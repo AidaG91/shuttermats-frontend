@@ -1,0 +1,27 @@
+@use "../../styles/base/variables" as v;
+
+.formPage {
+  color: v.$color-on-surface;
+
+  h1 {
+    font-family: v.$font-display;
+    font-size: v.$fs-xl;
+    font-weight: v.$fw-black;
+    text-transform: uppercase;
+    margin: v.$space-2 0 v.$space-6;
+  }
+}
+
+.backLink {
+  color: v.$color-on-surface-muted;
+  font-size: v.$fs-sm;
+
+  &:hover {
+    color: v.$color-red;
+  }
+}
+
+.errorMessage {
+  color: v.$color-red;
+  margin-bottom: v.$space-4;
+}
