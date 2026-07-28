@@ -10,3 +10,11 @@ export function getAdminRequests({ status, page = 0, size = 10, sort = "createdA
     { Authorization: `Bearer ${token}` },
   );
 }
+
+export function getAdminRequestById(id) {
+  const token = getAdminToken();
+
+  return get(`/admin/requests/${id}`, undefined, {
+    Authorization: `Bearer ${token}`,
+  });
+}

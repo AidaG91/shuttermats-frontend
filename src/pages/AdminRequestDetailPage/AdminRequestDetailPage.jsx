@@ -1,19 +1,45 @@
-import { Link, useLocation, useParams } from "react-router";
+import { useEffect } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import StatusBadge from "../../components/StatusBadge/StatusBadge";
+import { useAdminRequest } from "../../hooks/useAdminRequest";
+import { clearAdminSession } from "../../services/authService";
 import styles from "./AdminRequestDetailPage.module.scss";
 
 export default function AdminRequestDetailPage() {
   const { id } = useParams();
   const location = useLocation();
-  const request = location.state?.request;
+  const navigate = useNavigate();
+
+  const { request: fetched, loading, error } = useAdminRequest(id);
+  // Mientras carga, mostramos al instante lo que ya trajimos de la tabla
+  // (si venimos de ahí) y lo sustituimos por la respuesta del servidor.
+  const request = fetched ?? location.state?.request;
+
+  const sessionExpired = error?.status === 401 || error?.status === 403;
+  const notFound = error?.status === 404;
+
+  useEffect(() => {
+    if (sessionExpired) {
+      clearAdminSession();
+      navigate("/admin/login", { replace: true });
+    }
+  }, [sessionExpired, navigate]);
+
+  if (loading && !request) {
+    return (
+      <main className={styles.detailPage}>
+        <p>Cargando solicitud...</p>
+      </main>
+    );
+  }
 
   if (!request) {
     return (
       <main className={styles.detailPage}>
         <p className={styles.errorMessage} role="alert">
-          No tenemos los datos de la solicitud #{id} a mano (esto pasa si
-          recargas la página o entras directamente por la URL). Vuelve al
-          panel y accede desde la tabla.
+          {notFound
+            ? `No existe ninguna solicitud con id ${id}.`
+            : `No se han podido cargar los datos de la solicitud #${id}.`}
         </p>
         <Link to="/admin" className={styles.link}>
           Volver al panel
