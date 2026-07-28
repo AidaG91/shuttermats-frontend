@@ -1,38 +1,139 @@
-import { useNavigate } from "react-router";
-import { LogOut } from "lucide-react";
-import Button from "../../components/Button/Button";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { useAdminRequests } from "../../hooks/useAdminRequests";
+import Select from "../../components/Select/Select";
+import StatusBadge from "../../components/StatusBadge/StatusBadge";
 import { clearAdminSession } from "../../services/authService";
 import styles from "./AdminDashboardPage.module.scss";
 
+const STATUS_OPTIONS = [
+  { value: "", label: "Todas" },
+  { value: "PENDING", label: "Pendiente" },
+  { value: "RECEIVED", label: "Recibida" },
+  { value: "CONFIRMED", label: "Confirmada" },
+  { value: "IN_PROGRESS", label: "En progreso" },
+  { value: "DELIVERED", label: "Entregada" },
+  { value: "REJECTED", label: "Rechazada" },
+];
+
 export default function AdminDashboardPage() {
   const navigate = useNavigate();
+  const [status, setStatus] = useState("");
+  const [page, setPage] = useState(0);
 
-  const handleLogout = () => {
-    clearAdminSession();
-    navigate("/admin/login");
+  const {
+    content: requests,
+    totalPages,
+    totalElements,
+    loading,
+    error,
+  } = useAdminRequests({ status, page });
+
+  const sessionExpired = error?.status === 401 || error?.status === 403;
+
+  useEffect(() => {
+    if (sessionExpired) {
+      clearAdminSession();
+      navigate("/admin/login", { replace: true });
+    }
+  }, [sessionExpired, navigate]);
+
+  const changeStatus = (value) => {
+    setStatus(value);
+    setPage(0);
   };
 
   return (
     <main className={styles.dashboardPage}>
-      <div className="container">
-        <div className={styles.header}>
-          <div>
-            <h1>Panel de administración</h1>
-            <p>Sesión iniciada correctamente.</p>
-          </div>
-          <Button variant="ghost" onClick={handleLogout}>
-            <LogOut size={16} style={{ marginRight: 6, verticalAlign: "-3px" }} />
-            Cerrar sesión
-          </Button>
-        </div>
-
-        <div className={styles.placeholder}>
-          <p>
-            Aquí irá la gestión de eventos y solicitudes de cobertura en las
-            próximas iteraciones.
-          </p>
+      <div className={styles.header}>
+        <div>
+          <h1>Solicitudes de cobertura</h1>
+          <p>Gestiona las peticiones de cobertura fotográfica de los atletas.</p>
         </div>
       </div>
+
+      <div className={styles.filters}>
+        <Select
+          label="Estado"
+          id="status-filter"
+          options={STATUS_OPTIONS}
+          value={status}
+          onChange={(e) => changeStatus(e.target.value)}
+        />
+      </div>
+
+      <div aria-live="polite">
+        {loading && <p>Cargando solicitudes...</p>}
+
+        {!loading && error && !sessionExpired && (
+          <p className={styles.errorMessage} role="alert">
+            No se han podido cargar las solicitudes: {error.message}.
+          </p>
+        )}
+
+        {!loading && !error && requests.length === 0 && (
+          <p className={styles.emptyState}>No hay solicitudes con este filtro.</p>
+        )}
+      </div>
+
+      {!loading && !error && requests.length > 0 && (
+        <div className={styles.tableWrapper}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Atleta</th>
+                <th>Evento</th>
+                <th>Fecha solicitud</th>
+                <th>Estado</th>
+                <th className={styles.actionsHeader}>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {requests.map((request) => (
+                <tr key={request.id}>
+                  <td className={styles.athleteName}>{request.athleteName}</td>
+                  <td>{request.event?.name}</td>
+                  <td>{new Date(request.createdAt).toLocaleDateString("es-ES")}</td>
+                  <td>
+                    <StatusBadge status={request.status} />
+                  </td>
+                  <td className={styles.actionsCell}>
+                    <Link
+                      to={`/admin/requests/${request.id}`}
+                      state={{ request }}
+                      className={styles.detailsLink}
+                    >
+                      Detalles
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {!loading && !error && totalPages > 1 && (
+        <nav className={styles.pagination} aria-label="Paginación de solicitudes">
+          <button
+            className={styles.pageButton}
+            disabled={page === 0}
+            onClick={() => setPage((p) => p - 1)}
+          >
+            Anterior
+          </button>
+          <span className={styles.pageInfo}>
+            Página {page + 1} de {totalPages} · {totalElements} en total
+          </span>
+          <button
+            className={styles.pageButton}
+            disabled={page + 1 >= totalPages}
+            onClick={() => setPage((p) => p + 1)}
+          >
+            Siguiente
+          </button>
+        </nav>
+      )}
     </main>
   );
 }
