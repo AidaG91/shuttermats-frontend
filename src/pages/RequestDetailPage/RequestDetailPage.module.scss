@@ -8,9 +8,11 @@
 }
 
 .hero {
+  position: relative;
   padding: calc(#{v.$navbar-height} + #{v.$space-8}) 0 v.$space-6;
   text-align: center;
   border-bottom: 1px solid v.$color-outline-variant;
+  overflow: hidden;
 
   h1 {
     font-family: v.$font-display;
@@ -25,6 +27,38 @@
   }
 }
 
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.88) 0%,
+    rgba(10, 10, 10, 0.75) 100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+
+  p {
+    color: v.$color-on-surface;
+  }
+}
+
 .successIcon {
   display: inline-flex;
   align-items: center;
@@ -34,23 +68,64 @@
   margin: 0 auto v.$space-4;
   border-radius: 50%;
   color: v.$color-success;
-  background: rgba(31, 157, 85, 0.12);
-  border: 1px solid rgba(31, 157, 85, 0.35);
+  background: rgba(31, 157, 85, 0.15);
+  border: 1px solid rgba(31, 157, 85, 0.4);
+  backdrop-filter: blur(4px);
 }
 
 .detailSection {
   padding: v.$space-8 0;
+}
+
+.layout {
   display: flex;
   flex-direction: column;
   gap: v.$space-6;
-  align-items: center;
+  max-width: 56rem;
+  margin-inline: auto;
+
+  @include m.lg {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.sideImage {
+  border-radius: v.$radius-lg;
+  overflow: hidden;
+  min-height: 220px;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @include m.lg {
+    width: 18rem;
+    min-height: unset;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-6;
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+
+  @include m.lg {
+    margin-inline: 0;
+  }
 }
 
 .card {
   @include m.card-surface;
   border-radius: v.$radius-lg;
   padding: v.$space-6;
-  max-width: 32rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -80,6 +155,11 @@
   color: v.$color-on-surface-muted;
 }
 
+.eventName {
+  font-weight: v.$fw-bold;
+  margin-top: calc(-1 * #{v.$space-1});
+}
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -104,7 +184,6 @@
   display: flex;
   align-items: flex-start;
   gap: v.$space-3;
-  max-width: 32rem;
   width: 100%;
   padding: v.$space-4;
   border-radius: v.$radius-md;
