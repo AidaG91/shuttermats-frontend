@@ -61,3 +61,51 @@ export async function post(path, body) {
 
   return response.json();
 }
+
+// Para multipart/form-data (p.ej. subir imagen de evento junto a los datos).
+// No se fija Content-Type a mano: el navegador debe generar el boundary.
+async function sendForm(method, path, formData, headers) {
+  let response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method,
+      headers,
+      body: formData,
+    });
+  } catch {
+    throw new ApiError("No se ha podido conectar con el servidor", 0);
+  }
+
+  if (!response.ok) {
+    throw new ApiError(await parseErrorMessage(response), response.status);
+  }
+
+  if (response.status === 204) return null;
+  return response.json();
+}
+
+export function postForm(path, formData, headers) {
+  return sendForm("POST", path, formData, headers);
+}
+
+export function putForm(path, formData, headers) {
+  return sendForm("PUT", path, formData, headers);
+}
+
+export async function del(path, headers) {
+  let response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method: "DELETE",
+      headers,
+    });
+  } catch {
+    throw new ApiError("No se ha podido conectar con el servidor", 0);
+  }
+
+  if (!response.ok) {
+    throw new ApiError(await parseErrorMessage(response), response.status);
+  }
+
+  return null;
+}
