@@ -6,6 +6,9 @@ import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import CoverageRequestFormPage from "../pages/CoverageRequestFormPage/CoverageRequestFormPage";
 import RequestDetailPage from "../pages/RequestDetailPage/RequestDetailPage";
 import LegalDocPage from "../pages/LegalDocPage/LegalDocPage";
+import AdminLoginPage from "../pages/AdminLoginPage/AdminLoginPage";
+import AdminDashboardPage from "../pages/AdminDashboardPage/AdminDashboardPage";
+import AdminProtectedRoute from "./protectedRouter";
 
 export const router = createBrowserRouter(
   [
@@ -32,6 +35,20 @@ export const router = createBrowserRouter(
         {
           path: "legal/:slug",
           element: <LegalDocPage />,
+        },
+        {
+          path: "admin/login",
+          element: <AdminLoginPage />,
+        },
+        {
+          path: "admin",
+          element: <AdminProtectedRoute />,
+          children: [
+            {
+              index: true,
+              element: <AdminDashboardPage />,
+            },
+          ],
         },
         {
           path: "*",
