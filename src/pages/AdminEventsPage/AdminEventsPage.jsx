@@ -146,22 +146,24 @@ export default function AdminEventsPage() {
                   <td>{new Date(event.date).toLocaleDateString("es-ES")}</td>
                   <td>{event.location}</td>
                   <td className={styles.actionsCell}>
-                    <Link
-                      to={`/admin/events/${event.id}/edit`}
-                      className={styles.iconLink}
-                      aria-label={`Editar ${event.name}`}
-                    >
-                      <Pencil size={16} />
-                    </Link>
-                    <button
-                      type="button"
-                      className={styles.iconButton}
-                      onClick={() => handleDeleteClick(event)}
-                      disabled={deletingId === event.id}
-                      aria-label={`Borrar ${event.name}`}
-                    >
-                      <Trash2 size={16} />
-                    </button>
+                    <div className={styles.actionsGroup}>
+                      <Link
+                        to={`/admin/events/${event.id}/edit`}
+                        className={styles.iconLink}
+                        aria-label={`Editar ${event.name}`}
+                      >
+                        <Pencil size={16} />
+                      </Link>
+                      <button
+                        type="button"
+                        className={styles.iconButton}
+                        onClick={() => handleDeleteClick(event)}
+                        disabled={deletingId === event.id}
+                        aria-label={`Borrar ${event.name}`}
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
