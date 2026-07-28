@@ -9,6 +9,7 @@ import LegalDocPage from "../pages/LegalDocPage/LegalDocPage";
 import AdminLoginPage from "../pages/AdminLoginPage/AdminLoginPage";
 import AdminDashboardPage from "../pages/AdminDashboardPage/AdminDashboardPage";
 import AdminProtectedRoute from "./protectedRouter";
+import AdminLayout from "../layouts/AdminLayout/AdminLayout";
 
 export const router = createBrowserRouter(
   [
@@ -37,22 +38,27 @@ export const router = createBrowserRouter(
           element: <LegalDocPage />,
         },
         {
-          path: "admin/login",
-          element: <AdminLoginPage />,
+          path: "*",
+          element: <NotFoundPage />,
         },
+      ],
+    },
+    {
+      path: "admin/login",
+      element: <AdminLoginPage />,
+    },
+    {
+      path: "admin",
+      element: <AdminProtectedRoute />,
+      children: [
         {
-          path: "admin",
-          element: <AdminProtectedRoute />,
+          element: <AdminLayout />,
           children: [
             {
               index: true,
               element: <AdminDashboardPage />,
             },
           ],
-        },
-        {
-          path: "*",
-          element: <NotFoundPage />,
         },
       ],
     },
