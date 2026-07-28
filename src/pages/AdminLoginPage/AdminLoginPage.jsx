@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
-import { Lock } from "lucide-react";
+import { Link, useNavigate } from "react-router";
+import { ArrowLeft, Lock } from "lucide-react";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { adminLogin } from "../../services/authService";
@@ -46,6 +46,11 @@ export default function AdminLoginPage() {
 
   return (
     <main className={styles.loginPage}>
+      <Link to="/" className={styles.backLink}>
+        <ArrowLeft size={16} aria-hidden="true" />
+        Volver a ShutterMats
+      </Link>
+
       <div className={styles.card}>
         <div className={styles.icon} aria-hidden="true">
           <Lock size={28} />
