@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEvents } from "../../hooks/useEvents";
 import { useEventLocations } from "../../hooks/useEventLocations";
 import EventCard from "../../components/EventCard/EventCard";
+import { resolveAssetUrl } from "../../utils/url";
 import styles from "./EventsPage.module.scss";
 
 export default function EventsPage() {
@@ -30,7 +31,16 @@ export default function EventsPage() {
   return (
     <main className={styles.eventsPage}>
       <section className={styles.hero}>
-        <div className="container">
+        <div className={styles.heroBackground}>
+          <img
+            src={resolveAssetUrl("/images/events-hero.jpg")}
+            alt=""
+            aria-hidden="true"
+            className={styles.heroImage}
+          />
+          <div className={styles.heroOverlay}></div>
+        </div>
+        <div className={`container ${styles.heroContent}`}>
           <h1>Events</h1>
           <p>
             Descubre las competiciones en las que ShutterMats captura la acción.
