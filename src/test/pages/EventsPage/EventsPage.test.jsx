@@ -1,9 +1,19 @@
 import { render, screen, waitFor } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import EventsPage from "../../../pages/EventsPage/EventsPage";
 import { getEventLocations, getEvents } from "../../../services/eventsService";
 
 vi.mock("../../../services/eventsService");
+
+// EventsPage renderiza <EventCard>, que usa <Link>: necesita Router alrededor.
+function renderEventsPage() {
+  return render(
+    <MemoryRouter>
+      <EventsPage />
+    </MemoryRouter>,
+  );
+}
 
 describe("EventsPage", () => {
   beforeEach(() => {
@@ -14,7 +24,7 @@ describe("EventsPage", () => {
   it("shows a loading message while the events are being fetched", () => {
     getEvents.mockReturnValue(new Promise(() => {}));
 
-    render(<EventsPage />);
+    renderEventsPage();
 
     expect(screen.getByText("Cargando eventos...")).toBeInTheDocument();
   });
@@ -28,7 +38,7 @@ describe("EventsPage", () => {
       totalElements: 1,
     });
 
-    render(<EventsPage />);
+    renderEventsPage();
 
     expect(await screen.findByText("Open BJJ")).toBeInTheDocument();
   });
@@ -36,7 +46,7 @@ describe("EventsPage", () => {
   it("shows an empty state message when there are no events", async () => {
     getEvents.mockResolvedValue({ content: [], totalPages: 0, totalElements: 0 });
 
-    render(<EventsPage />);
+    renderEventsPage();
 
     expect(
       await screen.findByText("No hay eventos disponibles en este momento."),
@@ -46,7 +56,7 @@ describe("EventsPage", () => {
   it("shows an error message when the request fails", async () => {
     getEvents.mockRejectedValue(new Error("No se ha podido conectar con el servidor"));
 
-    render(<EventsPage />);
+    renderEventsPage();
 
     await waitFor(() =>
       expect(screen.getByRole("alert")).toHaveTextContent(
