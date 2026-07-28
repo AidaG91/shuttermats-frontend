@@ -28,10 +28,10 @@ function buildUrl(path, params) {
   return url.toString();
 }
 
-export async function get(path, params) {
+export async function get(path, params, headers) {
   let response;
   try {
-    response = await fetch(buildUrl(path, params));
+    response = await fetch(buildUrl(path, params), { headers });
   } catch {
     throw new ApiError("No se ha podido conectar con el servidor", 0);
   }
