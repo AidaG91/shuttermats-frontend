@@ -1,0 +1,51 @@
+@use "../../styles/base/variables" as v;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  padding: v.$space-1 v.$space-3;
+  border-radius: v.$radius-pill;
+  font-size: v.$fs-xs;
+  font-weight: v.$fw-bold;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  border: 1px solid transparent;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pending {
+  color: v.$color-warning;
+  background: rgba(224, 168, 0, 0.12);
+  border-color: rgba(224, 168, 0, 0.35);
+}
+
+.info {
+  color: v.$color-info;
+  background: rgba(30, 136, 229, 0.12);
+  border-color: rgba(30, 136, 229, 0.35);
+}
+
+.success {
+  color: v.$color-success;
+  background: rgba(31, 157, 85, 0.12);
+  border-color: rgba(31, 157, 85, 0.35);
+}
+
+.danger {
+  color: v.$color-danger;
+  background: rgba(211, 47, 47, 0.12);
+  border-color: rgba(211, 47, 47, 0.35);
+}
+
+.default {
+  color: v.$color-on-surface-muted;
+  background: v.$color-surface-container;
+  border-color: v.$color-outline-variant;
+}

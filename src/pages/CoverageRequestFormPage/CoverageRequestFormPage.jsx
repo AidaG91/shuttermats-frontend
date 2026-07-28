@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { useEvent } from "../../hooks/useEvent";
 import { useCoverageExtras } from "../../hooks/useCoverageExtras";
 import { requestCoverage } from "../../services/coverageRequestService";
@@ -10,7 +10,7 @@ import { resolveAssetUrl } from "../../utils/url";
 import styles from "./CoverageRequestFormPage.module.scss";
 
 const BELT_OPTIONS = [
-  { value: "", label: "No especifica" },
+  { value: "", label: "Selecciona un cinturón" },
   { value: "WHITE", label: "Blanco" },
   { value: "BLUE", label: "Azul" },
   { value: "PURPLE", label: "Morado" },
@@ -79,6 +79,7 @@ export default function CoverageRequestFormPage() {
     if (!form.athlete.name.trim()) nextErrors.athleteName = "El nombre es obligatorio";
     if (!form.athlete.email.trim()) nextErrors.athleteEmail = "El email es obligatorio";
     if (!form.athlete.phone.trim()) nextErrors.athletePhone = "El teléfono es obligatorio";
+    if (!form.category.belt) nextErrors.belt = "Selecciona un cinturón";
     if (!form.category.division) nextErrors.division = "Selecciona una división";
     if (!form.category.modality) nextErrors.modality = "Selecciona una modalidad";
     if (!form.confirmations.termsAccepted) {
@@ -239,9 +240,11 @@ export default function CoverageRequestFormPage() {
               <Select
                 label="Cinturón"
                 id="belt"
+                required
                 options={BELT_OPTIONS}
                 value={form.category.belt}
                 onChange={(e) => updateSection("category", "belt", e.target.value)}
+                error={errors.belt}
               />
               <Select
                 label="División"
@@ -372,7 +375,26 @@ export default function CoverageRequestFormPage() {
                   checked={form.confirmations.termsAccepted}
                   onChange={(e) => updateSection("confirmations", "termsAccepted", e.target.checked)}
                 />
-                He leído y acepto las condiciones del servicio
+                <span>
+                  He leído y acepto las{" "}
+                  <Link
+                    to="/legal/condiciones-servicio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    condiciones del servicio
+                  </Link>{" "}
+                  y la{" "}
+                  <Link
+                    to="/legal/privacidad"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    política de privacidad
+                  </Link>
+                </span>
               </label>
               {errors.termsAccepted && (
                 <span className={styles.errorMessage} role="alert">
@@ -386,7 +408,18 @@ export default function CoverageRequestFormPage() {
                   checked={form.confirmations.portfolioConsent}
                   onChange={(e) => updateSection("confirmations", "portfolioConsent", e.target.checked)}
                 />
-                Autorizo el uso de algunas imágenes para el portfolio y redes sociales de ShutterMats
+                <span>
+                  Autorizo el uso de algunas imágenes para el portfolio y redes
+                  sociales de ShutterMats, conforme a los{" "}
+                  <Link
+                    to="/legal/uso-imagenes"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    términos de uso de imágenes
+                  </Link>
+                </span>
               </label>
             </fieldset>
 

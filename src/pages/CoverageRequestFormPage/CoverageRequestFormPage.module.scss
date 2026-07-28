@@ -93,17 +93,30 @@
 
 .checkboxRow {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: v.$space-3;
   font-size: v.$fs-sm;
   color: v.$color-on-surface-muted;
   cursor: pointer;
+  line-height: 1.5;
 
   input[type="checkbox"] {
     accent-color: v.$color-red;
     width: 16px;
     height: 16px;
+    margin-top: 3px;
+    flex-shrink: 0;
     cursor: pointer;
+  }
+
+  a {
+    color: v.$color-on-surface;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: v.$color-red;
+    }
   }
 }
 

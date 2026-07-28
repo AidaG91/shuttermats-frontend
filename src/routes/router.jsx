@@ -5,6 +5,7 @@ import EventsPage from "../pages/EventsPage/EventsPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import CoverageRequestFormPage from "../pages/CoverageRequestFormPage/CoverageRequestFormPage";
 import RequestDetailPage from "../pages/RequestDetailPage/RequestDetailPage";
+import LegalDocPage from "../pages/LegalDocPage/LegalDocPage";
 
 export const router = createBrowserRouter(
   [
@@ -27,6 +28,10 @@ export const router = createBrowserRouter(
         {
           path: "requests/:id",
           element: <RequestDetailPage />,
+        },
+        {
+          path: "legal/:slug",
+          element: <LegalDocPage />,
         },
         {
           path: "*",
