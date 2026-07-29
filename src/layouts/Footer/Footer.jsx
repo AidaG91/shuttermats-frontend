@@ -36,11 +36,8 @@ const Footer = () => {
           ))}
         </nav>
 
-        <div className={styles.footer__bottom}>
-          <p className={styles.footer__copy}>
-            © {new Date().getFullYear()} ShutterMats
-          </p>
-
+        <p className={styles.footer__copy}>
+          © {new Date().getFullYear()} ShutterMats{" "}
           <Link
             to="/admin/login"
             className={styles.footer__adminLink}
@@ -49,7 +46,7 @@ const Footer = () => {
           >
             <Lock size={14} aria-hidden="true" />
           </Link>
-        </div>
+        </p>
       </div>
     </footer>
   );

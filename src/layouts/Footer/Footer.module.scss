@@ -52,20 +52,17 @@
   color: v.$color-white;
 }
 
-.footer__bottom {
+.footer__copy {
   display: flex;
   align-items: center;
   gap: v.$space-3;
-}
-
-.footer__copy {
   font-size: v.$fs-xs;
   color: v.$color-on-surface-muted;
   white-space: nowrap;
 }
 
 .footer__adminLink {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   color: v.$color-on-surface-muted;
   opacity: 0.6;
