@@ -26,17 +26,8 @@
 }
 
 .footer__logo {
-  width: 28px;
-  height: 28px;
-}
-
-.footer__wordmark {
-  font-family: v.$font-display;
-  font-size: v.$fs-sm;
-  font-weight: v.$fw-bold;
-  letter-spacing: v.$ls-wide;
-  text-transform: uppercase;
-  color: v.$color-white;
+  height: 24px;
+  width: auto;
 }
 
 .footer__nav {
@@ -62,16 +53,24 @@
 }
 
 .footer__copy {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
   font-size: v.$fs-xs;
   color: v.$color-on-surface-muted;
   white-space: nowrap;
 }
 
 .footer__adminLink {
+  display: inline-flex;
+  align-items: center;
   color: v.$color-on-surface-muted;
+  opacity: 0.6;
   text-decoration: none;
+  transition: v.$transition-base;
 
   &:hover {
     color: v.$color-red;
+    opacity: 1;
   }
 }

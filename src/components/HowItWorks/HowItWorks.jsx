@@ -3,23 +3,28 @@ import styles from "./HowItWorks.module.scss";
 const steps = [
   {
     number: "01",
-    title: "Capturamos el evento",
-    text: "Fotografiamos y grabamos cada combate, cada detalle y cada momento clave del evento.",
+    title: "Reserva",
+    text: "A través de nuestra plataforma, reservas tu cobertura en un par de clics.",
   },
   {
     number: "02",
-    title: "Procesamos y editamos",
-    text: "Seleccionamos, editamos y tratamos cada imagen y vídeo con un estilo cinematográfico y profesional.",
+    title: "Confirmamos",
+    text: "En cuanto tenemos horario y brackets. Sin rival o sin combate, te devolvemos el dinero. Cero riesgo.",
   },
   {
     number: "03",
-    title: "Publicamos la galería",
-    text: "Subimos el contenido a la plataforma para que atletas, academias y público puedan acceder a él.",
+    title: "Capturamos el evento",
+    text: "Fotografiamos el combate completo: técnica, tensión y el momento en que todo se decide.",
   },
   {
     number: "04",
-    title: "Descarga y compra",
-    text: "Los usuarios pueden ver, descargar o adquirir sus fotos y vídeos favoritos de forma segura.",
+    title: "Seleccionamos y editamos",
+    text: "Editamos cada imagen una a una, creando una colección documental única.",
+  },
+  {
+    number: "05",
+    title: "Publicamos la galería",
+    text: "En galería privada, listas para descargar.",
   },
 ];
 

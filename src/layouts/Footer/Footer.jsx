@@ -1,12 +1,12 @@
 import { NavLink, Link } from "react-router";
+import { Lock } from "lucide-react";
 import styles from "./Footer.module.scss";
-import Logo from "../../assets/logos/logo-white.svg";
+import Logo from "../../assets/logos/logo-side-to-side.svg";
 
 const FOOTER_LINKS = [
   { to: "/", label: "Inicio" },
   { to: "/events", label: "Eventos" },
   { to: "/galerias", label: "Galerías" },
-  { to: "/reserva", label: "Reserva" },
 ];
 
 const Footer = () => {
@@ -19,7 +19,6 @@ const Footer = () => {
             alt="ShutterMats Logo"
             className={styles.footer__logo}
           />
-          <span className={styles.footer__wordmark}>ShutterMats</span>
         </Link>
 
         <nav className={styles.footer__nav} aria-label="Enlaces del pie de página">
@@ -38,9 +37,14 @@ const Footer = () => {
         </nav>
 
         <p className={styles.footer__copy}>
-          © {new Date().getFullYear()} ShutterMats ·{" "}
-          <Link to="/admin/login" className={styles.footer__adminLink}>
-            Acceso administrador
+          © {new Date().getFullYear()} ShutterMats{" "}
+          <Link
+            to="/admin/login"
+            className={styles.footer__adminLink}
+            title="Acceso administrador"
+            aria-label="Acceso administrador"
+          >
+            <Lock size={14} aria-hidden="true" />
           </Link>
         </p>
       </div>

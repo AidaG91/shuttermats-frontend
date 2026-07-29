@@ -40,13 +40,24 @@
   }
 }
 
-.logo {
+.logoDesktop {
+  display: none;
+
+  @include m.md {
+    display: block;
+    height: 32px;
+    width: auto;
+    margin-bottom: v.$space-2;
+  }
+}
+
+.logoMobile {
+  display: block;
   height: 28px;
   width: auto;
 
   @include m.md {
-    height: 32px;
-    margin-bottom: v.$space-2;
+    display: none;
   }
 }
 

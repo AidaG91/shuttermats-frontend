@@ -15,8 +15,9 @@ const Home = () => {
 
           <blockquote className={styles.intro__quote}>
             No solo hacemos fotos: contamos la historia de cada combate, cada
-            entrenamiento y cada persona sobre el tatami — porque nosotros
-            también lo vivimos.
+            entrenamiento y cada persona sobre el tatami. Entendemos el juego
+            desde dentro — entrenamos, competimos y vivimos este deporte igual
+            que tú.
           </blockquote>
 
           <p className={styles.intro__attribution}>— El equipo de ShutterMats</p>

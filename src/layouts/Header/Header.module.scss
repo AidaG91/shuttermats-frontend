@@ -39,8 +39,12 @@
 }
 
 .header__logo {
-  width: 40px;
-  height: 40px;
+  height: 28px;
+  width: auto;
+
+  @include m.md {
+    height: 32px;
+  }
 }
 
 .header__title {
@@ -95,12 +99,9 @@
 }
 
 .header__linkDisabled {
-  position: relative;
+  display: flex;
+  align-items: center;
   color: v.$color-gray;
-  text-transform: uppercase;
-  font-size: v.$fs-sm;
-  letter-spacing: 0.05em;
-  padding-bottom: v.$space-2;
   cursor: not-allowed;
   user-select: none;
 }
@@ -112,20 +113,6 @@
     display: flex;
     align-items: center;
     gap: v.$space-4;
-  }
-}
-
-.header__cta {
-  background: v.$color-red;
-  color: v.$color-white;
-  padding: v.$space-2 v.$space-4;
-  border-radius: v.$radius-sm;
-  font-weight: v.$fw-bold;
-  text-transform: uppercase;
-  transition: v.$transition-base;
-
-  &:hover {
-    background: v.$color-red-dark;
   }
 }
 
@@ -233,18 +220,6 @@
   user-select: none;
 }
 
-.mobileMenu__cta {
-  background: v.$color-red;
-  color: v.$color-white;
-  padding: v.$space-2 v.$space-4;
-  border-radius: v.$radius-sm;
-  text-align: center;
-
-  &:hover {
-    background: v.$color-red-dark;
-    color: v.$color-white;
-  }
-}
 
 .mobileMenu__logout {
   background: none;
