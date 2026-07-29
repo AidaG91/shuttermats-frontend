@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { NavLink, Link } from "react-router";
 import { Lock } from "lucide-react";
 import styles from "./Footer.module.scss";
@@ -9,9 +10,9 @@ const FOOTER_LINKS = [
   { to: "/galerias", label: "Galerías" },
 ];
 
-const Footer = () => {
+const Footer = forwardRef((props, ref) => {
   return (
-    <footer className={styles.footer}>
+    <footer ref={ref} className={styles.footer}>
       <div className={styles.footer__inner}>
         <Link to="/" className={styles.footer__brand}>
           <img
@@ -50,6 +51,8 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = "Footer";
 
 export default Footer;
