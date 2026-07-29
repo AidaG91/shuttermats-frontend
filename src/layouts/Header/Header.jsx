@@ -8,8 +8,9 @@ import Logo from "../../assets/logos/logo-side-to-side.svg";
 const NAV_LINKS = [
   { to: "/", label: "Inicio" },
   { to: "/events", label: "Eventos" },
-  { to: "/galerias", label: "Galerías" },
 ];
+
+const NAV_DISABLED_LINKS = [{ label: "Galerías" }];
 
 const SCROLL_THRESHOLD = 40;
 
@@ -97,6 +98,18 @@ const Header = ({ user, onLogout }) => {
               {link.label}
             </NavLink>
           ))}
+
+          {NAV_DISABLED_LINKS.map((link) => (
+            <span
+              key={link.label}
+              className={styles.header__navLinkDisabled}
+              aria-disabled="true"
+              title="Próximamente"
+            >
+              {link.label}
+              <span className={styles.srOnly}> (próximamente)</span>
+            </span>
+          ))}
         </nav>
 
         <div className={styles.header__actions}>
@@ -154,6 +167,18 @@ const Header = ({ user, onLogout }) => {
                 </NavLink>
               ))}
 
+              {NAV_DISABLED_LINKS.map((link) => (
+                <span
+                  key={link.label}
+                  className={styles.mobileMenu__linkDisabled}
+                  aria-disabled="true"
+                  title="Próximamente"
+                >
+                  {link.label}
+                  <span className={styles.srOnly}> (próximamente)</span>
+                </span>
+              ))}
+
               {user ? (
                 <button
                   className={styles.mobileMenu__logout}
@@ -168,6 +193,7 @@ const Header = ({ user, onLogout }) => {
                   title="Próximamente"
                 >
                   Login
+                  <span className={styles.srOnly}> (próximamente)</span>
                 </span>
               )}
             </nav>

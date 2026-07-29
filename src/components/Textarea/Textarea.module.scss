@@ -1,42 +1,24 @@
 @use "../../styles/base/variables" as v;
 @use "../../styles/base/mixins" as m;
 
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: v.$space-2;
-}
-
-.label {
-    font-size: v.$fs-xs;
-    text-transform: uppercase;
-    letter-spacing: v.$ls-wide;
-    color: v.$color-on-surface-muted;
-}
-
 .textarea {
-    background: v.$color-surface-container;
-    border: 1px solid v.$color-outline-variant;
-    border-radius: v.$radius-lg;
-    padding: v.$space-4 v.$space-5;
-    color: v.$color-on-surface;
-    font-family: v.$font-primary;
-    resize: vertical;
-    min-height: 120px;
-    transition: v.$transition-base;
+  background: v.$color-surface-container;
+  border: 1px solid v.$color-outline-variant;
+  border-radius: v.$radius-lg;
+  padding: v.$space-4 v.$space-5;
+  color: v.$color-on-surface;
+  font-family: v.$font-primary;
+  resize: vertical;
+  min-height: 120px;
+  transition: v.$transition-base;
 
-    &:focus {
-        border-color: v.$color-red;
-        box-shadow: v.$shadow-glow;
-        outline: none;
-    }
+  &:focus {
+    border-color: v.$color-red;
+    box-shadow: v.$shadow-glow;
+    outline: none;
+  }
 }
 
 .textarea--error {
-    border-color: v.$color-red;
-}
-
-.errorMessage {
-    color: v.$color-red;
-    font-size: v.$fs-sm;
+  border-color: v.$color-red;
 }

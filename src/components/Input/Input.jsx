@@ -1,3 +1,4 @@
+import FormField from "../FormField/FormField";
 import styles from "./Input.module.scss";
 
 const Input = ({
@@ -15,27 +16,15 @@ const Input = ({
     .join(" ");
 
   return (
-    <div className={styles.field}>
-      <label htmlFor={id} className={styles.label}>
-        {label}
-        {required && " *"}
-      </label>
-
+    <FormField id={id} label={label} required={required} error={error}>
       <input
-        id={id}
         type={type}
         value={value}
         onChange={onChange}
         className={classes}
         {...rest}
       />
-
-      {error && (
-        <span className={styles.errorMessage} role="alert">
-          {error}
-        </span>
-      )}
-    </div>
+    </FormField>
   );
 };
 

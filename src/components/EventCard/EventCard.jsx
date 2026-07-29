@@ -1,7 +1,7 @@
 import { Calendar, MapPin } from "lucide-react";
 import { resolveAssetUrl } from "../../utils/url";
+import Button from "../Button/Button";
 import styles from "./EventCard.module.scss";
-import { Link } from "react-router";
 
 export default function EventCard({ event }) {
   const isPastEvent = new Date(event.date) < new Date();
@@ -37,11 +37,18 @@ export default function EventCard({ event }) {
         </div>
 
         {isPastEvent ? (
-          <button className={styles.button}>Ver galería</button>
+          <Button
+            variant="subtle"
+            fullWidth
+            disabled
+            title="Disponible próximamente"
+          >
+            Ver galería
+          </Button>
         ) : (
-          <Link to={`/events/${event.id}/request`} className={styles.button}>
+          <Button variant="subtle" fullWidth to={`/events/${event.id}/request`}>
             Solicitar cobertura
-          </Link>
+          </Button>
         )}
       </div>
     </article>

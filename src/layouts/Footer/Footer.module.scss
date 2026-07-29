@@ -52,6 +52,19 @@
   color: v.$color-white;
 }
 
+.footer__linkDisabled {
+  color: v.$color-gray;
+  text-transform: uppercase;
+  font-size: v.$fs-xs;
+  letter-spacing: v.$ls-wide;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.srOnly {
+  @include m.visually-hidden;
+}
+
 .footer__copy {
   display: flex;
   align-items: center;

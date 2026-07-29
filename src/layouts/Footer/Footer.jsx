@@ -7,8 +7,9 @@ import Logo from "../../assets/logos/logo-side-to-side.svg";
 const FOOTER_LINKS = [
   { to: "/", label: "Inicio" },
   { to: "/events", label: "Eventos" },
-  { to: "/galerias", label: "Galerías" },
 ];
+
+const FOOTER_DISABLED_LINKS = [{ label: "Galerías" }];
 
 const Footer = forwardRef((props, ref) => {
   return (
@@ -34,6 +35,18 @@ const Footer = forwardRef((props, ref) => {
             >
               {link.label}
             </NavLink>
+          ))}
+
+          {FOOTER_DISABLED_LINKS.map((link) => (
+            <span
+              key={link.label}
+              className={styles.footer__linkDisabled}
+              aria-disabled="true"
+              title="Próximamente"
+            >
+              {link.label}
+              <span className={styles.srOnly}> (próximamente)</span>
+            </span>
           ))}
         </nav>
 

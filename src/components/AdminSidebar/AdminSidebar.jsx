@@ -48,9 +48,17 @@ export default function AdminSidebar() {
         ))}
 
         {DISABLED_ITEMS.map(({ label, icon: Icon }) => (
-          <span key={label} className={styles.navLinkDisabled} title="Próximamente">
-            <Icon size={20} />
-            <span>{label}</span>
+          <span
+            key={label}
+            className={styles.navLinkDisabled}
+            aria-disabled="true"
+            title="Próximamente"
+          >
+            <Icon size={20} aria-hidden="true" />
+            <span>
+              {label}
+              <span className={styles.srOnly}> (próximamente)</span>
+            </span>
           </span>
         ))}
       </nav>

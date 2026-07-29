@@ -61,11 +61,19 @@
 
 .hero__title {
   font-family: v.$font-display;
-  font-size: v.$fs-3xl;
+  font-size: v.$fs-xl;
   font-weight: v.$fw-bold;
   text-transform: uppercase;
   margin-bottom: v.$space-4;
   line-height: 1.1;
+
+  @include m.sm {
+    font-size: v.$fs-2xl;
+  }
+
+  @include m.lg {
+    font-size: v.$fs-3xl;
+  }
 }
 
 .hero__stroke {
@@ -89,23 +97,6 @@
 
   @include m.sm {
     flex-direction: row;
-  }
-}
-
-.hero__btn--primary {
-  background: v.$color-red;
-  color: v.$color-white;
-  padding: v.$space-3 v.$space-6;
-  text-transform: uppercase;
-  font-weight: v.$fw-bold;
-  letter-spacing: 0.05em;
-  text-align: center;
-  border-radius: v.$radius-sm;
-  transition: v.$transition-base;
-
-  &:hover {
-    background: v.$color-red-dark;
-    color: v.$color-white;
   }
 }
 

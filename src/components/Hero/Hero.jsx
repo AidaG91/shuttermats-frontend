@@ -1,5 +1,5 @@
-import { Link } from "react-router";
 import { ChevronDown } from "lucide-react";
+import Button from "../Button/Button";
 import heroImage from "../../assets/images/hero-bjj.jpg";
 import styles from "./Hero.module.scss";
 
@@ -31,9 +31,9 @@ const Hero = () => {
         </p>
 
         <div className={styles.hero__actions}>
-          <Link to="/events" className={styles["hero__btn--primary"]}>
+          <Button to="/events" variant="primary" size="lg">
             Ver Eventos
-          </Link>
+          </Button>
         </div>
       </div>
 
