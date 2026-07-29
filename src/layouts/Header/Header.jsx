@@ -104,20 +104,13 @@ const Header = ({ user, onLogout }) => {
               Cerrar sesión
             </button>
           ) : (
-            <>
-              <span
-                className={styles.header__linkDisabled}
-                aria-disabled="true"
-                title="Próximamente"
-              >
-                Login
-              </span>
-              <Link to="/reserva">
-                <button className={styles.header__cta}>
-                  Reservar Cobertura
-                </button>
-              </Link>
-            </>
+            <span
+              className={styles.header__linkDisabled}
+              aria-disabled="true"
+              title="Próximamente"
+            >
+              Login
+            </span>
           )}
         </div>
 
@@ -167,22 +160,13 @@ const Header = ({ user, onLogout }) => {
                   Cerrar sesión
                 </button>
               ) : (
-                <>
-                  <span
-                    className={styles.mobileMenu__linkDisabled}
-                    aria-disabled="true"
-                    title="Próximamente"
-                  >
-                    Login
-                  </span>
-                  <Link
-                    to="/reserva"
-                    className={styles.mobileMenu__cta}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Reservar Cobertura
-                  </Link>
-                </>
+                <span
+                  className={styles.mobileMenu__linkDisabled}
+                  aria-disabled="true"
+                  title="Próximamente"
+                >
+                  Login
+                </span>
               )}
             </nav>
           </div>,

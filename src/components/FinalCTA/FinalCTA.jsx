@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import Button from "../../components/Button/Button";
 import styles from "./FinalCTA.module.scss";
 
@@ -14,11 +13,15 @@ const FinalCTA = () => {
           Contacta con nosotros y cuéntanos qué necesitas.
         </p>
 
-        <Link to="/reserva">
-          <Button variant="primary" size="md">
-            Hablemos
-          </Button>
-        </Link>
+        <Button
+          variant="primary"
+          size="md"
+          disabled
+          title="Próximamente"
+          aria-disabled="true"
+        >
+          Hablemos
+        </Button>
       </div>
     </section>
   );

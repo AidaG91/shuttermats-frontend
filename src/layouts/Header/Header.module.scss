@@ -119,20 +119,6 @@
   }
 }
 
-.header__cta {
-  background: v.$color-red;
-  color: v.$color-white;
-  padding: v.$space-2 v.$space-4;
-  border-radius: v.$radius-sm;
-  font-weight: v.$fw-bold;
-  text-transform: uppercase;
-  transition: v.$transition-base;
-
-  &:hover {
-    background: v.$color-red-dark;
-  }
-}
-
 .header__logout {
   background: none;
   border: none;
@@ -237,18 +223,6 @@
   user-select: none;
 }
 
-.mobileMenu__cta {
-  background: v.$color-red;
-  color: v.$color-white;
-  padding: v.$space-2 v.$space-4;
-  border-radius: v.$radius-sm;
-  text-align: center;
-
-  &:hover {
-    background: v.$color-red-dark;
-    color: v.$color-white;
-  }
-}
 
 .mobileMenu__logout {
   background: none;

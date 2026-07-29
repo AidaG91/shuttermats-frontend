@@ -6,7 +6,6 @@ const FOOTER_LINKS = [
   { to: "/", label: "Inicio" },
   { to: "/events", label: "Eventos" },
   { to: "/galerias", label: "Galerías" },
-  { to: "/reserva", label: "Reserva" },
 ];
 
 const Footer = () => {

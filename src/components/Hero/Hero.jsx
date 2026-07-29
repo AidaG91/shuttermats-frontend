@@ -34,10 +34,6 @@ const Hero = () => {
           <Link to="/events" className={styles["hero__btn--primary"]}>
             Ver Eventos
           </Link>
-
-          <Link to="/reserva" className={styles["hero__btn--outline"]}>
-            Reservar Cobertura
-          </Link>
         </div>
       </div>
 
