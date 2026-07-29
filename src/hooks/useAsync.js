@@ -14,13 +14,13 @@ export function useAsync(asyncFn, deps) {
         if (!cancelled) setState({ data, loading: false, error: null });
       })
       .catch((error) => {
-        if (!cancelled) setState((previous) => ({ ...previous, loading: false, error }));
+        if (!cancelled)
+          setState((previous) => ({ ...previous, loading: false, error }));
       });
 
     return () => {
       cancelled = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   return state;

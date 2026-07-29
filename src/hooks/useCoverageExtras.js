@@ -1,29 +1,8 @@
-import { useEffect, useState } from "react";
+import { useAsync } from "./useAsync";
 import { getActiveExtras } from "../services/coverageExtrasService";
 
 export function useCoverageExtras() {
-  const [extras, setExtras] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data, loading, error } = useAsync(() => getActiveExtras(), []);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    getActiveExtras()
-      .then((result) => {
-        if (!cancelled) setExtras(result);
-      })
-      .catch((err) => {
-        if (!cancelled) setError(err.message);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  return { extras, loading, error };
+  return { extras: data ?? [], loading, error: error?.message ?? null };
 }

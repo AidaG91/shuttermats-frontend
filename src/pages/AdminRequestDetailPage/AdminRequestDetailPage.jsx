@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router";
 import StatusBadge from "../../components/StatusBadge/StatusBadge";
 import Textarea from "../../components/Textarea/Textarea";
 import Button from "../../components/Button/Button";
-import { useAdminRequest } from "../../hooks/useAdminRequest";
+import { useAdminRequestDetail } from "../../hooks/useAdminRequestDetail";
 import { clearAdminSession } from "../../services/authService";
 import { updateRequestStatus } from "../../services/adminRequestService";
 import styles from "./AdminRequestDetailPage.module.scss";
@@ -22,7 +22,7 @@ export default function AdminRequestDetailPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { request: fetched, loading, error } = useAdminRequest(id);
+  const { request: fetched, loading, error } = useAdminRequestDetail(id);
   // Mientras carga, mostramos al instante lo que ya trajimos de la tabla
   // (si venimos de ahí) y lo sustituimos por la respuesta del servidor.
   const initialRequest = fetched ?? location.state?.request;

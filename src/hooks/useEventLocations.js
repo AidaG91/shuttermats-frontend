@@ -1,25 +1,8 @@
-import { useEffect, useState } from "react";
+import { useAsync } from "./useAsync";
 import { getEventLocations } from "../services/eventsService";
 
 export function useEventLocations() {
-  const [locations, setLocations] = useState([]);
-  const [error, setError] = useState(null);
+  const { data, error } = useAsync(() => getEventLocations(), []);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    getEventLocations()
-      .then((result) => {
-        if (!cancelled) setLocations(result);
-      })
-      .catch((err) => {
-        if (!cancelled) setError(err.message);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  return { locations, error };
+  return { locations: data ?? [], error: error?.message ?? null };
 }

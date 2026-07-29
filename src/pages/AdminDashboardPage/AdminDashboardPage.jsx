@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { useAdminRequests } from "../../hooks/useAdminRequests";
+import { useAdminRequestList } from "../../hooks/useAdminRequestList";
 import { useEvents } from "../../hooks/useEvents";
 import Select from "../../components/Select/Select";
 import StatusBadge from "../../components/StatusBadge/StatusBadge";
@@ -29,7 +29,7 @@ export default function AdminDashboardPage() {
     totalElements,
     loading,
     error,
-  } = useAdminRequests({ status, eventId, page });
+  } = useAdminRequestList({ status, eventId, page });
 
   const { content: events } = useEvents({ status: "all", size: 100, sort: "date,desc" });
 

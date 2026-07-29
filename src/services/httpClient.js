@@ -28,10 +28,10 @@ function buildUrl(path, params) {
   return url.toString();
 }
 
-export async function get(path, params, headers) {
+async function request(url, options) {
   let response;
   try {
-    response = await fetch(buildUrl(path, params), { headers });
+    response = await fetch(url, options);
   } catch {
     throw new ApiError("No se ha podido conectar con el servidor", 0);
   }
@@ -40,64 +40,44 @@ export async function get(path, params, headers) {
     throw new ApiError(await parseErrorMessage(response), response.status);
   }
 
+  return response;
+}
+
+function jsonRequestOptions(method, body, headers) {
+  return {
+    method,
+    headers: { "Content-Type": "application/json", ...headers },
+    body: JSON.stringify(body),
+  };
+}
+
+export async function get(path, params, headers) {
+  const response = await request(buildUrl(path, params), { headers });
   return response.json();
 }
 
-export async function post(path, body) {
-  let response;
-  try {
-    response = await fetch(`${API_BASE_URL}${path}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-  } catch {
-    throw new ApiError("No se ha podido conectar con el servidor", 0);
-  }
-
-  if (!response.ok) {
-    throw new ApiError(await parseErrorMessage(response), response.status);
-  }
-
+export async function post(path, body, headers) {
+  const response = await request(
+    `${API_BASE_URL}${path}`,
+    jsonRequestOptions("POST", body, headers),
+  );
   return response.json();
 }
 
 export async function patch(path, body, headers) {
-  let response;
-  try {
-    response = await fetch(`${API_BASE_URL}${path}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json", ...headers },
-      body: JSON.stringify(body),
-    });
-  } catch {
-    throw new ApiError("No se ha podido conectar con el servidor", 0);
-  }
-
-  if (!response.ok) {
-    throw new ApiError(await parseErrorMessage(response), response.status);
-  }
-
+  const response = await request(
+    `${API_BASE_URL}${path}`,
+    jsonRequestOptions("PATCH", body, headers),
+  );
   return response.json();
 }
 
-// Para multipart/form-data (p.ej. subir imagen de evento junto a los datos).
-// No se fija Content-Type a mano: el navegador debe generar el boundary.
 async function sendForm(method, path, formData, headers) {
-  let response;
-  try {
-    response = await fetch(`${API_BASE_URL}${path}`, {
-      method,
-      headers,
-      body: formData,
-    });
-  } catch {
-    throw new ApiError("No se ha podido conectar con el servidor", 0);
-  }
-
-  if (!response.ok) {
-    throw new ApiError(await parseErrorMessage(response), response.status);
-  }
+  const response = await request(`${API_BASE_URL}${path}`, {
+    method,
+    headers,
+    body: formData,
+  });
 
   if (response.status === 204) return null;
   return response.json();
@@ -112,19 +92,6 @@ export function putForm(path, formData, headers) {
 }
 
 export async function del(path, headers) {
-  let response;
-  try {
-    response = await fetch(`${API_BASE_URL}${path}`, {
-      method: "DELETE",
-      headers,
-    });
-  } catch {
-    throw new ApiError("No se ha podido conectar con el servidor", 0);
-  }
-
-  if (!response.ok) {
-    throw new ApiError(await parseErrorMessage(response), response.status);
-  }
-
+  await request(`${API_BASE_URL}${path}`, { method: "DELETE", headers });
   return null;
 }
