@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEvents } from "../../hooks/useEvents";
 import { useEventLocations } from "../../hooks/useEventLocations";
 import EventCard from "../../components/EventCard/EventCard";
-import { resolveAssetUrl } from "../../utils/url";
+import eventsHero from "../../assets/images/events-hero.jpg";
 import styles from "./EventsPage.module.scss";
 
 export default function EventsPage() {
@@ -33,7 +33,7 @@ export default function EventsPage() {
       <section className={styles.hero}>
         <div className={styles.heroBackground}>
           <img
-            src={resolveAssetUrl("/images/events-hero.jpg")}
+            src={eventsHero}
             alt=""
             aria-hidden="true"
             className={styles.heroImage}

@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { ChevronDown } from "lucide-react";
-import { resolveAssetUrl } from "../../utils/url";
+import heroImage from "../../assets/images/hero-bjj.jpg";
 import styles from "./Hero.module.scss";
 
 const Hero = () => {
@@ -8,7 +8,7 @@ const Hero = () => {
     <section className={styles.hero}>
       <div className={styles.hero__background}>
         <img
-          src={resolveAssetUrl("/images/hero-bjj.jpg")}
+          src={heroImage}
           alt="Dos atletas de Brazilian Jiu-Jitsu compitiendo sobre el tatami"
           className={styles.hero__image}
         />
