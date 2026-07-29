@@ -9,13 +9,10 @@
   align-items: center;
   background: v.$color-black;
   color: v.$color-white;
-  // El header va position:fixed y no ocupa espacio en el flujo, así que sin
-  // esto el contenido centrado puede quedar pegado (o tapado) por la navbar,
-  // sobre todo en móvil con viewports bajos.
-  padding-top: calc(#{v.$navbar-height} + #{v.$space-5});
+  padding-top: calc(#{v.$navbar-height} + #{v.$space-2});
 
   @include m.md {
-    padding-top: calc(#{v.$navbar-height} + #{v.$space-7});
+    padding-top: calc(#{v.$navbar-height} + #{v.$space-4});
   }
 }
 
