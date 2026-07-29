@@ -1,5 +1,6 @@
 import { NavLink, Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./Header.module.scss";
 import Logo from "../../assets/logos/logo-side-to-side.svg";
 
@@ -39,6 +40,17 @@ const Header = ({ user, onLogout }) => {
 
     return () => {
       window.removeEventListener("keydown", closeMenuOnEscape);
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = overflow;
     };
   }, [menuOpen]);
 
@@ -124,53 +136,58 @@ const Header = ({ user, onLogout }) => {
         </button>
       </div>
 
-      {menuOpen && (
-        <div className={styles.mobileOverlay}>
-          <nav
-            id="mobile-menu"
-            className={styles.mobileMenu}
-            ref={menuRef}
-            aria-label="Menú principal móvil"
-          >
-            {NAV_LINKS.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.to === "/"}
-                className={({ isActive }) =>
-                  `${styles.mobileMenu__link} ${isActive ? styles["mobileMenu__link--active"] : ""}`
-                }
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-
-            {user ? (
-              <button className={styles.mobileMenu__logout} onClick={onLogout}>
-                Cerrar sesión
-              </button>
-            ) : (
-              <>
-                <span
-                  className={styles.mobileMenu__linkDisabled}
-                  aria-disabled="true"
-                  title="Próximamente"
-                >
-                  Login
-                </span>
-                <Link
-                  to="/reserva"
-                  className={styles.mobileMenu__cta}
+      {menuOpen &&
+        createPortal(
+          <div className={styles.mobileOverlay}>
+            <nav
+              id="mobile-menu"
+              className={styles.mobileMenu}
+              ref={menuRef}
+              aria-label="Menú principal móvil"
+            >
+              {NAV_LINKS.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  end={link.to === "/"}
+                  className={({ isActive }) =>
+                    `${styles.mobileMenu__link} ${isActive ? styles["mobileMenu__link--active"] : ""}`
+                  }
                   onClick={() => setMenuOpen(false)}
                 >
-                  Reservar Cobertura
-                </Link>
-              </>
-            )}
-          </nav>
-        </div>
-      )}
+                  {link.label}
+                </NavLink>
+              ))}
+
+              {user ? (
+                <button
+                  className={styles.mobileMenu__logout}
+                  onClick={onLogout}
+                >
+                  Cerrar sesión
+                </button>
+              ) : (
+                <>
+                  <span
+                    className={styles.mobileMenu__linkDisabled}
+                    aria-disabled="true"
+                    title="Próximamente"
+                  >
+                    Login
+                  </span>
+                  <Link
+                    to="/reserva"
+                    className={styles.mobileMenu__cta}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Reservar Cobertura
+                  </Link>
+                </>
+              )}
+            </nav>
+          </div>,
+          document.body,
+        )}
     </header>
   );
 };
