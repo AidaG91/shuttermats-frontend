@@ -1,4 +1,5 @@
 import { NavLink, Link } from "react-router";
+import { Lock } from "lucide-react";
 import styles from "./Footer.module.scss";
 import Logo from "../../assets/logos/logo-side-to-side.svg";
 
@@ -35,12 +36,20 @@ const Footer = () => {
           ))}
         </nav>
 
-        <p className={styles.footer__copy}>
-          © {new Date().getFullYear()} ShutterMats ·{" "}
-          <Link to="/admin/login" className={styles.footer__adminLink}>
-            Acceso administrador
+        <div className={styles.footer__bottom}>
+          <p className={styles.footer__copy}>
+            © {new Date().getFullYear()} ShutterMats
+          </p>
+
+          <Link
+            to="/admin/login"
+            className={styles.footer__adminLink}
+            title="Acceso administrador"
+            aria-label="Acceso administrador"
+          >
+            <Lock size={14} aria-hidden="true" />
           </Link>
-        </p>
+        </div>
       </div>
     </footer>
   );
