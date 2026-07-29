@@ -4,6 +4,7 @@ const INITIAL_STATE = { data: undefined, loading: true, error: null };
 
 export function useAsync(asyncFn, deps) {
   const [state, setState] = useState(INITIAL_STATE);
+  const [reloadToken, setReloadToken] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -21,7 +22,10 @@ export function useAsync(asyncFn, deps) {
     return () => {
       cancelled = true;
     };
-  }, deps);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...deps, reloadToken]);
 
-  return state;
+  const refetch = () => setReloadToken((token) => token + 1);
+
+  return { ...state, refetch };
 }

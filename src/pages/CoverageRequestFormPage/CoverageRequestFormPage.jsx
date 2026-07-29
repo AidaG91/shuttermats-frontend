@@ -6,6 +6,7 @@ import { requestCoverage } from "../../services/coverageRequestService";
 import Input from "../../components/Input/Input";
 import Select from "../../components/Select/Select";
 import Textarea from "../../components/Textarea/Textarea";
+import Button from "../../components/Button/Button";
 import { resolveAssetUrl } from "../../utils/url";
 import styles from "./CoverageRequestFormPage.module.scss";
 
@@ -423,9 +424,9 @@ export default function CoverageRequestFormPage() {
               </label>
             </fieldset>
 
-            <button type="submit" className={styles.submitButton} disabled={submitting}>
+            <Button type="submit" variant="primary" fullWidth loading={submitting}>
               {submitting ? "Enviando..." : "Enviar solicitud"}
-            </button>
+            </Button>
           </form>
         </div>
       </section>

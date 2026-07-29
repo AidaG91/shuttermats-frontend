@@ -2,8 +2,16 @@ import { useState } from "react";
 import { useEvents } from "../../hooks/useEvents";
 import { useEventLocations } from "../../hooks/useEventLocations";
 import EventCard from "../../components/EventCard/EventCard";
+import Select from "../../components/Select/Select";
+import Button from "../../components/Button/Button";
 import eventsHero from "../../assets/images/events-hero.jpg";
 import styles from "./EventsPage.module.scss";
+
+const STATUS_OPTIONS = [
+  { value: "upcoming", label: "Próximos" },
+  { value: "past", label: "Pasados" },
+  { value: "all", label: "Todos" },
+];
 
 export default function EventsPage() {
   const [status, setStatus] = useState("upcoming");
@@ -18,6 +26,10 @@ export default function EventsPage() {
     error,
   } = useEvents({ status, location, page, sort });
   const { locations } = useEventLocations();
+  const locationOptions = [
+    { value: "", label: "Todas las ubicaciones" },
+    ...locations.map((loc) => ({ value: loc, label: loc })),
+  ];
 
   const changeStatus = (value) => {
     setStatus(value);
@@ -41,7 +53,7 @@ export default function EventsPage() {
           <div className={styles.heroOverlay}></div>
         </div>
         <div className={`container ${styles.heroContent}`}>
-          <h1>Events</h1>
+          <h1>Eventos</h1>
           <p>
             Descubre las competiciones en las que ShutterMats captura la acción.
           </p>
@@ -51,40 +63,21 @@ export default function EventsPage() {
       <section className={styles.eventsList}>
         <div className="container">
           <div className={styles.filters}>
-            <div className={styles.field}>
-              <label htmlFor="status-filter" className={styles.fieldLabel}>
-                Estado
-              </label>
-              <select
-                id="status-filter"
-                className={styles.select}
-                value={status}
-                onChange={(e) => changeStatus(e.target.value)}
-              >
-                <option value="upcoming">Próximos</option>
-                <option value="past">Pasados</option>
-                <option value="all">Todos</option>
-              </select>
-            </div>
+            <Select
+              id="status-filter"
+              label="Estado"
+              value={status}
+              onChange={(e) => changeStatus(e.target.value)}
+              options={STATUS_OPTIONS}
+            />
 
-            <div className={styles.field}>
-              <label htmlFor="location-filter" className={styles.fieldLabel}>
-                Ubicación
-              </label>
-              <select
-                id="location-filter"
-                className={styles.select}
-                value={location}
-                onChange={(e) => changeLocation(e.target.value)}
-              >
-                <option value="">Todas las ubicaciones</option>
-                {locations.map((loc) => (
-                  <option key={loc} value={loc}>
-                    {loc}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <Select
+              id="location-filter"
+              label="Ubicación"
+              value={location}
+              onChange={(e) => changeLocation(e.target.value)}
+              options={locationOptions}
+            />
           </div>
 
           <div aria-live="polite">
@@ -115,23 +108,25 @@ export default function EventsPage() {
               className={styles.pagination}
               aria-label="Paginación de eventos"
             >
-              <button
-                className={styles.pageButton}
+              <Button
+                variant="subtle"
+                size="sm"
                 disabled={page === 0}
                 onClick={() => setPage((p) => p - 1)}
               >
                 Anterior
-              </button>
+              </Button>
               <span className={styles.pageInfo}>
                 Página {page + 1} de {totalPages}
               </span>
-              <button
-                className={styles.pageButton}
+              <Button
+                variant="subtle"
+                size="sm"
                 disabled={page + 1 >= totalPages}
                 onClick={() => setPage((p) => p + 1)}
               >
                 Siguiente
-              </button>
+              </Button>
             </nav>
           )}
         </div>
