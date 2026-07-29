@@ -99,12 +99,9 @@
 }
 
 .header__linkDisabled {
-  position: relative;
+  display: flex;
+  align-items: center;
   color: v.$color-gray;
-  text-transform: uppercase;
-  font-size: v.$fs-sm;
-  letter-spacing: 0.05em;
-  padding-bottom: v.$space-2;
   cursor: not-allowed;
   user-select: none;
 }

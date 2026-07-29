@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { LogIn } from "lucide-react";
 import styles from "./Header.module.scss";
 import Logo from "../../assets/logos/logo-side-to-side.svg";
 
@@ -108,8 +109,9 @@ const Header = ({ user, onLogout }) => {
               className={styles.header__linkDisabled}
               aria-disabled="true"
               title="Próximamente"
+              aria-label="Login (próximamente)"
             >
-              Login
+              <LogIn size={18} aria-hidden="true" />
             </span>
           )}
         </div>
