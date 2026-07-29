@@ -1,7 +1,7 @@
 import { NavLink, Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
-import Logo from "../../assets/logos/logo-white.svg";
+import Logo from "../../assets/logos/logo-side-to-side.svg";
 
 const NAV_LINKS = [
   { to: "/", label: "Inicio" },

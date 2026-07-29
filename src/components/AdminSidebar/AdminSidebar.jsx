@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router";
 import { LayoutDashboard, CalendarDays, Settings, LogOut } from "lucide-react";
-import Logo from "../../assets/logos/logo-white.svg";
+import LogoDesktop from "../../assets/logos/logo-side-to-side.svg";
+import LogoMobile from "../../assets/logos/logo-bars-only.svg";
 import { clearAdminSession } from "../../services/authService";
 import styles from "./AdminSidebar.module.scss";
 
@@ -22,7 +23,12 @@ export default function AdminSidebar() {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.brand}>
-        <img src={Logo} alt="ShutterMats" className={styles.logo} />
+        <img
+          src={LogoDesktop}
+          alt="ShutterMats"
+          className={styles.logoDesktop}
+        />
+        <img src={LogoMobile} alt="ShutterMats" className={styles.logoMobile} />
         <p className={styles.tag}>Admin Console</p>
       </div>
 

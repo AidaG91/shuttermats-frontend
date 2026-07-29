@@ -26,17 +26,8 @@
 }
 
 .footer__logo {
-  width: 28px;
-  height: 28px;
-}
-
-.footer__wordmark {
-  font-family: v.$font-display;
-  font-size: v.$fs-sm;
-  font-weight: v.$fw-bold;
-  letter-spacing: v.$ls-wide;
-  text-transform: uppercase;
-  color: v.$color-white;
+  height: 24px;
+  width: auto;
 }
 
 .footer__nav {
