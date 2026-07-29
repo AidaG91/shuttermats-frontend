@@ -1,10 +1,6 @@
 import { postForm, putForm, del } from "./httpClient";
-import { getAdminToken } from "./authService";
+import { getAdminAuthHeaders } from "./authService";
 
-// imageUrl en el JSON tiene 3 significados para el backend:
-//  - no se incluye / null  -> el campo no se ha tocado, conserva la imagen actual
-//  - ""                    -> quitar la imagen explícitamente
-//  - archivo adjunto       -> gana siempre sobre imageUrl
 function buildEventFormData(event, imageFile, imageRemoved) {
   const formData = new FormData();
   const eventBlob = new Blob(
@@ -27,24 +23,21 @@ function buildEventFormData(event, imageFile, imageRemoved) {
 }
 
 export function createAdminEvent(event, imageFile) {
-  const token = getAdminToken();
   return postForm(
     "/admin/events",
     buildEventFormData(event, imageFile, false),
-    { Authorization: `Bearer ${token}` },
+    getAdminAuthHeaders(),
   );
 }
 
 export function updateAdminEvent(id, event, imageFile, imageRemoved) {
-  const token = getAdminToken();
   return putForm(
     `/admin/events/${id}`,
     buildEventFormData(event, imageFile, imageRemoved),
-    { Authorization: `Bearer ${token}` },
+    getAdminAuthHeaders(),
   );
 }
 
 export function deleteAdminEvent(id) {
-  const token = getAdminToken();
-  return del(`/admin/events/${id}`, { Authorization: `Bearer ${token}` });
+  return del(`/admin/events/${id}`, getAdminAuthHeaders());
 }

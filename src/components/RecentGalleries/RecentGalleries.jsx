@@ -19,7 +19,9 @@ const RecentGalleries = () => {
         <h2 className={styles.galleries__title}>Galerías Recientes</h2>
 
         {loading && (
-          <p className={styles.galleries__status}>Cargando galerías...</p>
+          <p className={styles.galleries__status} aria-live="polite">
+            Cargando galerías...
+          </p>
         )}
 
         {!loading && error && (

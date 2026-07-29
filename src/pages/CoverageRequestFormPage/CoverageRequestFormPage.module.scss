@@ -132,24 +132,3 @@
   padding: v.$space-4;
   border-radius: v.$radius-md;
 }
-
-.submitButton {
-  @include m.button-reset;
-  @include m.flex-center;
-  background: v.$color-red;
-  color: v.$color-white;
-  padding: v.$space-4 v.$space-6;
-  border-radius: v.$radius-md;
-  text-transform: uppercase;
-  letter-spacing: v.$ls-wide;
-  font-size: v.$fs-sm;
-
-  &:hover:not(:disabled) {
-    background: v.$color-red-dark;
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-}

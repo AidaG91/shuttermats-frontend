@@ -26,7 +26,6 @@ export default function EventForm({
   const [form, setForm] = useState({ ...EMPTY_VALUES, ...initialValues });
   const [imageFile, setImageFile] = useState(null);
   const [objectPreviewUrl, setObjectPreviewUrl] = useState(null);
-  // true cuando el usuario ha quitado explícitamente la imagen existente
   const [imageRemoved, setImageRemoved] = useState(false);
   const [errors, setErrors] = useState({});
   const fileInputRef = useRef(null);

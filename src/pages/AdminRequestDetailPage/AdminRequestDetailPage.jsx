@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router";
 import StatusBadge from "../../components/StatusBadge/StatusBadge";
 import Textarea from "../../components/Textarea/Textarea";
 import Button from "../../components/Button/Button";
-import { useAdminRequest } from "../../hooks/useAdminRequest";
+import { useAdminRequestDetail } from "../../hooks/useAdminRequestDetail";
 import { clearAdminSession } from "../../services/authService";
 import { updateRequestStatus } from "../../services/adminRequestService";
 import styles from "./AdminRequestDetailPage.module.scss";
@@ -22,13 +22,10 @@ export default function AdminRequestDetailPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { request: fetched, loading, error } = useAdminRequest(id);
-  // Mientras carga, mostramos al instante lo que ya trajimos de la tabla
-  // (si venimos de ahí) y lo sustituimos por la respuesta del servidor.
+  const { request: fetched, loading, error } = useAdminRequestDetail(id);
+
   const initialRequest = fetched ?? location.state?.request;
 
-  // Copia local que se actualiza tras un PATCH correcto, para reflejar el
-  // nuevo estado/respuesta sin tener que recargar la página.
   const [updatedRequest, setUpdatedRequest] = useState(null);
   const request = updatedRequest ?? initialRequest;
 
@@ -48,14 +45,10 @@ export default function AdminRequestDetailPage() {
     }
   }, [sessionExpired, navigate]);
 
-  // Inicializa el formulario cuando llegan (o cambian) los datos de la
-  // solicitud, para partir siempre del estado y respuesta ya guardados.
   useEffect(() => {
     if (!request) return;
     setSelectedStatus(request.status);
     setAdminResponse(request.adminResponse ?? "");
-    // Solo nos importan estos 3 valores, no la identidad del objeto request.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [request?.id, request?.status, request?.adminResponse]);
 
   const hasChanges =
@@ -72,7 +65,11 @@ export default function AdminRequestDetailPage() {
     setSubmitSuccess(false);
 
     try {
-      const result = await updateRequestStatus(id, selectedStatus, adminResponse);
+      const result = await updateRequestStatus(
+        id,
+        selectedStatus,
+        adminResponse,
+      );
       setUpdatedRequest(result);
       setSubmitSuccess(true);
     } catch (err) {
@@ -182,14 +179,20 @@ export default function AdminRequestDetailPage() {
       <form className={styles.statusPanel} onSubmit={handleSubmitStatus}>
         <h2 className={styles.groupTitle}>Actualizar estado</h2>
 
-        <div className={styles.statusOptions} role="group" aria-label="Estado de la solicitud">
+        <div
+          className={styles.statusOptions}
+          role="group"
+          aria-label="Estado de la solicitud"
+        >
           {STATUS_OPTIONS.map((option) => (
             <button
               key={option.value}
               type="button"
               className={[
                 styles.statusOption,
-                selectedStatus === option.value ? styles.statusOptionActive : "",
+                selectedStatus === option.value
+                  ? styles.statusOptionActive
+                  : "",
               ]
                 .filter(Boolean)
                 .join(" ")}

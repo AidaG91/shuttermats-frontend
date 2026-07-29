@@ -1,36 +1,11 @@
-import { useEffect, useState } from "react";
+import { useAsync } from "./useAsync";
 import { getEventById } from "../services/eventsService";
 
 export function useEvent(eventId) {
-  const [event, setEvent] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data, loading, error } = useAsync(
+    () => (eventId ? getEventById(eventId) : Promise.resolve(null)),
+    [eventId],
+  );
 
-  useEffect(() => {
-    if (!eventId) {
-      setLoading(false);
-      return;
-    }
-
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-
-    getEventById(eventId)
-      .then((result) => {
-        if (!cancelled) setEvent(result);
-      })
-      .catch((err) => {
-        if (!cancelled) setError(err.message);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [eventId]);
-
-  return { event, loading, error };
+  return { event: data ?? null, loading, error: error?.message ?? null };
 }

@@ -1,7 +1,8 @@
 import { CheckCircle2, Mail } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import StatusBadge from "../../components/StatusBadge/StatusBadge";
-import { resolveAssetUrl } from "../../utils/url";
+import confirmedHero from "../../assets/images/request-confirmed-hero.jpg";
+import combatImage from "../../assets/images/combat.jpg";
 import styles from "./RequestDetailPage.module.scss";
 
 export default function RequestDetailPage() {
@@ -30,7 +31,7 @@ export default function RequestDetailPage() {
       <section className={styles.hero}>
         <div className={styles.heroBackground}>
           <img
-            src={resolveAssetUrl("/images/request-confirmed-hero.jpg")}
+            src={confirmedHero}
             alt=""
             aria-hidden="true"
             className={styles.heroImage}
@@ -51,7 +52,7 @@ export default function RequestDetailPage() {
           <div className={styles.layout}>
             <div className={styles.sideImage}>
               <img
-                src={resolveAssetUrl("/images/combat.jpg")}
+                src={combatImage}
                 alt=""
                 aria-hidden="true"
               />

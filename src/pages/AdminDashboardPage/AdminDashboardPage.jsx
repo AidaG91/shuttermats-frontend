@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { useAdminRequests } from "../../hooks/useAdminRequests";
+import { useAdminRequestList } from "../../hooks/useAdminRequestList";
 import { useEvents } from "../../hooks/useEvents";
 import Select from "../../components/Select/Select";
 import StatusBadge from "../../components/StatusBadge/StatusBadge";
+import AdminPagination from "../../components/AdminPagination/AdminPagination";
 import { clearAdminSession } from "../../services/authService";
 import styles from "./AdminDashboardPage.module.scss";
 
@@ -29,7 +30,7 @@ export default function AdminDashboardPage() {
     totalElements,
     loading,
     error,
-  } = useAdminRequests({ status, eventId, page });
+  } = useAdminRequestList({ status, eventId, page });
 
   const { content: events } = useEvents({ status: "all", size: 100, sort: "date,desc" });
 
@@ -105,11 +106,13 @@ export default function AdminDashboardPage() {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Atleta</th>
-                <th>Evento</th>
-                <th>Fecha solicitud</th>
-                <th>Estado</th>
-                <th className={styles.actionsHeader}>Acciones</th>
+                <th scope="col">Atleta</th>
+                <th scope="col">Evento</th>
+                <th scope="col">Fecha solicitud</th>
+                <th scope="col">Estado</th>
+                <th scope="col" className={styles.actionsHeader}>
+                  Acciones
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -137,27 +140,13 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
-      {!loading && !error && totalPages > 1 && (
-        <nav className={styles.pagination} aria-label="Paginación de solicitudes">
-          <button
-            className={styles.pageButton}
-            disabled={page === 0}
-            onClick={() => setPage((p) => p - 1)}
-          >
-            Anterior
-          </button>
-          <span className={styles.pageInfo}>
-            Página {page + 1} de {totalPages} · {totalElements} en total
-          </span>
-          <button
-            className={styles.pageButton}
-            disabled={page + 1 >= totalPages}
-            onClick={() => setPage((p) => p + 1)}
-          >
-            Siguiente
-          </button>
-        </nav>
-      )}
+      <AdminPagination
+        page={page}
+        totalPages={totalPages}
+        totalElements={totalElements}
+        onPageChange={setPage}
+        label="Paginación de solicitudes"
+      />
     </main>
   );
 }

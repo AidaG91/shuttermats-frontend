@@ -18,6 +18,10 @@ export function getAdminToken() {
   return localStorage.getItem(TOKEN_KEY);
 }
 
+export function getAdminAuthHeaders() {
+  return { Authorization: `Bearer ${getAdminToken()}` };
+}
+
 export function clearAdminSession() {
   localStorage.removeItem(TOKEN_KEY);
   localStorage.removeItem(EXPIRES_AT_KEY);

@@ -1,5 +1,5 @@
 import Button from "../../components/Button/Button";
-import { resolveAssetUrl } from "../../utils/url";
+import ctaBackground from "../../assets/images/cta-bg.jpg";
 import styles from "./FinalCTA.module.scss";
 
 const FinalCTA = () => {
@@ -7,7 +7,7 @@ const FinalCTA = () => {
     <section className={styles.cta}>
       <div className={styles.cta__background}>
         <img
-          src={resolveAssetUrl("/images/cta-bg.jpg")}
+          src={ctaBackground}
           alt=""
           aria-hidden="true"
           className={styles.cta__image}

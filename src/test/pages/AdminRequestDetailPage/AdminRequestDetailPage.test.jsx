@@ -3,10 +3,10 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import AdminRequestDetailPage from "../../../pages/AdminRequestDetailPage/AdminRequestDetailPage";
-import { useAdminRequest } from "../../../hooks/useAdminRequest";
+import { useAdminRequestDetail } from "../../../hooks/useAdminRequestDetail";
 import { updateRequestStatus } from "../../../services/adminRequestService";
 
-vi.mock("../../../hooks/useAdminRequest");
+vi.mock("../../../hooks/useAdminRequestDetail");
 vi.mock("../../../services/adminRequestService");
 
 const baseRequest = {
@@ -40,7 +40,7 @@ describe("AdminRequestDetailPage - actualizar estado", () => {
   });
 
   it("marca como seleccionado el estado actual de la solicitud", () => {
-    useAdminRequest.mockReturnValue({ request: baseRequest, loading: false, error: null });
+    useAdminRequestDetail.mockReturnValue({ request: baseRequest, loading: false, error: null });
 
     renderPage();
 
@@ -55,7 +55,7 @@ describe("AdminRequestDetailPage - actualizar estado", () => {
   });
 
   it("deshabilita el botón de guardar cuando no hay cambios", () => {
-    useAdminRequest.mockReturnValue({ request: baseRequest, loading: false, error: null });
+    useAdminRequestDetail.mockReturnValue({ request: baseRequest, loading: false, error: null });
 
     renderPage();
 
@@ -64,7 +64,7 @@ describe("AdminRequestDetailPage - actualizar estado", () => {
 
   it("habilita el botón y llama al servicio al cambiar el estado", async () => {
     const user = userEvent.setup();
-    useAdminRequest.mockReturnValue({ request: baseRequest, loading: false, error: null });
+    useAdminRequestDetail.mockReturnValue({ request: baseRequest, loading: false, error: null });
     updateRequestStatus.mockResolvedValue({
       ...baseRequest,
       status: "CONFIRMED",
@@ -92,7 +92,7 @@ describe("AdminRequestDetailPage - actualizar estado", () => {
 
   it("muestra un mensaje de error cuando falla la actualización", async () => {
     const user = userEvent.setup();
-    useAdminRequest.mockReturnValue({ request: baseRequest, loading: false, error: null });
+    useAdminRequestDetail.mockReturnValue({ request: baseRequest, loading: false, error: null });
     updateRequestStatus.mockRejectedValue(new Error("No se ha podido conectar con el servidor"));
 
     renderPage();

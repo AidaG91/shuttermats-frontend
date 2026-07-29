@@ -1,13 +1,5 @@
-import { useEffect, useState } from "react";
+import { useAsync } from "./useAsync";
 import { getEvents } from "../services/eventsService";
-
-const INITIAL_STATE = {
-  content: [],
-  totalPages: 0,
-  totalElements: 0,
-  loading: true,
-  error: null,
-};
 
 export function useEvents({
   status = "upcoming",
@@ -16,28 +8,16 @@ export function useEvents({
   size = 6,
   sort = "date,asc",
 } = {}) {
-  const [state, setState] = useState(INITIAL_STATE);
+  const { data, loading, error } = useAsync(
+    () => getEvents({ status, location, page, size, sort }),
+    [status, location, page, size, sort],
+  );
 
-  useEffect(() => {
-    let cancelled = false;
-    setState((previous) => ({ ...previous, loading: true, error: null }));
-
-    getEvents({ status, location, page, size, sort })
-      .then((result) => {
-        if (!cancelled) {
-          setState({ ...result, loading: false, error: null });
-        }
-      })
-      .catch((err) => {
-        if (!cancelled) {
-          setState((previous) => ({ ...previous, loading: false, error: err.message }));
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [status, location, page, size, sort]);
-
-  return state;
+  return {
+    content: data?.content ?? [],
+    totalPages: data?.totalPages ?? 0,
+    totalElements: data?.totalElements ?? 0,
+    loading,
+    error: error?.message ?? null,
+  };
 }

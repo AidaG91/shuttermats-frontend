@@ -106,6 +106,20 @@
   user-select: none;
 }
 
+.header__navLinkDisabled {
+  color: v.$color-gray;
+  text-transform: uppercase;
+  font-size: v.$fs-sm;
+  letter-spacing: 0.05em;
+  padding-bottom: v.$space-2;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.srOnly {
+  @include m.visually-hidden;
+}
+
 .header__actions {
   display: none;
 
@@ -219,7 +233,6 @@
   cursor: not-allowed;
   user-select: none;
 }
-
 
 .mobileMenu__logout {
   background: none;

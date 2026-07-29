@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { NavLink, Link } from "react-router";
 import { Lock } from "lucide-react";
 import styles from "./Footer.module.scss";
@@ -6,12 +7,13 @@ import Logo from "../../assets/logos/logo-side-to-side.svg";
 const FOOTER_LINKS = [
   { to: "/", label: "Inicio" },
   { to: "/events", label: "Eventos" },
-  { to: "/galerias", label: "Galerías" },
 ];
 
-const Footer = () => {
+const FOOTER_DISABLED_LINKS = [{ label: "Galerías" }];
+
+const Footer = forwardRef((props, ref) => {
   return (
-    <footer className={styles.footer}>
+    <footer ref={ref} className={styles.footer}>
       <div className={styles.footer__inner}>
         <Link to="/" className={styles.footer__brand}>
           <img
@@ -34,6 +36,18 @@ const Footer = () => {
               {link.label}
             </NavLink>
           ))}
+
+          {FOOTER_DISABLED_LINKS.map((link) => (
+            <span
+              key={link.label}
+              className={styles.footer__linkDisabled}
+              aria-disabled="true"
+              title="Próximamente"
+            >
+              {link.label}
+              <span className={styles.srOnly}> (próximamente)</span>
+            </span>
+          ))}
         </nav>
 
         <p className={styles.footer__copy}>
@@ -50,6 +64,8 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = "Footer";
 
 export default Footer;

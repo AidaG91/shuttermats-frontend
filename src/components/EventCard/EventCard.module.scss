@@ -68,22 +68,3 @@ h3 {
   margin-bottom: v.$space-4;
   line-height: 1.6;
 }
-
-.button {
-  @include m.button-reset;
-  width: 100%;
-  background: transparent;
-  color: v.$color-on-surface;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  padding: v.$space-3 v.$space-4;
-  border-radius: v.$radius-sm;
-  text-transform: uppercase;
-  letter-spacing: v.$ls-wide;
-  font-size: v.$fs-sm;
-  font-weight: v.$fw-bold;
-
-  &:hover {
-    background: v.$color-red;
-    border-color: v.$color-red;
-  }
-}
