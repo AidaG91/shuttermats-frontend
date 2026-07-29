@@ -127,7 +127,7 @@ export default function AdminDashboardPage() {
                       state={{ request }}
                       className={styles.detailsLink}
                     >
-                      Detalles
+                      Gestionar
                     </Link>
                   </td>
                 </tr>
