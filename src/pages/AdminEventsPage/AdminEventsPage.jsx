@@ -5,6 +5,7 @@ import { getEvents } from "../../services/eventsService";
 import { deleteAdminEvent } from "../../services/adminEventsService";
 import { clearAdminSession } from "../../services/authService";
 import { resolveAssetUrl } from "../../utils/url";
+import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import styles from "./AdminEventsPage.module.scss";
 
 const PAGE_SIZE = 10;
@@ -22,6 +23,7 @@ export default function AdminEventsPage() {
   const [deletingId, setDeletingId] = useState(null);
   const [deleteError, setDeleteError] = useState(null);
   const [reloadToken, setReloadToken] = useState(0);
+  const [eventToDelete, setEventToDelete] = useState(null);
 
   const load = useCallback(() => {
     let cancelled = false;
@@ -51,17 +53,25 @@ export default function AdminEventsPage() {
     }
   }, [sessionExpired, navigate]);
 
-  const handleDelete = async (event) => {
-    const confirmed = window.confirm(
-      `¿Seguro que quieres borrar "${event.name}"? Esta acción no se puede deshacer.`,
-    );
-    if (!confirmed) return;
+  const handleDeleteClick = (event) => {
+    setDeleteError(null);
+    setEventToDelete(event);
+  };
+
+  const handleCancelDelete = () => {
+    if (deletingId) return;
+    setEventToDelete(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!eventToDelete) return;
 
     setDeleteError(null);
-    setDeletingId(event.id);
+    setDeletingId(eventToDelete.id);
     try {
-      await deleteAdminEvent(event.id);
+      await deleteAdminEvent(eventToDelete.id);
       setReloadToken((t) => t + 1);
+      setEventToDelete(null);
     } catch (err) {
       setDeleteError(err.message);
     } finally {
@@ -136,22 +146,24 @@ export default function AdminEventsPage() {
                   <td>{new Date(event.date).toLocaleDateString("es-ES")}</td>
                   <td>{event.location}</td>
                   <td className={styles.actionsCell}>
-                    <Link
-                      to={`/admin/events/${event.id}/edit`}
-                      className={styles.iconLink}
-                      aria-label={`Editar ${event.name}`}
-                    >
-                      <Pencil size={16} />
-                    </Link>
-                    <button
-                      type="button"
-                      className={styles.iconButton}
-                      onClick={() => handleDelete(event)}
-                      disabled={deletingId === event.id}
-                      aria-label={`Borrar ${event.name}`}
-                    >
-                      <Trash2 size={16} />
-                    </button>
+                    <div className={styles.actionsGroup}>
+                      <Link
+                        to={`/admin/events/${event.id}/edit`}
+                        className={styles.iconLink}
+                        aria-label={`Editar ${event.name}`}
+                      >
+                        <Pencil size={16} />
+                      </Link>
+                      <button
+                        type="button"
+                        className={styles.iconButton}
+                        onClick={() => handleDeleteClick(event)}
+                        disabled={deletingId === event.id}
+                        aria-label={`Borrar ${event.name}`}
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -181,6 +193,22 @@ export default function AdminEventsPage() {
           </button>
         </nav>
       )}
+
+      <ConfirmModal
+        open={eventToDelete !== null}
+        title="Borrar evento"
+        message={
+          eventToDelete
+            ? `¿Seguro que quieres borrar "${eventToDelete.name}"? Esta acción no se puede deshacer.`
+            : ""
+        }
+        confirmText="Borrar"
+        cancelText="Cancelar"
+        danger
+        loading={deletingId !== null}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </main>
   );
 }
