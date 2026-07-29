@@ -7,13 +7,11 @@ const FinalCTA = () => {
     <section className={styles.cta}>
       <div className={styles.cta__container}>
         <h2 className={styles.cta__title}>
-          Creemos juntos algo que te represente de la manera más auténtica.
+          Los momentos más importantes merecen ser recordados.
         </h2>
 
         <p className={styles.cta__text}>
-          Contacta con nosotros y cuéntanos en qué podemos ayudarte. Si compites
-          o organizas un evento, podemos ofrecer cobertura profesional enfocada
-          en la intensidad y la esencia del tatami.
+          Contacta con nosotros y cuéntanos qué necesitas.
         </p>
 
         <Link to="/reserva">

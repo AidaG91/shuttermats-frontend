@@ -8,7 +8,7 @@
 }
 
 .how__container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin-inline: auto;
 }
 
@@ -28,8 +28,12 @@
   gap: v.$space-7;
 
   @include m.md {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: v.$space-5;
+  }
+
+  @include m.lg {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
@@ -37,7 +41,7 @@
   content: "";
   display: none;
 
-  @include m.md {
+  @include m.lg {
     display: block;
     position: absolute;
     top: 24px;

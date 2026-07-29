@@ -21,13 +21,13 @@ const Hero = () => {
         </span>
 
         <h1 className={styles.hero__title}>
-          Precisión en <br />
-          <span className={styles.hero__stroke}>Cada Fotograma</span>
+          Tu combate. <br />
+          <span className={styles.hero__stroke}>Tu historia.</span>
         </h1>
 
         <p className={styles.hero__subtitle}>
-          Capturamos tus combates con una estética cinematográfica, enfocada en
-          la intensidad, la técnica y la emoción del tatami.
+          Fotografiamos BJJ desde dentro del deporte. Sabemos cuándo pasa algo
+          importante en un combate, y estamos ahí para verlo.
         </p>
 
         <div className={styles.hero__actions}>
