@@ -62,6 +62,25 @@ export async function post(path, body) {
   return response.json();
 }
 
+export async function patch(path, body, headers) {
+  let response;
+  try {
+    response = await fetch(`${API_BASE_URL}${path}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", ...headers },
+      body: JSON.stringify(body),
+    });
+  } catch {
+    throw new ApiError("No se ha podido conectar con el servidor", 0);
+  }
+
+  if (!response.ok) {
+    throw new ApiError(await parseErrorMessage(response), response.status);
+  }
+
+  return response.json();
+}
+
 // Para multipart/form-data (p.ej. subir imagen de evento junto a los datos).
 // No se fija Content-Type a mano: el navegador debe generar el boundary.
 async function sendForm(method, path, formData, headers) {
