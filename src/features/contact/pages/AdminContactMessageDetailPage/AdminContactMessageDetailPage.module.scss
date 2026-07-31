@@ -1,94 +1,155 @@
 @use "../../../../styles/base/variables" as v;
 @use "../../../../styles/base/mixins" as m;
 
-.detailPage {
+.detail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   color: v.$color-on-surface;
 }
 
-.header {
+.stateWrapper {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+  min-height: 20rem;
+  padding: v.$space-6;
+  color: v.$color-on-surface-muted;
+}
+
+.errorMessage {
+  color: v.$color-red;
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: v.$space-4;
-  padding-bottom: v.$space-5;
+  padding: v.$space-5;
   border-bottom: 1px solid v.$color-outline-variant;
-  margin-bottom: v.$space-6;
+}
 
-  h1 {
+.identity {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  min-width: 0;
+
+  h2 {
     font-family: v.$font-display;
-    font-size: v.$fs-xl;
+    font-size: v.$fs-md;
     font-weight: v.$fw-black;
     text-transform: uppercase;
-    margin-top: v.$space-2;
   }
 }
 
-.backLink {
-  color: v.$color-on-surface-muted;
+.avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: v.$radius-md;
+  background: rgba(229, 57, 53, 0.15);
+  color: v.$color-red;
+  font-family: v.$font-display;
+  font-weight: v.$fw-black;
   font-size: v.$fs-sm;
-
-  &:hover {
-    color: v.$color-red;
-  }
 }
 
-.card {
-  @include m.card-surface;
-  border-radius: v.$radius-lg;
-  padding: v.$space-6;
+.identitySub {
+  display: block;
+  font-size: v.$fs-xs;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  color: v.$color-on-surface-muted;
+}
+
+.thread {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: v.$space-6;
+  gap: v.$space-4;
+  padding: v.$space-5;
+  overflow-y: auto;
+}
+
+.bubble {
+  @include m.card-surface;
+  background: v.$color-surface-container-low;
+  border-radius: v.$radius-lg;
+  padding: v.$space-4 v.$space-5;
   max-width: 40rem;
 }
 
-.group {
+.bubbleResponse {
+  align-self: flex-end;
+  background: rgba(229, 57, 53, 0.08);
+  border-color: rgba(229, 57, 53, 0.35);
+}
+
+.bubbleMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-2;
+  font-size: v.$fs-xs;
+  color: v.$color-on-surface-muted;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  margin-bottom: v.$space-2;
+}
+
+.bubbleText {
+  font-size: v.$fs-sm;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.replyBox {
+  border-top: 1px solid v.$color-outline-variant;
+  padding: v.$space-5;
   display: flex;
   flex-direction: column;
   gap: v.$space-2;
 }
 
-.groupTitle {
-  font-family: v.$font-display;
-  font-size: v.$fs-sm;
+.replyHint {
+  font-size: v.$fs-xs;
+  color: v.$color-on-surface-muted;
+}
+
+.replyActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-3;
+  margin-top: v.$space-2;
+}
+
+.replyExtras {
+  display: flex;
+  gap: v.$space-4;
+}
+
+.extraButton {
+  @include m.button-reset;
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  background: transparent;
+  color: v.$color-on-surface-muted;
+  font-size: v.$fs-xs;
   text-transform: uppercase;
   letter-spacing: v.$ls-wide;
-  color: v.$color-on-surface-muted;
-  margin-bottom: v.$space-1;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
-.row {
+.replySubmitGroup {
   display: flex;
-  justify-content: space-between;
-  gap: v.$space-4;
-  font-size: v.$fs-sm;
-}
-
-.label {
-  color: v.$color-on-surface-muted;
-}
-
-.messageBody {
-  white-space: pre-wrap;
-  font-size: v.$fs-sm;
-  line-height: 1.6;
-}
-
-.actions {
-  margin-top: v.$space-6;
-  max-width: 40rem;
-}
-
-.errorMessage {
-  color: v.$color-red;
-  margin-bottom: v.$space-4;
-}
-
-.link {
-  color: v.$color-red;
-  font-weight: v.$fw-bold;
-
-  &:hover {
-    text-decoration: underline;
-  }
+  align-items: center;
+  gap: v.$space-3;
 }

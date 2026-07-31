@@ -21,3 +21,11 @@ export function getAdminContactMessageById(id) {
 export function markContactMessageAsRead(id) {
   return patch(`/admin/contact-messages/${id}/read`, {}, getAdminAuthHeaders());
 }
+
+export function saveContactMessageResponse(id, adminResponse) {
+  return patch(
+    `/admin/contact-messages/${id}/response`,
+    { adminResponse },
+    getAdminAuthHeaders(),
+  );
+}

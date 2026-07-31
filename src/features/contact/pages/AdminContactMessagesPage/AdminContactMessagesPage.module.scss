@@ -1,14 +1,21 @@
 @use "../../../../styles/base/variables" as v;
 @use "../../../../styles/base/mixins" as m;
 
-.messagesPage {
+.inboxPage {
   color: v.$color-on-surface;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-6;
 }
 
 .header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: v.$space-4;
   padding-bottom: v.$space-5;
   border-bottom: 1px solid v.$color-outline-variant;
-  margin-bottom: v.$space-6;
 
   h1 {
     font-family: v.$font-display;
@@ -24,84 +31,205 @@
   }
 }
 
-.filters {
+.stats {
   display: flex;
-  flex-wrap: wrap;
   gap: v.$space-4;
-  margin-bottom: v.$space-6;
+}
 
-  > * {
-    flex: 1 1 16rem;
-    max-width: 20rem;
+.statCard {
+  @include m.card-surface;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-1;
+  padding: v.$space-3 v.$space-5;
+  border-radius: v.$radius-md;
+  min-width: 6rem;
+}
+
+.statLabel {
+  font-size: v.$fs-xs;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  color: v.$color-on-surface-muted;
+}
+
+.statValue {
+  font-family: v.$font-display;
+  font-size: v.$fs-lg;
+  font-weight: v.$fw-black;
+}
+
+.statValueAccent {
+  color: v.$color-red;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-6;
+  align-items: flex-start;
+
+  @include m.lg {
+    flex-direction: row;
   }
+}
+
+.listPanel {
+  @include m.card-surface;
+  width: 100%;
+  border-radius: v.$radius-lg;
+  padding: v.$space-5;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+
+  @include m.lg {
+    flex: 0 0 22rem;
+  }
+}
+
+.listPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-3;
+
+  h2 {
+    font-family: v.$font-display;
+    font-size: v.$fs-sm;
+    text-transform: uppercase;
+    letter-spacing: v.$ls-wide;
+    color: v.$color-on-surface-muted;
+  }
+}
+
+.filterGroup {
+  display: flex;
+  gap: v.$space-1;
+  background: v.$color-surface-container-high;
+  border-radius: v.$radius-pill;
+  padding: 2px;
+}
+
+.filterButton {
+  @include m.button-reset;
+  padding: v.$space-1 v.$space-3;
+  border-radius: v.$radius-pill;
+  background: transparent;
+  color: v.$color-on-surface-muted;
+  font-size: v.$fs-xs;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+
+  &:hover {
+    color: v.$color-on-surface;
+  }
+}
+
+.filterButtonActive {
+  background: v.$color-red;
+  color: v.$color-white;
+
+  &:hover {
+    color: v.$color-white;
+  }
+}
+
+.status,
+.errorMessage,
+.emptyState {
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
 }
 
 .errorMessage {
   color: v.$color-red;
 }
 
-.emptyState {
-  color: v.$color-on-surface-muted;
+.messageList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-1;
+  max-height: 32rem;
+  overflow-y: auto;
 }
 
-.tableWrapper {
-  @include m.card-surface;
-  border-radius: v.$radius-lg;
-  overflow-x: auto;
-}
+.messageItem {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-1;
+  padding: v.$space-3;
+  border-radius: v.$radius-md;
+  border-left: 2px solid transparent;
+  color: v.$color-on-surface;
+  transition: v.$transition-base;
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 640px;
-
-  th,
-  td {
-    text-align: left;
-    padding: v.$space-4;
-    border-bottom: 1px solid v.$color-outline-variant;
-    font-size: v.$fs-sm;
-  }
-
-  th {
-    color: v.$color-on-surface-muted;
-    text-transform: uppercase;
-    letter-spacing: v.$ls-wide;
-    font-size: v.$fs-xs;
-    font-weight: v.$fw-bold;
-  }
-
-  tbody tr:last-child td {
-    border-bottom: none;
-  }
-
-  tbody tr:hover {
+  &:hover {
     background: v.$color-surface-container-high;
   }
 }
 
-.senderName {
+.messageItemActive {
+  background: v.$color-surface-container-high;
+  border-left-color: v.$color-red;
+}
+
+.messageItemHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: v.$space-2;
+}
+
+.messageSender {
+  font-size: v.$fs-sm;
   font-weight: v.$fw-bold;
   color: v.$color-on-surface;
 }
 
-.actionsHeader {
-  text-align: right;
+.messageSenderUnread {
+  color: v.$color-red-light;
 }
 
-.actionsCell {
-  text-align: right;
-}
-
-.detailsLink {
-  color: v.$color-red;
-  text-transform: uppercase;
+.messageTime {
   font-size: v.$fs-xs;
-  font-weight: v.$fw-bold;
-  letter-spacing: v.$ls-wide;
+  color: v.$color-on-surface-muted;
+  white-space: nowrap;
+}
 
-  &:hover {
-    color: v.$color-red-dark;
-    text-decoration: underline;
-  }
+.messageSnippet {
+  display: flex;
+  align-items: flex-start;
+  gap: v.$space-2;
+  font-size: v.$fs-xs;
+  color: v.$color-on-surface-muted;
+  min-width: 0;
+}
+
+.messageSnippetText {
+  min-width: 0;
+  flex: 1 1 auto;
+  @include m.truncate;
+}
+
+.unreadDot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: v.$color-red;
+}
+
+.detailPanel {
+  @include m.card-surface;
+  flex: 1 1 0;
+  width: 100%;
+  border-radius: v.$radius-lg;
+  min-height: 28rem;
+  display: flex;
+  flex-direction: column;
 }

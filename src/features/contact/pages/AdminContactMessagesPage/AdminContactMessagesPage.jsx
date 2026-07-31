@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useCallback, useEffect, useState } from "react";
+import { Link, Outlet, useMatch, useNavigate } from "react-router";
 import { useAdminContactMessageList } from "../../hooks/useAdminContactMessageList";
-import Select from "../../../../shared/components/Select/Select";
-import StatusBadge from "../../../coverage-requests/components/StatusBadge/StatusBadge";
 import AdminPagination from "../../../../shared/components/AdminPagination/AdminPagination";
 import { clearAdminSession } from "../../../auth/services/authService";
-import { CONTACT_SUBJECT_LABELS } from "../../utils/contactOptions";
+import { formatRelativeTime } from "../../utils/relativeTime";
 import styles from "./AdminContactMessagesPage.module.scss";
 
-const READ_OPTIONS = [
+const READ_FILTER_OPTIONS = [
   { value: "", label: "Todos" },
   { value: "false", label: "Nuevos" },
   { value: "true", label: "Leídos" },
@@ -16,6 +14,9 @@ const READ_OPTIONS = [
 
 export default function AdminContactMessagesPage() {
   const navigate = useNavigate();
+  const match = useMatch("/admin/contact-messages/:id");
+  const selectedId = match?.params.id;
+
   const [readFilter, setReadFilter] = useState("");
   const [page, setPage] = useState(0);
 
@@ -27,7 +28,15 @@ export default function AdminContactMessagesPage() {
     totalElements,
     loading,
     error,
+    refetch,
   } = useAdminContactMessageList({ read, page });
+
+  const { totalElements: totalCount } = useAdminContactMessageList({ page: 0, size: 1 });
+  const { totalElements: unreadCount } = useAdminContactMessageList({
+    read: false,
+    page: 0,
+    size: 1,
+  });
 
   const sessionExpired = error?.status === 401 || error?.status === 403;
 
@@ -43,87 +52,113 @@ export default function AdminContactMessagesPage() {
     setPage(0);
   };
 
+  const refetchAll = useCallback(() => {
+    refetch();
+  }, [refetch]);
+
   return (
-    <main className={styles.messagesPage}>
+    <main className={styles.inboxPage}>
       <div className={styles.header}>
         <div>
-          <h1>Mensajes de contacto</h1>
-          <p>Consultas generales enviadas desde el formulario de contacto.</p>
+          <h1>Inbox</h1>
+          <p>Gestiona las consultas de contacto y las peticiones de los atletas.</p>
+        </div>
+
+        <div className={styles.stats}>
+          <div className={styles.statCard}>
+            <span className={styles.statLabel}>Total</span>
+            <span className={styles.statValue}>{totalCount}</span>
+          </div>
+          <div className={styles.statCard}>
+            <span className={styles.statLabel}>No leídos</span>
+            <span className={`${styles.statValue} ${styles.statValueAccent}`}>
+              {unreadCount}
+            </span>
+          </div>
         </div>
       </div>
 
-      <div className={styles.filters}>
-        <Select
-          label="Estado"
-          id="read-filter"
-          options={READ_OPTIONS}
-          value={readFilter}
-          onChange={(e) => changeReadFilter(e.target.value)}
-        />
-      </div>
-
-      <div aria-live="polite">
-        {loading && <p>Cargando mensajes...</p>}
-
-        {!loading && error && !sessionExpired && (
-          <p className={styles.errorMessage} role="alert">
-            No se han podido cargar los mensajes: {error.message}.
-          </p>
-        )}
-
-        {!loading && !error && messages.length === 0 && (
-          <p className={styles.emptyState}>No hay mensajes con este filtro.</p>
-        )}
-      </div>
-
-      {!loading && !error && messages.length > 0 && (
-        <div className={styles.tableWrapper}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Email</th>
-                <th scope="col">Asunto</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Estado</th>
-                <th scope="col" className={styles.actionsHeader}>
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {messages.map((message) => (
-                <tr key={message.id}>
-                  <td className={styles.senderName}>{message.name}</td>
-                  <td>{message.email}</td>
-                  <td>{CONTACT_SUBJECT_LABELS[message.subject] ?? message.subject}</td>
-                  <td>{new Date(message.createdAt).toLocaleDateString("es-ES")}</td>
-                  <td>
-                    <StatusBadge status={message.read ? "READ" : "NEW"} />
-                  </td>
-                  <td className={styles.actionsCell}>
-                    <Link
-                      to={`/admin/contact-messages/${message.id}`}
-                      state={{ message }}
-                      className={styles.detailsLink}
-                    >
-                      Ver
-                    </Link>
-                  </td>
-                </tr>
+      <div className={styles.layout}>
+        <section className={styles.listPanel}>
+          <div className={styles.listPanelHeader}>
+            <h2>Actividad reciente</h2>
+            <div className={styles.filterGroup} role="group" aria-label="Filtrar mensajes">
+              {READ_FILTER_OPTIONS.map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={`${styles.filterButton} ${
+                    readFilter === option.value ? styles.filterButtonActive : ""
+                  }`}
+                  onClick={() => changeReadFilter(option.value)}
+                >
+                  {option.label}
+                </button>
               ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+            </div>
+          </div>
 
-      <AdminPagination
-        page={page}
-        totalPages={totalPages}
-        totalElements={totalElements}
-        onPageChange={setPage}
-        label="Paginación de mensajes"
-      />
+          <div aria-live="polite">
+            {loading && <p className={styles.status}>Cargando mensajes...</p>}
+
+            {!loading && error && !sessionExpired && (
+              <p className={styles.errorMessage} role="alert">
+                No se han podido cargar los mensajes: {error.message}.
+              </p>
+            )}
+
+            {!loading && !error && messages.length === 0 && (
+              <p className={styles.emptyState}>No hay mensajes con este filtro.</p>
+            )}
+          </div>
+
+          {!loading && !error && messages.length > 0 && (
+            <ul className={styles.messageList}>
+              {messages.map((message) => (
+                <li key={message.id}>
+                  <Link
+                    to={`/admin/contact-messages/${message.id}`}
+                    className={`${styles.messageItem} ${
+                      selectedId === String(message.id) ? styles.messageItemActive : ""
+                    }`}
+                  >
+                    <span className={styles.messageItemHeader}>
+                      <span
+                        className={`${styles.messageSender} ${
+                          !message.read ? styles.messageSenderUnread : ""
+                        }`}
+                      >
+                        {message.name}
+                      </span>
+                      <span className={styles.messageTime}>
+                        {formatRelativeTime(message.createdAt)}
+                      </span>
+                    </span>
+                    <span className={styles.messageSnippet}>
+                      {!message.read && (
+                        <span className={styles.unreadDot} aria-hidden="true" />
+                      )}
+                      <span className={styles.messageSnippetText}>{message.message}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <AdminPagination
+            page={page}
+            totalPages={totalPages}
+            totalElements={totalElements}
+            onPageChange={setPage}
+            label="Paginación de mensajes"
+          />
+        </section>
+
+        <section className={styles.detailPanel}>
+          <Outlet context={{ refetchList: refetchAll }} />
+        </section>
+      </div>
     </main>
   );
 }
