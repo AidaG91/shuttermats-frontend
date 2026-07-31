@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Plus, Pencil, Trash2, ImageOff } from "lucide-react";
 import { useAdminEventList } from "../../hooks/useAdminEventList";
 import { deleteAdminEvent } from "../../services/adminEventsService";
@@ -7,11 +7,12 @@ import { clearAdminSession } from "../../../auth/services/authService";
 import { resolveAssetUrl } from "../../../../shared/utils/url";
 import ConfirmModal from "../../../../shared/components/ConfirmModal/ConfirmModal";
 import AdminPagination from "../../../../shared/components/AdminPagination/AdminPagination";
+import { useToast } from "../../../../shared/components/Toast/ToastProvider";
 import styles from "./AdminEventsPage.module.scss";
 
 export default function AdminEventsPage() {
   const navigate = useNavigate();
-  const location = useLocation();
+  const { showToast } = useToast();
   const [page, setPage] = useState(0);
   const {
     content: events,
@@ -22,9 +23,7 @@ export default function AdminEventsPage() {
     refetch,
   } = useAdminEventList({ page });
   const [deletingId, setDeletingId] = useState(null);
-  const [deleteError, setDeleteError] = useState(null);
   const [eventToDelete, setEventToDelete] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(location.state?.flashMessage ?? null);
 
   const sessionExpired = error?.status === 401 || error?.status === 403;
 
@@ -35,17 +34,7 @@ export default function AdminEventsPage() {
     }
   }, [sessionExpired, navigate]);
 
-  useEffect(() => {
-    // Evita que el mensaje reaparezca si el usuario recarga la página o vuelve con el botón atrás.
-    if (location.state?.flashMessage) {
-      navigate(location.pathname, { replace: true, state: {} });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const handleDeleteClick = (event) => {
-    setDeleteError(null);
-    setSuccessMessage(null);
     setEventToDelete(event);
   };
 
@@ -57,15 +46,14 @@ export default function AdminEventsPage() {
   const handleConfirmDelete = async () => {
     if (!eventToDelete) return;
 
-    setDeleteError(null);
     setDeletingId(eventToDelete.id);
     try {
       await deleteAdminEvent(eventToDelete.id);
       refetch();
-      setSuccessMessage(`"${eventToDelete.name}" se ha borrado correctamente.`);
+      showToast(`"${eventToDelete.name}" se ha borrado correctamente.`, "success");
       setEventToDelete(null);
     } catch (err) {
-      setDeleteError(err.message);
+      showToast(`No se ha podido borrar el evento: ${err.message}`, "error");
     } finally {
       setDeletingId(null);
     }
@@ -83,18 +71,6 @@ export default function AdminEventsPage() {
           Nuevo evento
         </Link>
       </div>
-
-      {deleteError && (
-        <p className={styles.errorMessage} role="alert">
-          No se ha podido borrar el evento: {deleteError}
-        </p>
-      )}
-
-      {successMessage && !deleteError && (
-        <p className={styles.successMessage} role="status">
-          {successMessage}
-        </p>
-      )}
 
       <div aria-live="polite">
         {loading && <p>Cargando eventos...</p>}

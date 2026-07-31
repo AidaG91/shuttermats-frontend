@@ -1,0 +1,88 @@
+@use "../../../styles/base/variables" as v;
+@use "../../../styles/base/mixins" as m;
+
+.stack {
+  position: fixed;
+  z-index: 300;
+  left: v.$space-4;
+  right: v.$space-4;
+  bottom: v.$space-4;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+  pointer-events: none;
+
+  @include m.sm {
+    left: auto;
+    right: v.$space-6;
+    bottom: v.$space-6;
+    align-items: flex-end;
+  }
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: v.$space-3;
+  background: v.$color-surface-container;
+  border-radius: 0 v.$radius-md v.$radius-md 0;
+  border-left: 3px solid v.$color-success;
+  box-shadow: v.$shadow-lg;
+  padding: v.$space-3 v.$space-4;
+  width: 100%;
+  animation: sm-toast-in v.$transition-base;
+
+  @include m.sm {
+    width: auto;
+    max-width: 360px;
+  }
+}
+
+.toastError {
+  border-left-color: v.$color-danger;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: v.$color-success;
+}
+
+.toastError .icon {
+  color: v.$color-danger;
+}
+
+.message {
+  flex: 1;
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface;
+  line-height: 1.5;
+}
+
+.closeButton {
+  @include m.button-reset;
+  @include m.flex-center;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: transparent;
+  color: v.$color-on-surface-muted;
+  border-radius: v.$radius-md;
+
+  &:hover {
+    background: v.$color-surface-container-high;
+    color: v.$color-on-surface;
+  }
+}
+
+@keyframes sm-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
