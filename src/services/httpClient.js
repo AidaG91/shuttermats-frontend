@@ -2,19 +2,23 @@ export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8080/api";
 
 export class ApiError extends Error {
-  constructor(message, status) {
+  constructor(message, status, fieldErrors) {
     super(message);
     this.name = "ApiError";
     this.status = status;
+    this.fieldErrors = fieldErrors ?? {};
   }
 }
 
-async function parseErrorMessage(response) {
+async function parseErrorBody(response) {
   try {
     const body = await response.json();
-    return body.message ?? response.statusText;
+    return {
+      message: body.message ?? response.statusText,
+      fieldErrors: body.fieldErrors ?? {},
+    };
   } catch {
-    return response.statusText;
+    return { message: response.statusText, fieldErrors: {} };
   }
 }
 
@@ -37,7 +41,8 @@ async function request(url, options) {
   }
 
   if (!response.ok) {
-    throw new ApiError(await parseErrorMessage(response), response.status);
+    const { message, fieldErrors } = await parseErrorBody(response);
+    throw new ApiError(message, response.status, fieldErrors);
   }
 
   return response;
