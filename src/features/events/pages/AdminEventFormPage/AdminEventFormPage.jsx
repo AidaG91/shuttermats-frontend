@@ -3,12 +3,14 @@ import { Link, useNavigate, useParams } from "react-router";
 import EventForm from "../../components/EventForm/EventForm";
 import { useEvent } from "../../hooks/useEvent";
 import { createAdminEvent, updateAdminEvent } from "../../services/adminEventsService";
+import { useToast } from "../../../../shared/components/Toast/useToast";
 import styles from "./AdminEventFormPage.module.scss";
 
 export default function AdminEventFormPage() {
   const { id } = useParams();
   const isEditMode = Boolean(id);
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const { event, loading, error } = useEvent(id);
   const [submitting, setSubmitting] = useState(false);
@@ -23,13 +25,11 @@ export default function AdminEventFormPage() {
       } else {
         await createAdminEvent(values, imageFile);
       }
-      navigate("/admin/events", {
-        state: {
-          flashMessage: isEditMode
-            ? "Evento actualizado correctamente."
-            : "Evento creado correctamente.",
-        },
-      });
+      showToast(
+        isEditMode ? "Evento actualizado correctamente." : "Evento creado correctamente.",
+        "success",
+      );
+      navigate("/admin/events");
     } catch (err) {
       setSubmitError(err.message);
     } finally {
