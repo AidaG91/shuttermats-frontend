@@ -23,7 +23,13 @@ export default function AdminEventFormPage() {
       } else {
         await createAdminEvent(values, imageFile);
       }
-      navigate("/admin/events");
+      navigate("/admin/events", {
+        state: {
+          flashMessage: isEditMode
+            ? "Evento actualizado correctamente."
+            : "Evento creado correctamente.",
+        },
+      });
     } catch (err) {
       setSubmitError(err.message);
     } finally {
