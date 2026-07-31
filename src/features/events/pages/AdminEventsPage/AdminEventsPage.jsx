@@ -7,7 +7,7 @@ import { clearAdminSession } from "../../../auth/services/authService";
 import { resolveAssetUrl } from "../../../../shared/utils/url";
 import ConfirmModal from "../../../../shared/components/ConfirmModal/ConfirmModal";
 import AdminPagination from "../../../../shared/components/AdminPagination/AdminPagination";
-import { useToast } from "../../../../shared/components/Toast/ToastProvider";
+import { useToast } from "../../../../shared/components/Toast/useToast";
 import styles from "./AdminEventsPage.module.scss";
 
 export default function AdminEventsPage() {

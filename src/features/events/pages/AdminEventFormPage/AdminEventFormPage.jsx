@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import EventForm from "../../components/EventForm/EventForm";
 import { useEvent } from "../../hooks/useEvent";
 import { createAdminEvent, updateAdminEvent } from "../../services/adminEventsService";
-import { useToast } from "../../../../shared/components/Toast/ToastProvider";
+import { useToast } from "../../../../shared/components/Toast/useToast";
 import styles from "./AdminEventFormPage.module.scss";
 
 export default function AdminEventFormPage() {

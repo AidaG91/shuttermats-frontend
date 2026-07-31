@@ -1,9 +1,8 @@
-import { createContext, useCallback, useContext, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { CheckCircle2, AlertCircle, X } from "lucide-react";
+import { ToastContext } from "./ToastContext";
 import styles from "./ToastProvider.module.scss";
-
-const ToastContext = createContext(null);
 
 const AUTO_DISMISS_MS = 4000;
 
@@ -55,12 +54,4 @@ export function ToastProvider({ children }) {
       )}
     </ToastContext.Provider>
   );
-}
-
-export function useToast() {
-  const context = useContext(ToastContext);
-  if (!context) {
-    throw new Error("useToast must be used within a ToastProvider");
-  }
-  return context;
 }

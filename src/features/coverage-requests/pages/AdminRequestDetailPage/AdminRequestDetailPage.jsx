@@ -49,6 +49,10 @@ export default function AdminRequestDetailPage() {
     if (!request) return;
     setSelectedStatus(request.status);
     setAdminResponse(request.adminResponse ?? "");
+    // Depend on the specific fields we read, not the whole `request` object:
+    // `request` gets a new reference on every fetch/render, which would
+    // reset the in-progress edit even when nothing relevant changed.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [request?.id, request?.status, request?.adminResponse]);
 
   const hasChanges =
