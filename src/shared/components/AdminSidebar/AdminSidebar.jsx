@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router";
-import { LayoutDashboard, CalendarDays, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, CalendarDays, Mail, Settings, LogOut } from "lucide-react";
 import LogoDesktop from "../../../assets/logos/logo-side-to-side.svg";
 import LogoMobile from "../../../assets/logos/logo-bars-only.svg";
 import { clearAdminSession } from "../../../features/auth/services/authService";
@@ -8,6 +8,7 @@ import styles from "./AdminSidebar.module.scss";
 const NAV_ITEMS = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/admin/events", label: "Eventos", icon: CalendarDays, end: false },
+  { to: "/admin/contact-messages", label: "Mensajes", icon: Mail, end: false },
 ];
 
 const DISABLED_ITEMS = [{ label: "Ajustes", icon: Settings }];

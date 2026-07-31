@@ -3,10 +3,14 @@ import { NavLink, Link } from "react-router";
 import { Lock } from "lucide-react";
 import styles from "./Footer.module.scss";
 import Logo from "../../../assets/logos/logo-side-to-side.svg";
+import InstagramIcon from "../../components/icons/InstagramIcon";
+
+const INSTAGRAM_URL = "https://www.instagram.com/shuttermats/";
 
 const FOOTER_LINKS = [
   { to: "/", label: "Inicio" },
   { to: "/events", label: "Eventos" },
+  { to: "/contacto", label: "Contacto" },
 ];
 
 const FOOTER_DISABLED_LINKS = [{ label: "Galerías" }];
@@ -49,6 +53,17 @@ const Footer = forwardRef((props, ref) => {
             </span>
           ))}
         </nav>
+
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.footer__social}
+          aria-label="ShutterMats en Instagram"
+          title="ShutterMats en Instagram"
+        >
+          <InstagramIcon size={18} aria-hidden="true" />
+        </a>
 
         <p className={styles.footer__copy}>
           © {new Date().getFullYear()} ShutterMats{" "}

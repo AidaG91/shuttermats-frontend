@@ -8,6 +8,7 @@ import Logo from "../../../assets/logos/logo-side-to-side.svg";
 const NAV_LINKS = [
   { to: "/", label: "Inicio" },
   { to: "/events", label: "Eventos" },
+  { to: "/contacto", label: "Contacto" },
 ];
 
 const NAV_DISABLED_LINKS = [{ label: "Galerías" }];
