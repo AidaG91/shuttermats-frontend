@@ -1,0 +1,21 @@
+@use "../../../styles/base/variables" as v;
+
+.scrollTop {
+  position: fixed;
+  bottom: v.$space-5;
+  right: v.$space-5;
+  background: v.$color-red;
+  color: v.$color-white;
+  border: none;
+  border-radius: v.$radius-md;
+  padding: v.$space-2 v.$space-3;
+  font-size: v.$fs-md;
+  cursor: pointer;
+  box-shadow: v.$shadow-md;
+  transition: v.$transition-base;
+  z-index: v.$z-overlay;
+
+  &:hover {
+    background: v.$color-red-dark;
+  }
+}

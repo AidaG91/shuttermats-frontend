@@ -1,0 +1,17 @@
+@use "../../../styles/base/variables" as v;
+@use "../../../styles/base/mixins" as m;
+
+.shell {
+  min-height: 100vh;
+  background: v.$color-surface;
+  color: v.$color-on-surface;
+}
+
+.content {
+  padding: v.$space-6 v.$space-4;
+
+  @include m.md {
+    margin-left: v.$sidebar-width;
+    padding: v.$space-8 v.$space-6;
+  }
+}

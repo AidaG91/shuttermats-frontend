@@ -1,0 +1,38 @@
+@use "../../../../styles/base/variables" as v;
+@use "../../../../styles/base/mixins" as m;
+
+.galleries {
+  background: v.$color-black;
+  padding: v.$space-7 v.$space-4;
+  color: v.$color-white;
+}
+
+.galleries__container {
+  max-width: v.$container-max;
+  margin-inline: auto;
+}
+
+.galleries__title {
+  font-family: v.$font-display;
+  font-size: v.$fs-2xl;
+  font-weight: v.$fw-bold;
+  text-transform: uppercase;
+  margin-bottom: v.$space-6;
+}
+
+.galleries__status {
+  color: v.$color-on-surface-muted;
+}
+
+.galleries__grid {
+  display: grid;
+  gap: v.$space-6;
+
+  @include m.sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include m.lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
