@@ -1,0 +1,94 @@
+@use "../../../../styles/base/variables" as v;
+@use "../../../../styles/base/mixins" as m;
+
+// Esta pagina no lleva el Navbar publico (es una ruta standalone), asi que
+// no reservamos hueco para uno: solo centramos el card en el viewport.
+// 100dvh (con fallback a 100vh) evita el salto/scroll que provoca 100vh en
+// móvil cuando la barra de direcciones del navegador aparece/desaparece.
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: v.$space-4;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: v.$space-4;
+  background: v.$color-surface;
+  color: v.$color-on-surface;
+
+  @include m.md {
+    padding: v.$space-6;
+  }
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  align-self: center;
+  color: v.$color-on-surface-muted;
+  font-size: v.$fs-sm;
+
+  &:hover {
+    color: v.$color-red;
+  }
+}
+
+.card {
+  @include m.card-surface;
+  width: 100%;
+  max-width: 24rem;
+  padding: v.$space-5;
+  border-radius: v.$radius-lg;
+  text-align: center;
+  max-height: 100%;
+  overflow-y: auto;
+
+  @include m.md {
+    padding: v.$space-7;
+  }
+
+  h1 {
+    font-family: v.$font-display;
+    font-size: v.$fs-xl;
+    font-weight: v.$fw-black;
+    text-transform: uppercase;
+    margin-bottom: v.$space-2;
+  }
+
+  p {
+    color: v.$color-on-surface-muted;
+    font-size: v.$fs-sm;
+    margin-bottom: v.$space-5;
+  }
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 auto v.$space-4;
+  border-radius: 50%;
+  color: v.$color-red;
+  background: v.$color-red-glow;
+  border: 1px solid rgba(229, 57, 53, 0.35);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+  text-align: left;
+}
+
+.errorBanner {
+  background: rgba(229, 57, 53, 0.1);
+  border: 1px solid v.$color-red;
+  color: v.$color-on-surface;
+  padding: v.$space-3 v.$space-4;
+  border-radius: v.$radius-md;
+  font-size: v.$fs-sm;
+}

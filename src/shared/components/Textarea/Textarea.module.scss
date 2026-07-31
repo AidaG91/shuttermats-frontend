@@ -1,0 +1,24 @@
+@use "../../../styles/base/variables" as v;
+@use "../../../styles/base/mixins" as m;
+
+.textarea {
+  background: v.$color-surface-container;
+  border: 1px solid v.$color-outline-variant;
+  border-radius: v.$radius-lg;
+  padding: v.$space-4 v.$space-5;
+  color: v.$color-on-surface;
+  font-family: v.$font-primary;
+  resize: vertical;
+  min-height: 120px;
+  transition: v.$transition-base;
+
+  &:focus {
+    border-color: v.$color-red;
+    box-shadow: v.$shadow-glow;
+    outline: none;
+  }
+}
+
+.textarea--error {
+  border-color: v.$color-red;
+}

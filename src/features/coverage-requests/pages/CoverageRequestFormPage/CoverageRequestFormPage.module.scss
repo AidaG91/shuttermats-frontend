@@ -1,0 +1,134 @@
+@use "../../../../styles/base/variables" as v;
+@use "../../../../styles/base/mixins" as m;
+
+.formPage {
+  background: v.$color-surface;
+  color: v.$color-on-surface;
+  min-height: 100vh;
+}
+
+.hero {
+  position: relative;
+  background: v.$color-surface;
+  padding: calc(#{v.$navbar-height} + #{v.$space-8}) 0 v.$space-6;
+  text-align: center;
+  border-bottom: 1px solid v.$color-outline-variant;
+  overflow: hidden;
+
+  h1 {
+    font-family: v.$font-display;
+    font-size: v.$fs-2xl;
+    font-weight: v.$fw-black;
+    text-transform: uppercase;
+    margin-bottom: v.$space-3;
+  }
+
+  p {
+    color: v.$color-on-surface-muted;
+  }
+}
+
+.heroBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.85) 0%,
+    rgba(10, 10, 10, 0.7) 100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+
+  p {
+    color: v.$color-on-surface;
+  }
+}
+
+.formSection {
+  padding: v.$space-8 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-7;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.fieldset {
+  @include m.card-surface;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+  padding: v.$space-6;
+  border-radius: v.$radius-lg;
+
+  legend {
+    font-family: v.$font-display;
+    font-size: v.$fs-md;
+    font-weight: v.$fw-bold;
+    text-transform: uppercase;
+    letter-spacing: v.$ls-wide;
+    color: v.$color-on-surface;
+    padding: 0 v.$space-2;
+  }
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: flex-start;
+  gap: v.$space-3;
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
+  cursor: pointer;
+  line-height: 1.5;
+
+  input[type="checkbox"] {
+    accent-color: v.$color-red;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  a {
+    color: v.$color-on-surface;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: v.$color-red;
+    }
+  }
+}
+
+.errorMessage {
+  color: v.$color-red;
+  font-size: v.$fs-sm;
+}
+
+.errorBanner {
+  background: rgba(229, 57, 53, 0.1);
+  border: 1px solid v.$color-red;
+  color: v.$color-on-surface;
+  padding: v.$space-4;
+  border-radius: v.$radius-md;
+}

@@ -1,0 +1,122 @@
+@use "../../../../styles/base/variables" as v;
+@use "../../../../styles/base/mixins" as m;
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: v.$color-black;
+  color: v.$color-white;
+  padding-top: calc(#{v.$navbar-height} + #{v.$space-2});
+
+  @include m.md {
+    padding-top: calc(#{v.$navbar-height} + #{v.$space-4});
+  }
+}
+
+.hero__background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 0.65;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.85)
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 10;
+  max-width: 720px;
+  margin-inline: auto;
+  padding: v.$space-7 v.$space-4;
+}
+
+.hero__tag {
+  display: inline-block;
+  border-left: 4px solid v.$color-red;
+  padding-left: v.$space-3;
+  margin-bottom: v.$space-4;
+  font-size: v.$fs-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: v.$color-red;
+}
+
+.hero__title {
+  font-family: v.$font-display;
+  font-size: v.$fs-xl;
+  font-weight: v.$fw-bold;
+  text-transform: uppercase;
+  margin-bottom: v.$space-4;
+  line-height: 1.1;
+
+  @include m.sm {
+    font-size: v.$fs-2xl;
+  }
+
+  @include m.lg {
+    font-size: v.$fs-3xl;
+  }
+}
+
+.hero__stroke {
+  color: transparent;
+  -webkit-text-stroke: 2px v.$color-red;
+}
+
+.hero__subtitle {
+  font-size: v.$fs-lg;
+  color: v.$color-gray-light;
+  border-left: 2px solid v.$color-gray-light;
+  padding-left: v.$space-3;
+  margin-bottom: v.$space-6;
+  max-width: 520px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+
+  @include m.sm {
+    flex-direction: row;
+  }
+}
+
+.hero__scrollCue {
+  position: absolute;
+  left: 50%;
+  bottom: v.$space-6;
+  z-index: 10;
+  color: v.$color-white;
+  opacity: 0.7;
+  transform: translateX(-50%);
+  animation: heroScrollBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes heroScrollBounce {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 8px);
+  }
+}

@@ -1,0 +1,172 @@
+@use "../../../../styles/base/variables" as v;
+@use "../../../../styles/base/mixins" as m;
+
+.eventsPage {
+  color: v.$color-on-surface;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: v.$space-4;
+  padding-bottom: v.$space-5;
+  border-bottom: 1px solid v.$color-outline-variant;
+  margin-bottom: v.$space-6;
+
+  h1 {
+    font-family: v.$font-display;
+    font-size: v.$fs-xl;
+    font-weight: v.$fw-black;
+    text-transform: uppercase;
+    margin-bottom: v.$space-1;
+  }
+
+  p {
+    color: v.$color-on-surface-muted;
+    font-size: v.$fs-sm;
+  }
+}
+
+.newButton {
+  @include m.button-reset;
+  @include m.flex-center;
+  gap: v.$space-2;
+  background: v.$color-red;
+  color: v.$color-white;
+  padding: v.$space-3 v.$space-5;
+  border-radius: v.$radius-md;
+  font-size: v.$fs-sm;
+  font-weight: v.$fw-bold;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  white-space: nowrap;
+
+  &:hover {
+    background: v.$color-red-dark;
+  }
+}
+
+.errorMessage {
+  color: v.$color-red;
+}
+
+.successMessage {
+  color: v.$color-success;
+}
+
+.emptyState {
+  color: v.$color-on-surface-muted;
+}
+
+.tableWrapper {
+  @include m.card-surface;
+  border-radius: v.$radius-lg;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 640px;
+
+  th,
+  td {
+    text-align: left;
+    padding: v.$space-4;
+    border-bottom: 1px solid v.$color-outline-variant;
+    font-size: v.$fs-sm;
+  }
+
+  th {
+    color: v.$color-on-surface-muted;
+    text-transform: uppercase;
+    letter-spacing: v.$ls-wide;
+    font-size: v.$fs-xs;
+    font-weight: v.$fw-bold;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+
+    &:first-child {
+      border-bottom-left-radius: v.$radius-lg;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: v.$radius-lg;
+    }
+  }
+
+  tbody tr:hover {
+    background: v.$color-surface-container-high;
+  }
+}
+
+.thumbCell {
+  width: 3.5rem;
+}
+
+.thumb {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: v.$radius-md;
+  object-fit: cover;
+  display: block;
+}
+
+.thumbPlaceholder {
+  @include m.flex-center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: v.$radius-md;
+  background: v.$color-surface-container-high;
+  color: v.$color-on-surface-muted;
+}
+
+.eventName {
+  font-weight: v.$fw-bold;
+  color: v.$color-on-surface;
+}
+
+.actionsHeader {
+  text-align: right;
+}
+
+.actionsCell {
+  text-align: right;
+}
+
+.actionsGroup {
+  display: inline-flex;
+  gap: v.$space-3;
+}
+
+.iconLink,
+.iconButton {
+  @include m.flex-center;
+  @include m.button-reset;
+  width: 2rem;
+  height: 2rem;
+  border-radius: v.$radius-md;
+  background: transparent;
+  color: v.$color-on-surface-muted;
+  border: 1px solid v.$color-outline-variant;
+
+  &:hover {
+    color: v.$color-on-surface;
+    border-color: v.$color-red;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.srOnly {
+  @include m.visually-hidden;
+}

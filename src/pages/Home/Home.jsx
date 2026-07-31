@@ -1,8 +1,8 @@
 import styles from "./Home.module.scss";
-import Hero from "../../components/Hero/Hero";
-import HowItWorks from "../../components/HowItWorks/HowItWorks";
-import RecentGalleries from "../../components/RecentGalleries/RecentGalleries";
-import FinalCTA from "../../components/FinalCTA/FinalCTA";
+import Hero from "./components/Hero/Hero";
+import HowItWorks from "./components/HowItWorks/HowItWorks";
+import RecentGalleries from "./components/RecentGalleries/RecentGalleries";
+import FinalCTA from "./components/FinalCTA/FinalCTA";
 
 const Home = () => {
   return (

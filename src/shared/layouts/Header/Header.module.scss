@@ -1,0 +1,246 @@
+@use "../../../styles/base/variables" as v;
+@use "../../../styles/base/mixins" as m;
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: v.$navbar-height;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  padding: 0 v.$space-4;
+  z-index: v.$z-navbar;
+  transition: background-color v.$transition-base, border-color v.$transition-base,
+    backdrop-filter v.$transition-base;
+}
+
+.header--solid {
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom-color: v.$color-outline-variant;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: v.$container-max;
+  margin-inline: auto;
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  text-decoration: none;
+}
+
+.header__logo {
+  height: 28px;
+  width: auto;
+
+  @include m.md {
+    height: 32px;
+  }
+}
+
+.header__title {
+  font-family: v.$font-display;
+  font-size: v.$fs-md;
+  font-weight: v.$fw-bold;
+  color: v.$color-white;
+  text-transform: uppercase;
+}
+
+/* Desktop nav */
+.header__nav {
+  display: none;
+
+  @include m.md {
+    display: flex;
+    gap: v.$space-6;
+  }
+}
+
+.header__link {
+  position: relative;
+  color: v.$color-white;
+  text-transform: uppercase;
+  font-size: v.$fs-sm;
+  letter-spacing: 0.05em;
+  padding-bottom: v.$space-2;
+  transition: v.$transition-base;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    height: 2px;
+    background: v.$color-red;
+    transition: right v.$transition-base;
+  }
+
+  &:hover {
+    color: v.$color-red;
+  }
+}
+
+.header__link--active {
+  color: v.$color-white;
+
+  &::after {
+    right: 0;
+  }
+}
+
+.header__linkDisabled {
+  display: flex;
+  align-items: center;
+  color: v.$color-gray;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.header__navLinkDisabled {
+  color: v.$color-gray;
+  text-transform: uppercase;
+  font-size: v.$fs-sm;
+  letter-spacing: 0.05em;
+  padding-bottom: v.$space-2;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.srOnly {
+  @include m.visually-hidden;
+}
+
+.header__actions {
+  display: none;
+
+  @include m.md {
+    display: flex;
+    align-items: center;
+    gap: v.$space-4;
+  }
+}
+
+.header__logout {
+  background: none;
+  border: none;
+  color: v.$color-white;
+  cursor: pointer;
+
+  &:hover {
+    color: v.$color-red;
+  }
+}
+
+/* Hamburger */
+.header__hamburger {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px;
+  cursor: pointer;
+
+  @include m.md {
+    display: none;
+  }
+}
+
+.header__hamburgerLine {
+  width: 22px;
+  height: 2px;
+  background: v.$color-white;
+  transition: v.$transition-base;
+}
+
+/* Animación a X */
+.header__hamburger--open .header__hamburgerLine:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.header__hamburger--open .header__hamburgerLine:nth-child(2) {
+  opacity: 0;
+}
+
+.header__hamburger--open .header__hamburgerLine:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile overlay + menu */
+.mobileOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: v.$z-overlay;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mobileMenu {
+  width: 260px;
+  background: v.$color-black-soft;
+  padding: v.$space-5 v.$space-4;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+  box-shadow: v.$shadow-lg;
+  animation: slideIn 200ms ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.mobileMenu__link {
+  color: v.$color-white;
+  text-transform: uppercase;
+  font-size: v.$fs-sm;
+  border-left: 2px solid transparent;
+  padding-left: v.$space-3;
+
+  &:hover {
+    color: v.$color-red;
+  }
+}
+
+.mobileMenu__link--active {
+  color: v.$color-red;
+  border-left-color: v.$color-red;
+}
+
+.mobileMenu__linkDisabled {
+  color: v.$color-gray;
+  text-transform: uppercase;
+  font-size: v.$fs-sm;
+  border-left: 2px solid transparent;
+  padding-left: v.$space-3;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.mobileMenu__logout {
+  background: none;
+  border: none;
+  color: v.$color-white;
+  text-align: left;
+
+  &:hover {
+    color: v.$color-red;
+  }
+}

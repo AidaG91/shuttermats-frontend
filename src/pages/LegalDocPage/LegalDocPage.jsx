@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router";
-import { renderMarkdown } from "../../utils/markdown.jsx";
+import { renderMarkdown } from "../../shared/utils/markdown.jsx";
 import terminosServicio from "../../assets/legal/terminos-servicio-cobertura.md?raw";
 import terminosImagenes from "../../assets/legal/terminos-uso-imagenes.md?raw";
 import politicaPrivacidad from "../../assets/legal/politica-privacidad.md?raw";

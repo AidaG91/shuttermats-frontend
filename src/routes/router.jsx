@@ -1,18 +1,18 @@
 import { createBrowserRouter } from "react-router";
 import App from "../App";
 import Home from "../pages/Home/Home";
-import EventsPage from "../pages/EventsPage/EventsPage";
+import EventsPage from "../features/events/pages/EventsPage/EventsPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
-import CoverageRequestFormPage from "../pages/CoverageRequestFormPage/CoverageRequestFormPage";
-import RequestDetailPage from "../pages/RequestDetailPage/RequestDetailPage";
+import CoverageRequestFormPage from "../features/coverage-requests/pages/CoverageRequestFormPage/CoverageRequestFormPage";
+import RequestDetailPage from "../features/coverage-requests/pages/RequestDetailPage/RequestDetailPage";
 import LegalDocPage from "../pages/LegalDocPage/LegalDocPage";
-import AdminLoginPage from "../pages/AdminLoginPage/AdminLoginPage";
-import AdminDashboardPage from "../pages/AdminDashboardPage/AdminDashboardPage";
-import AdminRequestDetailPage from "../pages/AdminRequestDetailPage/AdminRequestDetailPage";
-import AdminEventsPage from "../pages/AdminEventsPage/AdminEventsPage";
-import AdminEventFormPage from "../pages/AdminEventFormPage/AdminEventFormPage";
-import AdminProtectedRoute from "./protectedRouter";
-import AdminLayout from "../layouts/AdminLayout/AdminLayout";
+import AdminLoginPage from "../features/auth/pages/AdminLoginPage/AdminLoginPage";
+import AdminDashboardPage from "../features/coverage-requests/pages/AdminDashboardPage/AdminDashboardPage";
+import AdminRequestDetailPage from "../features/coverage-requests/pages/AdminRequestDetailPage/AdminRequestDetailPage";
+import AdminEventsPage from "../features/events/pages/AdminEventsPage/AdminEventsPage";
+import AdminEventFormPage from "../features/events/pages/AdminEventFormPage/AdminEventFormPage";
+import AdminProtectedRoute from "../features/auth/routes/protectedRouter";
+import AdminLayout from "../shared/layouts/AdminLayout/AdminLayout";
 
 export const router = createBrowserRouter(
   [
