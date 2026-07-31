@@ -30,18 +30,25 @@ The public side is a marketing-style landing page plus an event catalog and a mu
 
 ## Project Structure
 
+Organized by feature (screaming architecture) rather than by technical layer, so everything about a business capability lives together:
+
 ```
 src/
-├── components/     # Reusable UI components (EventCard, StatusBadge, form inputs, AdminSidebar, ...)
-├── layouts/        # AppLayout/AdminLayout shells, Header, Footer
-├── pages/          # Route-level pages (public + admin)
-├── routes/         # Router config and AdminProtectedRoute
-├── services/       # httpClient + per-resource API services (events, requests, extras, auth)
-├── hooks/          # Data-fetching hooks built on top of the services
+├── features/
+│   ├── auth/               # Admin login, route guard (AdminProtectedRoute), authService
+│   ├── events/              # Public + admin event pages, EventCard/EventForm, hooks, services
+│   └── coverage-requests/   # Request form, request detail, admin request views, StatusBadge, hooks, services
+├── pages/          # Non-domain routes: landing page (+ its marketing sections), legal docs, 404
+├── shared/         # Reusable UI kit (Button, Input, Select, Textarea, FormField, ConfirmModal, AdminPagination,
+│                   #   AdminSidebar), layout shells (AppLayout/AdminLayout, Header, Footer), httpClient,
+│                   #   cross-cutting hooks/utils (useAsync, url, markdown)
+├── routes/         # Router config (router.jsx)
 ├── styles/         # Global Sass (variables, mixins, reset)
 ├── assets/         # Logos and legal Markdown content
-└── test/           # Vitest + Testing Library tests
+└── test/           # Vitest + Testing Library tests, mirroring the features/shared structure
 ```
+
+Admin views live inside the feature they manage (e.g. `AdminEventsPage` under `features/events/`) rather than a separate admin folder, since admin is a permission, not a business capability. New domains (galleries, messaging, athlete accounts) get their own `features/` folder when that work starts.
 
 ## Getting Started
 
