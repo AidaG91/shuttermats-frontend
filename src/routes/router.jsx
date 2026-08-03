@@ -11,6 +11,10 @@ import AdminDashboardPage from "../features/coverage-requests/pages/AdminDashboa
 import AdminRequestDetailPage from "../features/coverage-requests/pages/AdminRequestDetailPage/AdminRequestDetailPage";
 import AdminEventsPage from "../features/events/pages/AdminEventsPage/AdminEventsPage";
 import AdminEventFormPage from "../features/events/pages/AdminEventFormPage/AdminEventFormPage";
+import ContactPage from "../features/contact/pages/ContactPage/ContactPage";
+import AdminContactMessagesPage from "../features/contact/pages/AdminContactMessagesPage/AdminContactMessagesPage";
+import ContactMessageEmptyState from "../features/contact/pages/AdminContactMessagesPage/ContactMessageEmptyState";
+import AdminContactMessageDetailPage from "../features/contact/pages/AdminContactMessageDetailPage/AdminContactMessageDetailPage";
 import AdminProtectedRoute from "../features/auth/routes/protectedRouter";
 import AdminLayout from "../shared/layouts/AdminLayout/AdminLayout";
 
@@ -39,6 +43,10 @@ export const router = createBrowserRouter(
         {
           path: "legal/:slug",
           element: <LegalDocPage />,
+        },
+        {
+          path: "contacto",
+          element: <ContactPage />,
         },
         {
           path: "*",
@@ -76,6 +84,20 @@ export const router = createBrowserRouter(
             {
               path: "events/:id/edit",
               element: <AdminEventFormPage />,
+            },
+            {
+              path: "contact-messages",
+              element: <AdminContactMessagesPage />,
+              children: [
+                {
+                  index: true,
+                  element: <ContactMessageEmptyState />,
+                },
+                {
+                  path: ":id",
+                  element: <AdminContactMessageDetailPage />,
+                },
+              ],
             },
           ],
         },

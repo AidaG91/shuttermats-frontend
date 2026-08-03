@@ -131,6 +131,34 @@
   user-select: none;
 }
 
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  margin-left: v.$space-2;
+  border-radius: v.$radius-pill;
+  background: v.$color-red;
+  color: v.$color-white;
+  font-size: 10px;
+  font-weight: v.$fw-bold;
+  letter-spacing: normal;
+  text-transform: none;
+  line-height: 1;
+  flex-shrink: 0;
+
+  @include m.md {
+    margin-left: auto;
+  }
+}
+
+.navLinkActive .badge {
+  background: v.$color-white;
+  color: v.$color-red;
+}
+
 .srOnly {
   @include m.visually-hidden;
 }

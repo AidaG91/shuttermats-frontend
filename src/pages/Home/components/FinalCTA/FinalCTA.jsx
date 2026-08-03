@@ -24,13 +24,7 @@ const FinalCTA = () => {
           Contacta con nosotros y cuéntanos qué necesitas.
         </p>
 
-        <Button
-          variant="primary"
-          size="md"
-          disabled
-          title="Próximamente"
-          aria-disabled="true"
-        >
+        <Button to="/contacto" variant="primary" size="md">
           Hablemos
         </Button>
       </div>

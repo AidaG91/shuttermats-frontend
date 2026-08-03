@@ -1,7 +1,7 @@
 @use "../../../../styles/base/variables" as v;
 @use "../../../../styles/base/mixins" as m;
 
-.dashboardPage {
+.inboxPage {
   color: v.$color-on-surface;
   display: flex;
   flex-direction: column;
@@ -63,22 +63,48 @@
   color: v.$color-red;
 }
 
-.toolbar {
+.layout {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: v.$space-4;
+  flex-direction: column;
+  gap: v.$space-6;
+  align-items: flex-start;
 
-  > :last-child {
-    flex: 1 1 16rem;
-    max-width: 20rem;
+  @include m.lg {
+    flex-direction: row;
   }
 }
 
-.statusFilters {
+.listPanel {
+  @include m.card-surface;
+  width: 100%;
+  border-radius: v.$radius-lg;
+  padding: v.$space-5;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: v.$space-4;
+
+  @include m.lg {
+    flex: 0 0 22rem;
+  }
+}
+
+.listPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-3;
+
+  h2 {
+    font-family: v.$font-display;
+    font-size: v.$fs-sm;
+    text-transform: uppercase;
+    letter-spacing: v.$ls-wide;
+    color: v.$color-on-surface-muted;
+  }
+}
+
+.filterGroup {
+  display: flex;
   gap: v.$space-1;
   background: v.$color-surface-container-high;
   border-radius: v.$radius-pill;
@@ -94,7 +120,6 @@
   font-size: v.$fs-xs;
   text-transform: uppercase;
   letter-spacing: v.$ls-wide;
-  white-space: nowrap;
 
   &:hover {
     color: v.$color-on-surface;
@@ -121,93 +146,90 @@
   color: v.$color-red;
 }
 
-.requestList {
+.messageList {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: v.$space-3;
+  gap: v.$space-1;
+  max-height: 32rem;
+  overflow-y: auto;
 }
 
-.requestCard {
-  @include m.card-surface;
+.messageItem {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: v.$space-3 v.$space-4;
-  padding: v.$space-4 v.$space-5;
-  border-radius: v.$radius-lg;
+  flex-direction: column;
+  gap: v.$space-1;
+  padding: v.$space-3;
+  border-radius: v.$radius-md;
+  border-left: 2px solid transparent;
   color: v.$color-on-surface;
   transition: v.$transition-base;
 
   &:hover {
-    border-color: v.$color-red;
     background: v.$color-surface-container-high;
   }
 }
 
-.avatar {
-  flex-shrink: 0;
+.messageItemActive {
+  background: v.$color-surface-container-high;
+  border-left-color: v.$color-red;
+}
+
+.messageItemHeader {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: v.$radius-md;
-  background: rgba(229, 57, 53, 0.15);
-  color: v.$color-red;
-  font-family: v.$font-display;
-  font-weight: v.$fw-black;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: v.$space-2;
+}
+
+.messageSender {
   font-size: v.$fs-sm;
-}
-
-.requestInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-  flex: 1 1 12rem;
-}
-
-.athleteName {
   font-weight: v.$fw-bold;
   color: v.$color-on-surface;
-  @include m.truncate;
 }
 
-.eventName {
-  font-size: v.$fs-sm;
-  color: v.$color-on-surface-muted;
-  @include m.truncate;
+.messageSenderUnread {
+  color: v.$color-red-light;
 }
 
-.requestDate {
-  flex-shrink: 0;
-  font-size: v.$fs-sm;
-  color: v.$color-on-surface-muted;
-  text-transform: capitalize;
-  min-width: 3.5rem;
-}
-
-.manageLink {
-  display: none;
-  flex-shrink: 0;
-  align-items: center;
-  gap: v.$space-1;
-  margin-left: auto;
-  color: v.$color-red;
-  text-transform: uppercase;
+.messageTime {
   font-size: v.$fs-xs;
-  font-weight: v.$fw-bold;
-  letter-spacing: v.$ls-wide;
+  color: v.$color-on-surface-muted;
   white-space: nowrap;
-
-  @include m.md {
-    display: inline-flex;
-  }
 }
 
-.requestCard:hover .manageLink {
-  color: v.$color-red-dark;
+.messageSnippet {
+  display: flex;
+  align-items: flex-start;
+  gap: v.$space-2;
+  font-size: v.$fs-xs;
+  color: v.$color-on-surface-muted;
+  min-width: 0;
+}
+
+.messageSnippetText {
+  min-width: 0;
+  flex: 1 1 auto;
+  @include m.truncate;
+}
+
+.unreadDot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: v.$color-red;
+}
+
+.detailPanel {
+  @include m.card-surface;
+  flex: 1 1 0;
+  width: 100%;
+  border-radius: v.$radius-lg;
+  min-height: 28rem;
+  display: flex;
+  flex-direction: column;
 }

@@ -7,6 +7,8 @@ const STATUS_META = {
   REJECTED: { label: "Rechazada", tone: "danger" },
   IN_PROGRESS: { label: "En progreso", tone: "info" },
   DELIVERED: { label: "Entregada", tone: "success" },
+  NEW: { label: "Nuevo", tone: "pending" },
+  READ: { label: "Leído", tone: "success" },
 };
 
 const StatusBadge = ({ status }) => {

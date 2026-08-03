@@ -8,6 +8,10 @@ import { clearAdminSession } from "../../../auth/services/authService";
 import { updateRequestStatus } from "../../services/adminRequestService";
 import styles from "./AdminRequestDetailPage.module.scss";
 
+// TODO(design): redesign this page's UI, same as AdminDashboardPage was
+// redone (cards/modern look instead of the current plain form layout).
+// Also where the per-status reply templates (see TODO in
+// CoverageRequestServiceImpl.updateStatus) would eventually live.
 const STATUS_OPTIONS = [
   { value: "PENDING", label: "Pendiente" },
   { value: "RECEIVED", label: "Recibida" },

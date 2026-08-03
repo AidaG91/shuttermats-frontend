@@ -74,6 +74,17 @@
   white-space: nowrap;
 }
 
+.footer__social {
+  display: inline-flex;
+  align-items: center;
+  color: v.$color-on-surface-muted;
+  transition: v.$transition-base;
+
+  &:hover {
+    color: v.$color-red;
+  }
+}
+
 .footer__adminLink {
   display: inline-flex;
   align-items: center;
