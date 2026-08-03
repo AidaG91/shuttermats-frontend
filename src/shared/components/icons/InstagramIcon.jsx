@@ -1,6 +1,6 @@
-// lucide-react ya no incluye iconos de marcas (Instagram, Twitter, etc.) por
-// motivos de licencia de logos, así que este icono se dibuja a mano.
-// Acepta las mismas props que un icono de lucide-react (size, aria-hidden...).
+// lucide-react no longer ships brand icons (Instagram, Twitter, etc.) for
+// logo licensing reasons, so this icon is hand-drawn.
+// Accepts the same props as a lucide-react icon (size, aria-hidden...).
 const InstagramIcon = ({ size = 20, ...rest }) => (
   <svg
     width={size}

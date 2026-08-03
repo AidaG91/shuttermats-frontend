@@ -159,6 +159,15 @@ export default function AdminContactMessageDetailPage() {
           interna. Respóndele directamente a <strong>{message.email}</strong>.
         </p>
 
+        {/*
+          TODO(contact-messages): "Adjuntar archivo" and "Plantilla" are
+          intentionally disabled here. This isn't a real-time chat, so they
+          don't add much value in this context. Reply templates DO make
+          sense for the CoverageRequest flow though: when changing a
+          request's status (accepted/rejected/etc.), being able to send the
+          athlete a personalized message (with per-status templates).
+          See AdminRequestDetailPage - implement there, not here.
+        */}
         <div className={styles.replyActions}>
           <div className={styles.replyExtras}>
             <button

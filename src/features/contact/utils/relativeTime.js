@@ -2,8 +2,8 @@ const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
-// Formato corto tipo "hace 2 min", "hace 1 h", "Ayer", "hace 3 días",
-// para las vistas de inbox donde no cabe una fecha completa.
+// Short format like "hace 2 min", "hace 1 h", "Ayer", "hace 3 días" (Spanish,
+// user-facing) for inbox views where there's no room for a full date.
 export function formatRelativeTime(dateInput) {
   const date = new Date(dateInput);
   const diffMs = Date.now() - date.getTime();

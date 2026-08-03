@@ -11,9 +11,9 @@ import { resolveAssetUrl } from "../../../../shared/utils/url";
 import { BELT_OPTIONS, DIVISION_OPTIONS, MODALITY_OPTIONS } from "../../utils/coverageRequestOptions";
 import styles from "./CoverageRequestFormPage.module.scss";
 
-// El backend es la fuente de verdad de las validaciones (@Valid en CoverageRequestRequestDTO).
-// Este mapa solo traduce los field paths que devuelve la API (ej. "athlete.name")
-// a las claves que usan los inputs del formulario.
+// The backend is the source of truth for validation (@Valid on CoverageRequestRequestDTO).
+// This map just translates the field paths the API returns (e.g. "athlete.name")
+// into the keys the form inputs use.
 const FIELD_ERROR_MAP = {
   "athlete.name": "athleteName",
   "athlete.email": "athleteEmail",

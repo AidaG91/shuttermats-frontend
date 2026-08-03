@@ -1,10 +1,10 @@
 @use "../../../../styles/base/variables" as v;
 @use "../../../../styles/base/mixins" as m;
 
-// Esta pagina no lleva el Navbar publico (es una ruta standalone), asi que
-// no reservamos hueco para uno: solo centramos el card en el viewport.
-// 100dvh (con fallback a 100vh) evita el salto/scroll que provoca 100vh en
-// móvil cuando la barra de direcciones del navegador aparece/desaparece.
+// This page doesn't use the public Navbar (it's a standalone route), so we
+// don't reserve space for one: just center the card in the viewport.
+// 100dvh (with a 100vh fallback) avoids the jump/scroll that 100vh causes
+// on mobile when the browser's address bar shows/hides.
 .loginPage {
   display: flex;
   flex-direction: column;

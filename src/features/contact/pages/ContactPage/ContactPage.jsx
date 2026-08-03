@@ -18,8 +18,8 @@ const CONTACT_PHONE_DISPLAY = "676 28 96 86";
 const INSTAGRAM_HANDLE = "@shuttermats";
 const INSTAGRAM_URL = "https://www.instagram.com/shuttermats/";
 
-// El backend es la fuente de verdad de las validaciones (@Valid en ContactMessageRequestDTO).
-// Este mapa traduce los nombres de campo que devuelve la API a las claves del formulario.
+// The backend is the source of truth for validation (@Valid on ContactMessageRequestDTO).
+// This map translates the field names the API returns into the form's keys.
 const FIELD_ERROR_MAP = {
   name: "name",
   email: "email",
@@ -50,6 +50,11 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  // TODO(security): without reCAPTCHA/Turnstile this public form is an easy
+  // target for automated spam (see the matching TODO in ContactController.java,
+  // backend). When tackled: mount the widget here (reCAPTCHA v3 is invisible,
+  // no puzzles) and send the token inside `form` for the backend to verify
+  // before saving.
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError(null);
