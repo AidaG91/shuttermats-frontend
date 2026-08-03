@@ -3,12 +3,19 @@
 
 .dashboardPage {
   color: v.$color-on-surface;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-6;
 }
 
 .header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: v.$space-4;
   padding-bottom: v.$space-5;
   border-bottom: 1px solid v.$color-outline-variant;
-  margin-bottom: v.$space-6;
 
   h1 {
     font-family: v.$font-display;
@@ -24,85 +31,183 @@
   }
 }
 
-.filters {
+.stats {
+  display: flex;
+  gap: v.$space-4;
+}
+
+.statCard {
+  @include m.card-surface;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-1;
+  padding: v.$space-3 v.$space-5;
+  border-radius: v.$radius-md;
+  min-width: 6rem;
+}
+
+.statLabel {
+  font-size: v.$fs-xs;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  color: v.$color-on-surface-muted;
+}
+
+.statValue {
+  font-family: v.$font-display;
+  font-size: v.$fs-lg;
+  font-weight: v.$fw-black;
+}
+
+.statValueAccent {
+  color: v.$color-red;
+}
+
+.toolbar {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: v.$space-4;
-  margin-bottom: v.$space-6;
 
-  > * {
+  > :last-child {
     flex: 1 1 16rem;
     max-width: 20rem;
   }
+}
+
+.statusFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-1;
+  background: v.$color-surface-container-high;
+  border-radius: v.$radius-pill;
+  padding: 2px;
+}
+
+.filterButton {
+  @include m.button-reset;
+  padding: v.$space-1 v.$space-3;
+  border-radius: v.$radius-pill;
+  background: transparent;
+  color: v.$color-on-surface-muted;
+  font-size: v.$fs-xs;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  white-space: nowrap;
+
+  &:hover {
+    color: v.$color-on-surface;
+  }
+}
+
+.filterButtonActive {
+  background: v.$color-red;
+  color: v.$color-white;
+
+  &:hover {
+    color: v.$color-white;
+  }
+}
+
+.status,
+.errorMessage,
+.emptyState {
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
 }
 
 .errorMessage {
   color: v.$color-red;
 }
 
-.emptyState {
-  color: v.$color-on-surface-muted;
+.requestList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
 }
 
-.tableWrapper {
+.requestCard {
   @include m.card-surface;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: v.$space-3 v.$space-4;
+  padding: v.$space-4 v.$space-5;
   border-radius: v.$radius-lg;
-  overflow-x: auto;
-}
+  color: v.$color-on-surface;
+  transition: v.$transition-base;
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 640px;
-
-  th,
-  td {
-    text-align: left;
-    padding: v.$space-4;
-    border-bottom: 1px solid v.$color-outline-variant;
-    font-size: v.$fs-sm;
-  }
-
-  th {
-    color: v.$color-on-surface-muted;
-    text-transform: uppercase;
-    letter-spacing: v.$ls-wide;
-    font-size: v.$fs-xs;
-    font-weight: v.$fw-bold;
-  }
-
-  tbody tr:last-child td {
-    border-bottom: none;
-  }
-
-  tbody tr:hover {
+  &:hover {
+    border-color: v.$color-red;
     background: v.$color-surface-container-high;
   }
+}
+
+.avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: v.$radius-md;
+  background: rgba(229, 57, 53, 0.15);
+  color: v.$color-red;
+  font-family: v.$font-display;
+  font-weight: v.$fw-black;
+  font-size: v.$fs-sm;
+}
+
+.requestInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1 1 12rem;
 }
 
 .athleteName {
   font-weight: v.$fw-bold;
   color: v.$color-on-surface;
+  @include m.truncate;
 }
 
-.actionsHeader {
-  text-align: right;
+.eventName {
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
+  @include m.truncate;
 }
 
-.actionsCell {
-  text-align: right;
+.requestDate {
+  flex-shrink: 0;
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
+  text-transform: capitalize;
+  min-width: 3.5rem;
 }
 
-.detailsLink {
+.manageLink {
+  display: none;
+  flex-shrink: 0;
+  align-items: center;
+  gap: v.$space-1;
+  margin-left: auto;
   color: v.$color-red;
   text-transform: uppercase;
   font-size: v.$fs-xs;
   font-weight: v.$fw-bold;
   letter-spacing: v.$ls-wide;
+  white-space: nowrap;
 
-  &:hover {
-    color: v.$color-red-dark;
-    text-decoration: underline;
+  @include m.md {
+    display: inline-flex;
   }
 }
 
+.requestCard:hover .manageLink {
+  color: v.$color-red-dark;
+}
