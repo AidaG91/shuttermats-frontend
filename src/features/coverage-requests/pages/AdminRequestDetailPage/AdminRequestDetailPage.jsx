@@ -168,7 +168,24 @@ export default function AdminRequestDetailPage() {
           {request.extras?.length > 0 && (
             <div className={styles.row}>
               <span className={styles.label}>Extras</span>
-              <span>{request.extras.join(", ")}</span>
+              <span>
+                {request.extras
+                  .map((extra) => `${extra.name} (+${extra.price}€)`)
+                  .join(", ")}
+              </span>
+            </div>
+          )}
+          {request.event?.basePrice != null && (
+            <div className={styles.row}>
+              <span className={styles.label}>Precio estimado</span>
+              <span>
+                desde{" "}
+                {(
+                  request.event.basePrice * (request.modality === "BOTH" ? 2 : 1) +
+                  (request.extras ?? []).reduce((sum, extra) => sum + extra.price, 0)
+                ).toFixed(2)}
+                € (+{request.event.extraMatchPrice}€ por combate extra, a confirmar)
+              </span>
             </div>
           )}
         </div>

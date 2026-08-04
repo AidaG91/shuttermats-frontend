@@ -70,6 +70,10 @@
   gap: v.$space-7;
   max-width: 40rem;
   margin-inline: auto;
+
+  @media (min-width: 900px) {
+    max-width: 58rem;
+  }
 }
 
 .fieldset {
@@ -88,6 +92,31 @@
     letter-spacing: v.$ls-wide;
     color: v.$color-on-surface;
     padding: 0 v.$space-2;
+  }
+
+  // On desktop, lay out fields in two columns so the (long, but
+  // deliberately complete) form takes up noticeably less vertical space.
+  // Textareas and checkbox rows keep the full width - they don't read
+  // well squeezed into half a column.
+  @media (min-width: 900px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: v.$space-5;
+    row-gap: v.$space-4;
+    align-items: start;
+
+    legend {
+      grid-column: 1 / -1;
+    }
+
+    > div:has(textarea) {
+      grid-column: 1 / -1;
+    }
+
+    > label,
+    > .errorMessage {
+      grid-column: 1 / -1;
+    }
   }
 }
 
@@ -131,4 +160,26 @@
   color: v.$color-on-surface;
   padding: v.$space-4;
   border-radius: v.$radius-md;
+}
+
+.priceSummary {
+  background: v.$color-surface-container;
+  border: 1px solid v.$color-outline-variant;
+  border-radius: v.$radius-md;
+  padding: v.$space-4;
+}
+
+.priceEstimate {
+  font-size: v.$fs-lg;
+  color: v.$color-on-surface;
+
+  strong {
+    color: v.$color-red;
+  }
+}
+
+.priceHint {
+  margin-top: v.$space-2;
+  font-size: v.$fs-xs;
+  color: v.$color-on-surface-muted;
 }
