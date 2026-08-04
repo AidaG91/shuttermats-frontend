@@ -9,6 +9,7 @@ const Input = ({
   type = "text",
   required = false,
   error,
+  hint,
   ...rest
 }) => {
   const classes = [styles.input, error ? styles["input--error"] : ""]
@@ -16,7 +17,7 @@ const Input = ({
     .join(" ");
 
   return (
-    <FormField id={id} label={label} required={required} error={error}>
+    <FormField id={id} label={label} required={required} error={error} hint={hint}>
       <input
         type={type}
         value={value}
