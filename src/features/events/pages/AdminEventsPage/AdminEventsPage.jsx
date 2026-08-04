@@ -97,6 +97,7 @@ export default function AdminEventsPage() {
                 <th scope="col">Nombre</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Ubicación</th>
+                <th scope="col">Precio</th>
                 <th scope="col" className={styles.actionsHeader}>
                   Acciones
                 </th>
@@ -121,6 +122,16 @@ export default function AdminEventsPage() {
                   <td className={styles.eventName}>{event.name}</td>
                   <td>{new Date(event.date).toLocaleDateString("es-ES")}</td>
                   <td>{event.location}</td>
+                  <td>
+                    <div className={styles.priceCell}>
+                      <span>
+                        {event.basePrice}€ / +{event.extraMatchPrice}€
+                      </span>
+                      <span className={styles.planLabel}>
+                        {event.pricingPlanName ?? "Personalizado"}
+                      </span>
+                    </div>
+                  </td>
                   <td className={styles.actionsCell}>
                     <div className={styles.actionsGroup}>
                       <Link

@@ -11,6 +11,7 @@ import AdminDashboardPage from "../features/coverage-requests/pages/AdminDashboa
 import AdminRequestDetailPage from "../features/coverage-requests/pages/AdminRequestDetailPage/AdminRequestDetailPage";
 import AdminEventsPage from "../features/events/pages/AdminEventsPage/AdminEventsPage";
 import AdminEventFormPage from "../features/events/pages/AdminEventFormPage/AdminEventFormPage";
+import AdminPricingPlansPage from "../features/events/pages/AdminPricingPlansPage/AdminPricingPlansPage";
 import ContactPage from "../features/contact/pages/ContactPage/ContactPage";
 import AdminContactMessagesPage from "../features/contact/pages/AdminContactMessagesPage/AdminContactMessagesPage";
 import ContactMessageEmptyState from "../features/contact/pages/AdminContactMessagesPage/ContactMessageEmptyState";
@@ -84,6 +85,10 @@ export const router = createBrowserRouter(
             {
               path: "events/:id/edit",
               element: <AdminEventFormPage />,
+            },
+            {
+              path: "pricing-plans",
+              element: <AdminPricingPlansPage />,
             },
             {
               path: "contact-messages",

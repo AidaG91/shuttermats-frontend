@@ -1,7 +1,7 @@
 @use "../../../../styles/base/variables" as v;
 @use "../../../../styles/base/mixins" as m;
 
-.eventsPage {
+.page {
   color: v.$color-on-surface;
 }
 
@@ -67,7 +67,7 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  min-width: 760px;
+  min-width: 480px;
 
   th,
   td {
@@ -87,14 +87,6 @@
 
   tbody tr:last-child td {
     border-bottom: none;
-
-    &:first-child {
-      border-bottom-left-radius: v.$radius-lg;
-    }
-
-    &:last-child {
-      border-bottom-right-radius: v.$radius-lg;
-    }
   }
 
   tbody tr:hover {
@@ -102,41 +94,27 @@
   }
 }
 
-.thumbCell {
-  width: 3.5rem;
-}
-
-.thumb {
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: v.$radius-md;
-  object-fit: cover;
-  display: block;
-}
-
-.thumbPlaceholder {
-  @include m.flex-center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: v.$radius-md;
-  background: v.$color-surface-container-high;
-  color: v.$color-on-surface-muted;
-}
-
-.eventName {
+.planName {
   font-weight: v.$fw-bold;
   color: v.$color-on-surface;
-}
-
-.priceCell {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: v.$space-2;
+  flex-wrap: wrap;
 }
 
-.planLabel {
+.defaultBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-1;
+  background: rgba(229, 57, 53, 0.12);
+  color: v.$color-red-light;
   font-size: v.$fs-xs;
-  color: v.$color-on-surface-muted;
+  font-weight: v.$fw-bold;
+  text-transform: uppercase;
+  letter-spacing: v.$ls-wide;
+  padding: 2px v.$space-2;
+  border-radius: v.$radius-pill;
 }
 
 .actionsHeader {
@@ -152,7 +130,6 @@
   gap: v.$space-3;
 }
 
-.iconLink,
 .iconButton {
   @include m.flex-center;
   @include m.button-reset;
@@ -163,7 +140,7 @@
   color: v.$color-on-surface-muted;
   border: 1px solid v.$color-outline-variant;
 
-  &:hover {
+  &:hover:not(:disabled) {
     color: v.$color-on-surface;
     border-color: v.$color-red;
   }
@@ -174,6 +151,49 @@
   }
 }
 
-.srOnly {
-  @include m.visually-hidden;
+.modalTitle {
+  font-family: v.$font-display;
+  font-size: v.$fs-lg;
+  font-weight: v.$fw-bold;
+  color: v.$color-on-surface;
+  margin-bottom: v.$space-5;
+  padding-right: v.$space-6;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+}
+
+.errorBanner {
+  background: rgba(211, 47, 47, 0.12);
+  border: 1px solid v.$color-red;
+  color: v.$color-red-light;
+  padding: v.$space-3 v.$space-4;
+  border-radius: v.$radius-md;
+  font-size: v.$fs-sm;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: flex-start;
+  gap: v.$space-3;
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
+  cursor: pointer;
+  line-height: 1.5;
+
+  input[type="checkbox"] {
+    accent-color: v.$color-red;
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
 }

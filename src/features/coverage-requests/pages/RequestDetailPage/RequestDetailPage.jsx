@@ -9,6 +9,11 @@ export default function RequestDetailPage() {
   const location = useLocation();
   const request = location.state?.request;
 
+  const basePriceMultiplier = request?.modality === "BOTH" ? 2 : 1;
+  const estimatedBasePrice = request ? request.event.basePrice * basePriceMultiplier : 0;
+  const extrasTotal = request ? request.extras.reduce((sum, extra) => sum + extra.price, 0) : 0;
+  const estimatedTotal = estimatedBasePrice + extrasTotal;
+
   if (!request) {
     return (
       <main className={styles.detailPage}>
@@ -94,9 +99,26 @@ export default function RequestDetailPage() {
                   {request.extras.length > 0 && (
                     <div className={styles.row}>
                       <span className={styles.label}>Extras</span>
-                      <span>{request.extras.join(", ")}</span>
+                      <span>
+                        {request.extras
+                          .map((extra) => `${extra.name} (+${extra.price}€)`)
+                          .join(", ")}
+                      </span>
                     </div>
                   )}
+                </div>
+
+                <div className={styles.group}>
+                  <h2 className={styles.groupTitle}>Precio</h2>
+                  <p className={styles.eventName}>
+                    <strong>{estimatedTotal.toFixed(2)}€</strong>
+                  </p>
+                  <p className={styles.label}>
+                    Incluye la cobertura del primer combate de la modalidad seleccionada y los
+                    extras seleccionados. Cada combate adicional tiene un coste de +
+                    {request.event.extraMatchPrice}€. Se puede confirmar el mismo día
+                    del evento (sujeto a disponibilidad).
+                  </p>
                 </div>
               </div>
 

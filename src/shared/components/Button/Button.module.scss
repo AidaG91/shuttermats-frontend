@@ -24,12 +24,21 @@
   width: 100%;
 }
 
+// Button renders as a react-router <Link> (an <a>) when given a `to` prop.
+// The global `a:hover { color: ... }` rule in _reset.scss has the same
+// specificity as a lone variant class, so on hover it was winning over
+// e.g. `.sm-button--primary { color: white }` and turning button text red
+// on a red/red-dark background - unreadable and a contrast/accessibility
+// issue. Every hover state below now sets `color` explicitly so it always
+// wins regardless of that global rule.
+
 .sm-button--primary {
   background: v.$color-red;
   color: v.$color-white;
 
   &:hover:not(:disabled) {
     background: v.$color-red-dark;
+    color: v.$color-white;
   }
 }
 
@@ -39,6 +48,7 @@
 
   &:hover:not(:disabled) {
     background: v.$color-black-soft;
+    color: v.$color-white;
   }
 }
 
@@ -59,6 +69,7 @@
 
   &:hover:not(:disabled) {
     background: rgba(v.$color-red, 0.08);
+    color: v.$color-red;
   }
 }
 
@@ -70,6 +81,7 @@
   &:hover:not(:disabled) {
     background: v.$color-red;
     border-color: v.$color-red;
+    color: v.$color-white;
   }
 
   &[aria-disabled="true"] {

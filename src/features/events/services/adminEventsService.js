@@ -11,6 +11,8 @@ function buildEventFormData(event, imageFile, imageRemoved) {
         location: event.location,
         description: event.description || null,
         imageUrl: imageRemoved ? "" : null,
+        registrationUrl: event.registrationUrl || null,
+        pricingPlanId: event.pricingPlanId ?? null,
       }),
     ],
     { type: "application/json" },

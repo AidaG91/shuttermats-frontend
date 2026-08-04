@@ -52,6 +52,26 @@ export default function CoverageRequestFormPage() {
     }));
   };
 
+  const basePriceMultiplier = form.category.modality === "BOTH" ? 2 : 1;
+  const estimatedBasePrice =
+    event && form.category.modality ? event.basePrice * basePriceMultiplier : 0;
+  const selectedExtrasTotal = extras
+    .filter((extra) => form.extraIds.includes(extra.id))
+    .reduce((sum, extra) => sum + extra.price, 0);
+  const estimatedTotal = estimatedBasePrice + selectedExtrasTotal;
+
+  const modalityOptions = event
+    ? [
+        { value: "", label: "Selecciona modalidad" },
+        { value: "GI", label: `Gi (${event.basePrice.toFixed(2)}€)` },
+        { value: "NO_GI", label: `No-Gi (${event.basePrice.toFixed(2)}€)` },
+        {
+          value: "BOTH",
+          label: `Gi y No-Gi (${(event.basePrice * 2).toFixed(2)}€)`,
+        },
+      ]
+    : MODALITY_OPTIONS;
+
   const toggleExtra = (id) => {
     setForm((prev) => {
       const alreadySelected = prev.extraIds.includes(id);
@@ -228,7 +248,7 @@ export default function CoverageRequestFormPage() {
                   label="Modalidad"
                   id="modality"
                   required
-                  options={MODALITY_OPTIONS}
+                  options={modalityOptions}
                   value={form.category.modality}
                   onChange={(e) => updateSection("category", "modality", e.target.value)}
                   error={errors.modality}
@@ -391,6 +411,18 @@ export default function CoverageRequestFormPage() {
                   </span>
                 </label>
               </fieldset>
+
+              <div className={styles.priceSummary}>
+                <p className={styles.priceEstimate}>
+                  Precio: <strong>{estimatedTotal.toFixed(2)}€</strong>
+                </p>
+                <p className={styles.priceHint}>
+                  Incluye la cobertura del primer combate de la modalidad seleccionada y los
+                  extras seleccionados. Cada combate adicional tiene un coste de +
+                  {event.extraMatchPrice}€. Se puede confirmar el mismo día del evento
+                  (sujeto a disponibilidad).
+                </p>
+              </div>
 
               <Button type="submit" variant="primary" fullWidth loading={submitting}>
                 {submitting ? "Enviando..." : "Enviar solicitud"}

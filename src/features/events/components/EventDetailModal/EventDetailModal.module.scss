@@ -1,0 +1,95 @@
+@use "../../../../styles/base/variables" as v;
+@use "../../../../styles/base/mixins" as m;
+
+.panel {
+  max-width: 30rem;
+  padding: 0;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  display: block;
+}
+
+.title {
+  font-family: v.$font-display;
+  font-size: v.$fs-lg;
+  font-weight: v.$fw-bold;
+  color: v.$color-on-surface;
+  padding: v.$space-6 v.$space-6 0;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+  padding: v.$space-4 v.$space-6 0;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
+}
+
+.metaIcon {
+  color: v.$color-red;
+  flex-shrink: 0;
+}
+
+.description {
+  font-size: v.$fs-sm;
+  color: v.$color-on-surface-muted;
+  line-height: 1.6;
+  padding: v.$space-4 v.$space-6 0;
+}
+
+.priceBox {
+  margin: v.$space-5 v.$space-6 0;
+  background: v.$color-surface-container;
+  border: 1px solid v.$color-outline-variant;
+  border-radius: v.$radius-md;
+  padding: v.$space-4;
+}
+
+.priceLine {
+  font-size: v.$fs-md;
+  color: v.$color-on-surface;
+
+  strong {
+    color: v.$color-red;
+  }
+}
+
+.priceHint {
+  margin-top: v.$space-1;
+  font-size: v.$fs-xs;
+  color: v.$color-on-surface-muted;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: v.$space-4;
+  padding: v.$space-5 v.$space-6 v.$space-6;
+}
+
+.registrationLink {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  color: v.$color-red;
+  font-size: v.$fs-sm;
+  font-weight: v.$fw-bold;
+  text-decoration: underline;
+
+  &:hover {
+    color: v.$color-red-dark;
+  }
+}

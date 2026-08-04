@@ -3,21 +3,30 @@ import { resolveAssetUrl } from "../../../../shared/utils/url";
 import Button from "../../../../shared/components/Button/Button";
 import styles from "./EventCard.module.scss";
 
-export default function EventCard({ event }) {
+export default function EventCard({ event, onOpenDetails }) {
   const isPastEvent = new Date(event.date) < new Date();
 
   return (
     <article className={styles.card}>
-      {event.imageUrl && (
-        <img
-          src={resolveAssetUrl(event.imageUrl)}
-          alt={event.name}
-          className={styles.image}
-        />
-      )}
+      <button
+        type="button"
+        className={styles.detailsTrigger}
+        onClick={() => onOpenDetails?.(event)}
+        aria-label={`Ver detalles de ${event.name}`}
+      >
+        {event.imageUrl && (
+          <img
+            src={resolveAssetUrl(event.imageUrl)}
+            alt={event.name}
+            className={styles.image}
+          />
+        )}
+      </button>
 
       <div className={styles.content}>
-        <h3>{event.name}</h3>
+        <button type="button" className={styles.titleTrigger} onClick={() => onOpenDetails?.(event)}>
+          <h3>{event.name}</h3>
+        </button>
 
         <div className={styles.meta}>
           <div className={styles.metaRow}>
