@@ -65,10 +65,16 @@ $breakpoint-xl: 1280px;
 
 // ---- Red accent button base (overridden by component) ----
 @mixin button-reset {
+  appearance: none;
   border: none;
-  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  text-align: inherit;
   font-family: v.$font-primary;
   font-weight: v.$fw-semibold;
+  cursor: pointer;
   transition: v.$transition-base;
 }
 
