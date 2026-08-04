@@ -14,6 +14,25 @@
   }
 }
 
+.detailsTrigger {
+  @include m.button-reset;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.titleTrigger {
+  @include m.button-reset;
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover h3 {
+    color: v.$color-red;
+  }
+}
+
 .image {
   width: 100%;
   height: 200px;

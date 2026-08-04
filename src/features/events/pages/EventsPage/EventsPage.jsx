@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEvents } from "../../hooks/useEvents";
 import { useEventLocations } from "../../hooks/useEventLocations";
 import EventCard from "../../components/EventCard/EventCard";
+import EventDetailModal from "../../components/EventDetailModal/EventDetailModal";
 import Select from "../../../../shared/components/Select/Select";
 import Button from "../../../../shared/components/Button/Button";
 import eventsHero from "../../../../assets/images/events-hero.jpg";
@@ -17,6 +18,7 @@ export default function EventsPage() {
   const [status, setStatus] = useState("upcoming");
   const [location, setLocation] = useState("");
   const [page, setPage] = useState(0);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   const sort = status === "past" ? "date,desc" : "date,asc";
   const {
@@ -98,7 +100,7 @@ export default function EventsPage() {
           {!loading && !error && events.length > 0 && (
             <div className={styles.grid}>
               {events.map((event) => (
-                <EventCard key={event.id} event={event} />
+                <EventCard key={event.id} event={event} onOpenDetails={setSelectedEvent} />
               ))}
             </div>
           )}
@@ -131,6 +133,8 @@ export default function EventsPage() {
           )}
         </div>
       </section>
+
+      <EventDetailModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
     </main>
   );
 }
