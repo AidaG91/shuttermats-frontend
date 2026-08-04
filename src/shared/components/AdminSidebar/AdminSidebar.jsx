@@ -10,9 +10,10 @@ const NAV_ITEMS = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/admin/events", label: "Eventos", icon: CalendarDays, end: false },
   { to: "/admin/contact-messages", label: "Mensajes", icon: Mail, end: false, badgeKey: "contactMessages" },
+  { to: "/admin/pricing-plans", label: "Tarifas", icon: Settings, end: false },
 ];
 
-const DISABLED_ITEMS = [{ label: "Ajustes", icon: Settings }];
+const DISABLED_ITEMS = [];
 
 export default function AdminSidebar() {
   const navigate = useNavigate();

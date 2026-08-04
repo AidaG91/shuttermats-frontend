@@ -77,6 +77,14 @@ export async function patch(path, body, headers) {
   return response.json();
 }
 
+export async function put(path, body, headers) {
+  const response = await request(
+    `${API_BASE_URL}${path}`,
+    jsonRequestOptions("PUT", body, headers),
+  );
+  return response.json();
+}
+
 async function sendForm(method, path, formData, headers) {
   const response = await request(`${API_BASE_URL}${path}`, {
     method,
