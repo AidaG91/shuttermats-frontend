@@ -67,7 +67,7 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  min-width: 640px;
+  min-width: 760px;
 
   th,
   td {
@@ -126,6 +126,17 @@
 .eventName {
   font-weight: v.$fw-bold;
   color: v.$color-on-surface;
+}
+
+.priceCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.planLabel {
+  font-size: v.$fs-xs;
+  color: v.$color-on-surface-muted;
 }
 
 .actionsHeader {
